@@ -43,7 +43,7 @@ public class LoginFr extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(800, 612));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("/home/tejas/MyProjects/NetBeansProjects/Cases_Management_System - CMS/Images/courticon.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("/home/tejas/MyProjects/NetBeansProjects/Cases_Management_System - CMS/Images/icon/Black and White Bold Typographic Design Logo (200 x 200 px).png")); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Poppins Black", 0, 48)); // NOI18N
         jLabel4.setText("Login");
