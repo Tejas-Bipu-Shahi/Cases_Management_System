@@ -17,10 +17,10 @@ public class CivilCase extends Case {
 
     // 1. SPECIFIC ATTRIBUTES (For Civil Cases)
     // ==========================================
-    private String disputeType;   // "Divorce", "Property", "Contract"
-    private String subjectMatter; // "Land Kitta No 45", "Custody of Child"
-    private double claimAmount;   // Money involved (if any). Use 0.0 if not applicable.
-    private String reliefSought;  // What they want: e.g., "Compensation", "Injunction"
+    private String disputeType;   
+    private String subjectMatter; 
+    private double claimAmount;   
+    private String reliefSought;  
 
     // 2. CONSTRUCTOR
     // ==========================================

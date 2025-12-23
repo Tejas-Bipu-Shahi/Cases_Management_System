@@ -3,17 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+
 import model.CriminalCase;
 import controller.CaseController;
 import javax.swing.JOptionPane;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author Tejas Shahi
  */
-
 public class RegisterCriminalCase extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegisterCriminalCase.class.getName());
 
     /**
@@ -21,7 +23,7 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
      */
     //connect with case controller
     CaseController controller = new CaseController();
-    
+
     public RegisterCriminalCase() {
         initComponents();
     }
@@ -607,71 +609,74 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFirNumberActionPerformed
 
     private void registerbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbuttonActionPerformed
-                                 
-    try {
-        // --- 1. VALIDATION ---
-        // Check if important fields are empty
-        if (txtCaseId.getText().trim().isEmpty() || 
-            txtRegisterationNumber.getText().trim().isEmpty() || 
-            txtPoliceStation.getText().trim().isEmpty()) {
-            
-            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all required fields.");
-            return;
+
+        try {
+            // --- 1. VALIDATION ---
+            // Check if important fields are empty
+            if (txtCaseId.getText().trim().isEmpty()
+                    || txtRegisterationNumber.getText().trim().isEmpty()
+                    || txtPoliceStation.getText().trim().isEmpty()) {
+
+                javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all required fields.");
+                return;
+            }
+
+            // --- 2. GET DATA ---
+            int id = Integer.parseInt(txtCaseId.getText().trim());
+            String regNo = txtRegisterationNumber.getText().trim();
+            String title = txtCaseTitle.getText().trim();
+            String hearingDate = txtHearingDate.getText().trim();
+            String judge = cmbJudge.getSelectedItem().toString();
+
+            String crimeType = txtCrimeType.getText().trim();
+            String station = txtPoliceStation.getText().trim();
+            String firNo = txtFirNumber.getText().trim();
+
+            // Bail Status (ComboBox)
+            String bailStatus = chkBailStatus.getSelectedItem().toString();
+            // NOTE: If your Model expects a boolean, change this line to:
+            // boolean isBail = bailStatus.equals("Granted");
+            // getting current date and time
+            LocalDateTime currentDateTime = LocalDateTime.now();
+
+            // 2. FParsing it into String
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedFilingDate = currentDateTime.format(formatter);
+
+            // --- 3. CREATE MODEL OBJECT ---
+            // Ensure this matches your CriminalCase Constructor exactly!
+            model.CriminalCase newCase = new model.CriminalCase(
+                    id,
+                    regNo,
+                    title,
+                    formattedFilingDate,
+                    hearingDate,
+                    judge,
+                    "Open",
+                    crimeType,
+                    station,
+                    firNo,
+                    bailStatus
+            );
+
+            // CALL CONTROLLER
+            boolean isSaved = controller.registerCase(newCase);
+
+            if (isSaved) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Criminal Case Registered Successfully!");
+                // Clear fields
+                txtCaseId.setText("");
+                txtCaseTitle.setText("");
+                txtFirNumber.setText("");
+                txtPoliceStation.setText("");
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: Case ID already exists!");
+            }
+            this.dispose();
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Case ID must be a valid number.");
         }
-
-        // --- 2. GET DATA ---
-        int id = Integer.parseInt(txtCaseId.getText().trim());
-        String regNo = txtRegisterationNumber.getText().trim();
-        String title = txtCaseTitle.getText().trim();
-        String hearingDate = txtHearingDate.getText().trim();
-        String judge = cmbJudge.getSelectedItem().toString();
-        
-        String crimeType = txtCrimeType.getText().trim();
-        String station = txtPoliceStation.getText().trim();
-        String firNo = txtFirNumber.getText().trim();
-        
-        // Bail Status (ComboBox)
-        String bailStatus = chkBailStatus.getSelectedItem().toString();
-        // NOTE: If your Model expects a boolean, change this line to:
-        // boolean isBail = bailStatus.equals("Granted");
-
-        // --- 3. CREATE MODEL OBJECT ---
-        // Ensure this matches your CriminalCase Constructor exactly!
-        model.CriminalCase newCase = new model.CriminalCase(
-            id, 
-            regNo, 
-            title, 
-            "2025-12-23", // Filing Date
-            hearingDate, 
-            judge, 
-            "Open", 
-            crimeType, 
-            station, 
-            firNo, 
-            bailStatus // Assuming you changed Model to String as you said
-        );
-
-        // --- 4. CALL CONTROLLER ---
-        // We use the 'controller' variable you created at the top of the class
-        boolean isSaved = controller.registerCase(newCase);
-
-        // --- 5. FEEDBACK ---
-        if (isSaved) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Criminal Case Registered Successfully!");
-            
-            // Clear fields
-            txtCaseId.setText("");
-            txtCaseTitle.setText("");
-            txtFirNumber.setText("");
-            txtPoliceStation.setText("");
-            
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error: Case ID already exists!");
-        }
-        this.dispose();
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Case ID must be a valid number.");
-    }
     }//GEN-LAST:event_registerbuttonActionPerformed
 
 
