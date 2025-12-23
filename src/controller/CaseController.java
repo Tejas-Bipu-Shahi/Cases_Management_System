@@ -14,28 +14,30 @@ import java.util.LinkedList;
 
 public class CaseController {
     
-    private final LinkedList<Case> allCases;
+    // shared all over the app
+    private static LinkedList<Case> allCases = new LinkedList<>();
 
     public CaseController() {
-        this.allCases = new LinkedList<>();
+        
     }
     
     public boolean registerCase(Case newCase) {
-        // 1. Validation: Check if ID already exists
+        // Check if ID already exists
         for (Case c : allCases) {
             if (c.getCaseId() == newCase.getCaseId()) {
                 System.out.println("Error: Case ID " + newCase.getCaseId() + " already exists.");
-                return false; // Stop! Do not save.
+                return false; 
             }
-        // ADD TO LINKEDLIST
-        allCases.add(newCase);
-        return true;
-        
         }
         
-        // 2. Success: Add to list
+        
+        //  Add to list
         allCases.add(newCase);
-        System.out.println("Success! List size is now: " + allCases.size());
-        return true; // Tell View it worked
+        return true; 
+    }
+    
+    // Helper to get the list (for Admin View)
+    public LinkedList<Case> getAllCases() {
+        return allCases;
     }
 }

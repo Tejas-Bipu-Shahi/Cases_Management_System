@@ -8,17 +8,59 @@ package view;
  *
  * @author Tejas Shahi
  */
+import javax.swing.table.DefaultTableModel;
+import java.util.LinkedList;
+import model.Case;
+import model.CivilCase;
+import model.CriminalCase;
+import controller.CaseController;
+
 public class AdminView extends javax.swing.JFrame {
     
+    //connect with controller
+    CaseController controller = new CaseController();
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminView.class.getName());
-
     /**
      * Creates new form AdminView
      */
     public AdminView() {
         initComponents();
+        loadRegisteredCases();
     }
-
+    //load data in the table
+    public void loadRegisteredCases(){
+        DefaultTableModel model = (DefaultTableModel) totalRegisteredCasesTable.getModel();
+        
+        
+        //clear existing row
+        model.setRowCount(0);
+        
+        // Get the list of cases from linked list existing in controller
+        LinkedList<Case> allCases = controller.getAllCases();
+        
+        // loop through all cases
+        
+        for(Case c : allCases){
+            String caseType = null;
+            if (c instanceof CivilCase){
+                caseType = "Civil";
+            }
+            if (c instanceof CriminalCase){
+                caseType = "Criminal";
+            }
+            model.addRow(new Object[]{
+            c.getCaseId(),              
+            c.getRegistrationNumber(),  
+            c.getCaseTitle(),           
+            caseType,                   
+            c.getAssignedJudge(),       
+            c.getCaseStatus(),          
+            c.getHearingDate()          
+        });
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +95,7 @@ public class AdminView extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        totalRegisteredCasesTable = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
@@ -67,6 +109,11 @@ public class AdminView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1280, 720));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -320,8 +367,8 @@ public class AdminView extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("SEARCH");
 
-        jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        totalRegisteredCasesTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        totalRegisteredCasesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "reg-01", "Marriage Devorce", "Civil", "Tek Raj Joshi", "First", "25/10/2025"},
                 { new Integer(2), "reg-02", "Murder", "Criminal", "Kalpana Singh", "Second", "25/10/2025"},
@@ -355,8 +402,8 @@ public class AdminView extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable2.setGridColor(new java.awt.Color(0, 0, 0));
-        jScrollPane3.setViewportView(jTable2);
+        totalRegisteredCasesTable.setGridColor(new java.awt.Color(0, 0, 0));
+        jScrollPane3.setViewportView(totalRegisteredCasesTable);
 
         jLabel23.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
         jLabel23.setText("Sort By :");
@@ -497,7 +544,7 @@ public class AdminView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1328, Short.MAX_VALUE)
+            .addGap(0, 1286, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -526,6 +573,10 @@ public class AdminView extends javax.swing.JFrame {
     RegisterCriminalCase criminalRegister = new RegisterCriminalCase();
     criminalRegister.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+    loadRegisteredCases();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -587,7 +638,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable totalRegisteredCasesTable;
     // End of variables declaration//GEN-END:variables
 }
