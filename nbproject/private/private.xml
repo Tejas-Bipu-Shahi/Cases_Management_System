@@ -3,8 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/tejas/MyProjects/NetBeansProjects/Cases_Management_System%20-%20CMS/src/view/LoginFr.java</file>
-            <file>file:/home/tejas/MyProjects/NetBeansProjects/Cases_Management_System%20-%20CMS/src/view/AdminFr.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/controller/CaseController.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/view/LoginFr.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/view/RegisterCivilCase.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/model/CivilCase.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/model/Case.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/model/CriminalCase.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/view/RegisterCriminalCase.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/view/AdminView.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/view/txtRegularNumber.java</file>
         </group>
     </open-files>
 </project-private>

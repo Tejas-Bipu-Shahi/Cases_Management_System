@@ -14,13 +14,16 @@ import model.Case;
 import model.CivilCase;
 import model.CriminalCase;
 import controller.CaseController;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class AdminView extends javax.swing.JFrame {
-    
+
     //connect with controller
     CaseController controller = new CaseController();
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminView.class.getName());
+
     /**
      * Creates new form AdminView
      */
@@ -28,39 +31,58 @@ public class AdminView extends javax.swing.JFrame {
         initComponents();
         loadRegisteredCases();
     }
+
     //load data in the table
-    public void loadRegisteredCases(){
+    public void loadRegisteredCases() {
         DefaultTableModel model = (DefaultTableModel) totalRegisteredCasesTable.getModel();
-        
-        
+        DefaultTableModel model1 = (DefaultTableModel) dashboardTable.getModel();
         //clear existing row
         model.setRowCount(0);
-        
+        model1.setRowCount(0);
+
+        // getting current date and time
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        // 2. FParsing it into String
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedFilingDate = currentDateTime.format(formatter);
+
         // Get the list of cases from linked list existing in controller
         LinkedList<Case> allCases = controller.getAllCases();
-        
+
         // loop through all cases
-        
-        for(Case c : allCases){
+        for (Case c : allCases) {
             String caseType = null;
-            if (c instanceof CivilCase){
+            if (c instanceof CivilCase) {
                 caseType = "Civil";
             }
-            if (c instanceof CriminalCase){
+            if (c instanceof CriminalCase) {
                 caseType = "Criminal";
             }
             model.addRow(new Object[]{
-            c.getCaseId(),              
-            c.getRegistrationNumber(),  
-            c.getCaseTitle(),           
-            caseType,                   
-            c.getAssignedJudge(),       
-            c.getCaseStatus(),          
-            c.getHearingDate()          
-        });
+                c.getCaseId(),
+                c.getRegistrationNumber(),
+                c.getCaseTitle(),
+                caseType,
+                c.getAssignedJudge(),
+                c.getCaseStatus(),
+                c.getHearingDate()
+            });
+            
+            if(c.getHearingDate().equals(formattedFilingDate)){
+                model1.addRow(new Object[]{
+                c.getCaseId(),
+                c.getRegistrationNumber(),
+                c.getCaseTitle(),
+                caseType,
+                c.getAssignedJudge(),
+                c.getCaseStatus(),
+                c.getHearingDate()
+            });
+            }
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,7 +107,7 @@ public class AdminView extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        dashboardTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -231,8 +253,8 @@ public class AdminView extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
         jLabel12.setText("TODAY'S HEARINGS");
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        dashboardTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        dashboardTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "reg-01", "Marriage Devorce", "Civil", "Tek Raj Joshi", "First", "25/10/2025"},
                 { new Integer(2), "reg-02", "Murder", "Criminal", "Kalpana Singh", "Second", "25/10/2025"},
@@ -262,8 +284,8 @@ public class AdminView extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(0, 0, 0));
-        jScrollPane1.setViewportView(jTable1);
+        dashboardTable.setGridColor(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setViewportView(dashboardTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -570,12 +592,12 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    RegisterCriminalCase criminalRegister = new RegisterCriminalCase();
-    criminalRegister.setVisible(true);// TODO add your handling code here:
+        RegisterCriminalCase criminalRegister = new RegisterCriminalCase();
+        criminalRegister.setVisible(true);// TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-    loadRegisteredCases();
+        loadRegisteredCases();
     }//GEN-LAST:event_formWindowActivated
 
     /**
@@ -604,6 +626,7 @@ public class AdminView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable dashboardTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -637,7 +660,6 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTable totalRegisteredCasesTable;
     // End of variables declaration//GEN-END:variables
