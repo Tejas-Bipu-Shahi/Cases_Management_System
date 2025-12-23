@@ -576,17 +576,17 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel103" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField57" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                                          <Component id="txtCaseId" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel104" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField58" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                                          <Component id="txtRegisterationNumber" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel105" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField61" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                                          <Component id="txtCrimeType" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="jLabel107" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
@@ -595,36 +595,36 @@
                                           <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel108" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jComboBox10" alignment="0" min="-2" pref="243" max="-2" attributes="0"/>
+                                                  <Component id="cmbJudge" alignment="0" min="-2" pref="243" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel109" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jTextField60" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                                                  <Component id="txtHearingDate" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                              <Component id="jButton9" min="-2" pref="150" max="-2" attributes="0"/>
+                                              <Component id="registerbutton" min="-2" pref="150" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jScrollPane10" alignment="1" min="-2" pref="597" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel101" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jTextField59" alignment="0" min="-2" pref="440" max="-2" attributes="0"/>
+                                  <Component id="txtCaseTitle" alignment="0" min="-2" pref="440" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel110" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField62" min="-2" pref="159" max="-2" attributes="0"/>
+                                          <Component id="txtPoliceStation" min="-2" pref="159" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel111" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jTextField63" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Component id="txtFirNumber" min="-2" pref="160" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel112" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox11" min="-2" pref="203" max="-2" attributes="0"/>
+                                          <Component id="chkBailStatus" min="-2" pref="203" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -644,14 +644,14 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel103" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField57" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="txtCaseId" min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel104" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField58" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Component id="jTextField61" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="txtRegisterationNumber" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="txtCrimeType" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -669,7 +669,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField59" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="txtCaseTitle" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Component id="jLabel107" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -681,14 +681,14 @@
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="jLabel110" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jTextField62" min="-2" pref="22" max="-2" attributes="0"/>
+                                              <Component id="txtPoliceStation" min="-2" pref="22" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="jLabel111" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jTextField63" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                                  <Component id="jComboBox11" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                                  <Component id="txtFirNumber" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                                  <Component id="chkBailStatus" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -701,18 +701,18 @@
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="jComboBox10" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="cmbJudge" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jLabel108" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="jButton9" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="registerbutton" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jLabel109" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jTextField60" min="-2" pref="22" max="-2" attributes="0"/>
+                                          <Component id="txtHearingDate" min="-2" pref="22" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -747,7 +747,7 @@
                 <Property name="text" type="java.lang.String" value="Case Id."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField57">
+            <Component class="javax.swing.JTextField" name="txtCaseId">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -755,7 +755,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="   001"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder roundedCorners="true">
@@ -765,7 +764,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField57ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCaseIdActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel104">
@@ -776,7 +775,7 @@
                 <Property name="text" type="java.lang.String" value="Reg No."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField58">
+            <Component class="javax.swing.JTextField" name="txtRegisterationNumber">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -784,7 +783,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="   Reg No."/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder roundedCorners="true">
@@ -794,7 +792,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField58ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRegisterationNumberActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel105">
@@ -813,7 +811,7 @@
                 <Property name="text" type="java.lang.String" value="Case Title/Issue"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField59">
+            <Component class="javax.swing.JTextField" name="txtCaseTitle">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -821,7 +819,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Case Title/Issue (mudda)"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder roundedCorners="true"/>
@@ -844,7 +841,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea9">
+                <Component class="javax.swing.JTextArea" name="txtSubjectMatter">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -854,7 +851,6 @@
                       <Color blue="66" green="66" red="66" type="rgb"/>
                     </Property>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="Case Desc........"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder roundedCorners="true"/>
@@ -872,7 +868,7 @@
                 <Property name="text" type="java.lang.String" value="Assigned Judge"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox10">
+            <Component class="javax.swing.JComboBox" name="cmbJudge">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -893,7 +889,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField60">
+            <Component class="javax.swing.JTextField" name="txtHearingDate">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -901,7 +897,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="   (DD-MM-YYYY)"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder roundedCorners="true">
@@ -911,7 +906,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField60ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtHearingDateActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel109">
@@ -922,7 +917,7 @@
                 <Property name="text" type="java.lang.String" value="Hearing Date"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton9">
+            <Component class="javax.swing.JButton" name="registerbutton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="33" red="33" type="rgb"/>
@@ -933,10 +928,10 @@
                 <Property name="text" type="java.lang.String" value="Register Case"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerbuttonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField61">
+            <Component class="javax.swing.JTextField" name="txtCrimeType">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -944,7 +939,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="e.g Divorce"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder roundedCorners="true">
@@ -954,7 +948,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField61ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCrimeTypeActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel110">
@@ -965,7 +959,7 @@
                 <Property name="text" type="java.lang.String" value="Police Station"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField62">
+            <Component class="javax.swing.JTextField" name="txtPoliceStation">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -973,7 +967,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value=" $ 4000"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder roundedCorners="true">
@@ -983,7 +976,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField62ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPoliceStationActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel111">
@@ -994,7 +987,7 @@
                 <Property name="text" type="java.lang.String" value="Fir Number"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField63">
+            <Component class="javax.swing.JTextField" name="txtFirNumber">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -1002,7 +995,6 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Relief .."/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder roundedCorners="true">
@@ -1012,7 +1004,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField63ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFirNumberActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel112">
@@ -1023,7 +1015,7 @@
                 <Property name="text" type="java.lang.String" value="Bail Status"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox11">
+            <Component class="javax.swing.JComboBox" name="chkBailStatus">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>

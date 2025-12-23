@@ -16,13 +16,13 @@ public class CriminalCase extends Case {
     private String crimeType;      // "Theft", "Assault", "Fraud"
     private String policeStation;  // Where the FIR was filed
     private String firNumber;      // First I2nformation Report Number
-    private boolean bailGranted;   // True = Out on bail, False = In Custody
+    private String bailGranted;   // True = Out on bail, False = In Custody
 
     // 2. CONSTRUCTOR
     // ==========================================
     public CriminalCase(int caseId, String registrationNumber, String caseTitle,
             String filingDate, String hearingDate, String assignedJudge, String caseStatus,
-            String crimeType, String policeStation, String firNumber, boolean bailGranted) {
+            String crimeType, String policeStation, String firNumber, String bailGranted) {
 
         // Pass common data to Parent
         super(caseId, registrationNumber, caseTitle, filingDate, hearingDate, assignedJudge, caseStatus);
@@ -48,7 +48,7 @@ public class CriminalCase extends Case {
         return firNumber;
     }
 
-    public boolean isBailGranted() {
+    public String isBailGranted() {
         return bailGranted;
     }
 

@@ -3,11 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+import model.CriminalCase;
+import controller.CaseController;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Tejas Shahi
  */
+
 public class RegisterCriminalCase extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegisterCriminalCase.class.getName());
@@ -15,6 +19,9 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
     /**
      * Creates new form RegisterCriminalCase
      */
+    //connect with case controller
+    CaseController controller = new CaseController();
+    
     public RegisterCriminalCase() {
         initComponents();
     }
@@ -58,27 +65,27 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
         jLabel101 = new javax.swing.JLabel();
         jLabel102 = new javax.swing.JLabel();
         jLabel103 = new javax.swing.JLabel();
-        jTextField57 = new javax.swing.JTextField();
+        txtCaseId = new javax.swing.JTextField();
         jLabel104 = new javax.swing.JLabel();
-        jTextField58 = new javax.swing.JTextField();
+        txtRegisterationNumber = new javax.swing.JTextField();
         jLabel105 = new javax.swing.JLabel();
         jLabel106 = new javax.swing.JLabel();
-        jTextField59 = new javax.swing.JTextField();
+        txtCaseTitle = new javax.swing.JTextField();
         jLabel107 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTextArea9 = new javax.swing.JTextArea();
+        txtSubjectMatter = new javax.swing.JTextArea();
         jLabel108 = new javax.swing.JLabel();
-        jComboBox10 = new javax.swing.JComboBox<>();
-        jTextField60 = new javax.swing.JTextField();
+        cmbJudge = new javax.swing.JComboBox<>();
+        txtHearingDate = new javax.swing.JTextField();
         jLabel109 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
-        jTextField61 = new javax.swing.JTextField();
+        registerbutton = new javax.swing.JButton();
+        txtCrimeType = new javax.swing.JTextField();
         jLabel110 = new javax.swing.JLabel();
-        jTextField62 = new javax.swing.JTextField();
+        txtPoliceStation = new javax.swing.JTextField();
         jLabel111 = new javax.swing.JLabel();
-        jTextField63 = new javax.swing.JTextField();
+        txtFirNumber = new javax.swing.JTextField();
         jLabel112 = new javax.swing.JLabel();
-        jComboBox11 = new javax.swing.JComboBox<>();
+        chkBailStatus = new javax.swing.JComboBox<>();
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -307,20 +314,18 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
         jLabel103.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel103.setText("Case Id.");
 
-        jTextField57.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField57.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField57.setText("   001");
-        jTextField57.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        jTextField57.addActionListener(this::jTextField57ActionPerformed);
+        txtCaseId.setBackground(new java.awt.Color(204, 204, 204));
+        txtCaseId.setForeground(new java.awt.Color(102, 102, 102));
+        txtCaseId.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtCaseId.addActionListener(this::txtCaseIdActionPerformed);
 
         jLabel104.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel104.setText("Reg No.");
 
-        jTextField58.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField58.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField58.setText("   Reg No.");
-        jTextField58.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        jTextField58.addActionListener(this::jTextField58ActionPerformed);
+        txtRegisterationNumber.setBackground(new java.awt.Color(204, 204, 204));
+        txtRegisterationNumber.setForeground(new java.awt.Color(102, 102, 102));
+        txtRegisterationNumber.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtRegisterationNumber.addActionListener(this::txtRegisterationNumberActionPerformed);
 
         jLabel105.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel105.setText("Crime Type");
@@ -328,73 +333,67 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
         jLabel106.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel106.setText("Case Title/Issue");
 
-        jTextField59.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField59.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField59.setText("Case Title/Issue (mudda)");
-        jTextField59.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        txtCaseTitle.setBackground(new java.awt.Color(204, 204, 204));
+        txtCaseTitle.setForeground(new java.awt.Color(102, 102, 102));
+        txtCaseTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel107.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel107.setText("Subject Matter");
 
-        jTextArea9.setBackground(new java.awt.Color(204, 204, 204));
-        jTextArea9.setColumns(20);
-        jTextArea9.setForeground(new java.awt.Color(102, 102, 102));
-        jTextArea9.setRows(5);
-        jTextArea9.setText("Case Desc........");
-        jTextArea9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jScrollPane10.setViewportView(jTextArea9);
+        txtSubjectMatter.setBackground(new java.awt.Color(204, 204, 204));
+        txtSubjectMatter.setColumns(20);
+        txtSubjectMatter.setForeground(new java.awt.Color(102, 102, 102));
+        txtSubjectMatter.setRows(5);
+        txtSubjectMatter.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jScrollPane10.setViewportView(txtSubjectMatter);
 
         jLabel108.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel108.setText("Assigned Judge");
 
-        jComboBox10.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox10.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kamala Singh", "Tek Raj Joshi", "Babu Kaji", " " }));
+        cmbJudge.setBackground(new java.awt.Color(204, 204, 204));
+        cmbJudge.setForeground(new java.awt.Color(102, 102, 102));
+        cmbJudge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kamala Singh", "Tek Raj Joshi", "Babu Kaji", " " }));
 
-        jTextField60.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField60.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField60.setText("   (DD-MM-YYYY)");
-        jTextField60.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        jTextField60.addActionListener(this::jTextField60ActionPerformed);
+        txtHearingDate.setBackground(new java.awt.Color(204, 204, 204));
+        txtHearingDate.setForeground(new java.awt.Color(102, 102, 102));
+        txtHearingDate.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtHearingDate.addActionListener(this::txtHearingDateActionPerformed);
 
         jLabel109.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel109.setText("Hearing Date");
 
-        jButton9.setBackground(new java.awt.Color(51, 51, 51));
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Register Case");
-        jButton9.addActionListener(this::jButton9ActionPerformed);
+        registerbutton.setBackground(new java.awt.Color(51, 51, 51));
+        registerbutton.setForeground(new java.awt.Color(255, 255, 255));
+        registerbutton.setText("Register Case");
+        registerbutton.addActionListener(this::registerbuttonActionPerformed);
 
-        jTextField61.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField61.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField61.setText("e.g Divorce");
-        jTextField61.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        jTextField61.addActionListener(this::jTextField61ActionPerformed);
+        txtCrimeType.setBackground(new java.awt.Color(204, 204, 204));
+        txtCrimeType.setForeground(new java.awt.Color(102, 102, 102));
+        txtCrimeType.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtCrimeType.addActionListener(this::txtCrimeTypeActionPerformed);
 
         jLabel110.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel110.setText("Police Station");
 
-        jTextField62.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField62.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField62.setText(" $ 4000");
-        jTextField62.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        jTextField62.addActionListener(this::jTextField62ActionPerformed);
+        txtPoliceStation.setBackground(new java.awt.Color(204, 204, 204));
+        txtPoliceStation.setForeground(new java.awt.Color(102, 102, 102));
+        txtPoliceStation.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtPoliceStation.addActionListener(this::txtPoliceStationActionPerformed);
 
         jLabel111.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel111.setText("Fir Number");
 
-        jTextField63.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField63.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField63.setText("Relief ..");
-        jTextField63.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        jTextField63.addActionListener(this::jTextField63ActionPerformed);
+        txtFirNumber.setBackground(new java.awt.Color(204, 204, 204));
+        txtFirNumber.setForeground(new java.awt.Color(102, 102, 102));
+        txtFirNumber.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtFirNumber.addActionListener(this::txtFirNumberActionPerformed);
 
         jLabel112.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel112.setText("Bail Status");
 
-        jComboBox11.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox11.setForeground(new java.awt.Color(102, 102, 102));
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Granted", "Not Granted" }));
+        chkBailStatus.setBackground(new java.awt.Color(204, 204, 204));
+        chkBailStatus.setForeground(new java.awt.Color(102, 102, 102));
+        chkBailStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Granted", "Not Granted" }));
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -411,44 +410,44 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel103)
-                                    .addComponent(jTextField57, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtCaseId, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel104)
-                                    .addComponent(jTextField58, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtRegisterationNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel105)
-                                    .addComponent(jTextField61, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtCrimeType, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel107, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel17Layout.createSequentialGroup()
                                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel108)
-                                            .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(cmbJudge, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel109)
-                                            .addComponent(jTextField60, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtHearingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(27, 27, 27)
-                                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(registerbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel101))
-                            .addComponent(jTextField59, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCaseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel110)
-                                    .addComponent(jTextField62, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPoliceStation, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel111)
-                                    .addComponent(jTextField63, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtFirNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel112)
-                                    .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(chkBailStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
@@ -461,13 +460,13 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(jLabel103)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField57, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCaseId, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(jLabel104)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField58, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField61, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtRegisterationNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCrimeType, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addComponent(jLabel105)
                         .addGap(27, 27, 27)))
@@ -480,7 +479,7 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
                         .addGap(161, 161, 161))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField59, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCaseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel107)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -492,29 +491,29 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
                                     .addGroup(jPanel17Layout.createSequentialGroup()
                                         .addComponent(jLabel110)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField62, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtPoliceStation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel17Layout.createSequentialGroup()
                                         .addComponent(jLabel111)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jTextField63, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(txtFirNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(chkBailStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addComponent(jLabel112)
                                 .addGap(28, 28, 28)))
                         .addGap(15, 15, 15)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbJudge, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel17Layout.createSequentialGroup()
                                     .addComponent(jLabel108)
                                     .addGap(27, 27, 27)))
                             .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(registerbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel17Layout.createSequentialGroup()
                                     .addComponent(jLabel109)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField60, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtHearingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(27, Short.MAX_VALUE))))
         );
 
@@ -583,64 +582,103 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField56ActionPerformed
 
-    private void jTextField57ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField57ActionPerformed
+    private void txtCaseIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaseIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField57ActionPerformed
+    }//GEN-LAST:event_txtCaseIdActionPerformed
 
-    private void jTextField58ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField58ActionPerformed
+    private void txtRegisterationNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegisterationNumberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField58ActionPerformed
+    }//GEN-LAST:event_txtRegisterationNumberActionPerformed
 
-    private void jTextField60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField60ActionPerformed
+    private void txtHearingDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHearingDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField60ActionPerformed
+    }//GEN-LAST:event_txtHearingDateActionPerformed
 
-    private void jTextField61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField61ActionPerformed
+    private void txtCrimeTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCrimeTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField61ActionPerformed
+    }//GEN-LAST:event_txtCrimeTypeActionPerformed
 
-    private void jTextField62ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField62ActionPerformed
+    private void txtPoliceStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPoliceStationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField62ActionPerformed
+    }//GEN-LAST:event_txtPoliceStationActionPerformed
 
-    private void jTextField63ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField63ActionPerformed
+    private void txtFirNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFirNumberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField63ActionPerformed
+    }//GEN-LAST:event_txtFirNumberActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-    this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+    private void registerbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbuttonActionPerformed
+                                 
+    try {
+        // --- 1. VALIDATION ---
+        // Check if important fields are empty
+        if (txtCaseId.getText().trim().isEmpty() || 
+            txtRegisterationNumber.getText().trim().isEmpty() || 
+            txtPoliceStation.getText().trim().isEmpty()) {
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all required fields.");
+            return;
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new RegisterCriminalCase().setVisible(true));
+        // --- 2. GET DATA ---
+        int id = Integer.parseInt(txtCaseId.getText().trim());
+        String regNo = txtRegisterationNumber.getText().trim();
+        String title = txtCaseTitle.getText().trim();
+        String hearingDate = txtHearingDate.getText().trim();
+        String judge = cmbJudge.getSelectedItem().toString();
+        
+        String crimeType = txtCrimeType.getText().trim();
+        String station = txtPoliceStation.getText().trim();
+        String firNo = txtFirNumber.getText().trim();
+        
+        // Bail Status (ComboBox)
+        String bailStatus = chkBailStatus.getSelectedItem().toString();
+        // NOTE: If your Model expects a boolean, change this line to:
+        // boolean isBail = bailStatus.equals("Granted");
+
+        // --- 3. CREATE MODEL OBJECT ---
+        // Ensure this matches your CriminalCase Constructor exactly!
+        model.CriminalCase newCase = new model.CriminalCase(
+            id, 
+            regNo, 
+            title, 
+            "2025-12-23", // Filing Date
+            hearingDate, 
+            judge, 
+            "Open", 
+            crimeType, 
+            station, 
+            firNo, 
+            bailStatus // Assuming you changed Model to String as you said
+        );
+
+        // --- 4. CALL CONTROLLER ---
+        // We use the 'controller' variable you created at the top of the class
+        boolean isSaved = controller.registerCase(newCase);
+
+        // --- 5. FEEDBACK ---
+        if (isSaved) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Criminal Case Registered Successfully!");
+            
+            // Clear fields
+            txtCaseId.setText("");
+            txtCaseTitle.setText("");
+            txtFirNumber.setText("");
+            txtPoliceStation.setText("");
+            
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: Case ID already exists!");
+        }
+        this.dispose();
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Case ID must be a valid number.");
     }
+    }//GEN-LAST:event_registerbuttonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> chkBailStatus;
+    private javax.swing.JComboBox<String> cmbJudge;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox10;
-    private javax.swing.JComboBox<String> jComboBox11;
     private javax.swing.JComboBox<String> jComboBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel100;
@@ -673,7 +711,6 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea8;
-    private javax.swing.JTextArea jTextArea9;
     private javax.swing.JTextField jTextField50;
     private javax.swing.JTextField jTextField51;
     private javax.swing.JTextField jTextField52;
@@ -681,12 +718,14 @@ public class RegisterCriminalCase extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField54;
     private javax.swing.JTextField jTextField55;
     private javax.swing.JTextField jTextField56;
-    private javax.swing.JTextField jTextField57;
-    private javax.swing.JTextField jTextField58;
-    private javax.swing.JTextField jTextField59;
-    private javax.swing.JTextField jTextField60;
-    private javax.swing.JTextField jTextField61;
-    private javax.swing.JTextField jTextField62;
-    private javax.swing.JTextField jTextField63;
+    private javax.swing.JButton registerbutton;
+    private javax.swing.JTextField txtCaseId;
+    private javax.swing.JTextField txtCaseTitle;
+    private javax.swing.JTextField txtCrimeType;
+    private javax.swing.JTextField txtFirNumber;
+    private javax.swing.JTextField txtHearingDate;
+    private javax.swing.JTextField txtPoliceStation;
+    private javax.swing.JTextField txtRegisterationNumber;
+    private javax.swing.JTextArea txtSubjectMatter;
     // End of variables declaration//GEN-END:variables
 }

@@ -271,7 +271,7 @@ public class AdminView extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(51, 51, 51));
         jButton5.setFont(new java.awt.Font("Yu Gothic Light", 1, 24)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("CIVIL CASE");
+        jButton5.setText("CRMINAL CASE");
         jButton5.setVerifyInputWhenFocusTarget(false);
         jButton5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton5.addActionListener(this::jButton5ActionPerformed);
