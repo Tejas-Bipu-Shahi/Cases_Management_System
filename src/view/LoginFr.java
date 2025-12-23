@@ -32,8 +32,8 @@ public class LoginFr extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -43,25 +43,26 @@ public class LoginFr extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(800, 612));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("/home/tejas/MyProjects/NetBeansProjects/Cases_Management_System - CMS/Images/icon/Black and White Bold Typographic Design Logo (200 x 200 px).png")); // NOI18N
-
         jLabel4.setFont(new java.awt.Font("Poppins Black", 0, 48)); // NOI18N
         jLabel4.setText("Login");
 
         jLabel5.setForeground(new java.awt.Color(153, 153, 153));
         jLabel5.setText("Sign in to continue.");
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("       User@xyz");
-        jTextField1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        txtUsername.setBackground(new java.awt.Color(204, 204, 204));
+        txtUsername.setForeground(new java.awt.Color(153, 153, 153));
+        txtUsername.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUsernameFocusGained(evt);
+            }
+        });
+        txtUsername.addActionListener(this::txtUsernameActionPerformed);
 
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField2.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField2.setText("       *************");
-        jTextField2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTextField2.addActionListener(this::jTextField2ActionPerformed);
+        txtPassword.setBackground(new java.awt.Color(204, 204, 204));
+        txtPassword.setForeground(new java.awt.Color(153, 153, 153));
+        txtPassword.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtPassword.addActionListener(this::txtPasswordActionPerformed);
 
         jLabel6.setFont(new java.awt.Font("Adwaita Sans", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
@@ -75,6 +76,7 @@ public class LoginFr extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("LOGIN");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -98,10 +100,10 @@ public class LoginFr extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(239, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -118,11 +120,11 @@ public class LoginFr extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(65, Short.MAX_VALUE))
@@ -146,13 +148,77 @@ public class LoginFr extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    String username = txtUsername.getText();
+    String password = txtPassword.getText();
+    
+    // Check 1: Is the Username empty?
+    if (username.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Username cannot be empty. Please enter your ID.", 
+            "Validation Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return; // STOP here. Do not check password.
+    }
+
+    // Check 2: Is the Password empty?
+    if (password.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Password cannot be empty.", 
+            "Validation Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return; // STOP here.
+    }
+    // Check 3: Minimum Length (Optional but good for security marks)
+    if (password.length() < 4) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Password must be at least 4 characters long.", 
+            "Validation Error", 
+            javax.swing.JOptionPane.WARNING_MESSAGE);
+        return; 
+    }
+    
+     if (username.equals("admin") && password.equals("admin")) {
+        
+        // Success: Open Admin Dashboard
+        AdminView dashboard = new AdminView();
+        dashboard.setVisible(true);
+        this.dispose(); 
+        
+    } else if (username.equals("judge") && password.equals("judge123")) {
+        
+        // Success: Open Judge Dashboard
+        // JudgeDashboard judgeView = new JudgeDashboard();
+        // judgeView.setVisible(true);
+        this.dispose();
+        
+    } else {
+        // Failure: Wrong Login
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Incorrect Username or Password.", 
+            "Login Failed", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+     
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
+    if (txtUsername.getText().equals("Enter Username")) {
+        // 2. Clear the text
+        txtUsername.setText("");
+        
+        // 3. Optional: Change text color to black (if it was gray)
+        txtUsername.setForeground(new java.awt.Color(0, 0, 0));
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameFocusGained
 
     /**
      * @param args the command line arguments
@@ -187,7 +253,7 @@ public class LoginFr extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
