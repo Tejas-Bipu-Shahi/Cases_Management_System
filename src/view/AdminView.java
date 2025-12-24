@@ -108,10 +108,6 @@ public class AdminView extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dashboardTable = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
@@ -124,6 +120,58 @@ public class AdminView extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtCaseId = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtRegNo = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txtCaseTitle = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtSubjectMatter = new javax.swing.JTextArea();
+        jLabel20 = new javax.swing.JLabel();
+        cmbJudge = new javax.swing.JComboBox<>();
+        txtHearingDate = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        txtDisputeType = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        txtClaimAmount = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        txtReliefSought = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel101 = new javax.swing.JLabel();
+        jLabel102 = new javax.swing.JLabel();
+        jLabel103 = new javax.swing.JLabel();
+        rtxtCaseId = new javax.swing.JTextField();
+        jLabel104 = new javax.swing.JLabel();
+        rtxtRegisterationNumber = new javax.swing.JTextField();
+        jLabel105 = new javax.swing.JLabel();
+        jLabel106 = new javax.swing.JLabel();
+        rtxtCaseTitle = new javax.swing.JTextField();
+        jLabel107 = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        rtxtSubjectMatter = new javax.swing.JTextArea();
+        jLabel108 = new javax.swing.JLabel();
+        rcmbJudge = new javax.swing.JComboBox<>();
+        rtxtHearingDate = new javax.swing.JTextField();
+        jLabel109 = new javax.swing.JLabel();
+        registerbutton = new javax.swing.JButton();
+        rtxtCrimeType = new javax.swing.JTextField();
+        jLabel110 = new javax.swing.JLabel();
+        rtxtPoliceStation = new javax.swing.JTextField();
+        jLabel111 = new javax.swing.JLabel();
+        rtxtFirNumber = new javax.swing.JTextField();
+        jLabel112 = new javax.swing.JLabel();
+        rchkBailStatus = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -324,57 +372,6 @@ public class AdminView extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("       DASHBOARD      ", jPanel2);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel11.setFont(new java.awt.Font("Science Gothic", 0, 28)); // NOI18N
-        jLabel11.setText("REGISTER NEW CASE");
-
-        jButton1.setBackground(new java.awt.Color(51, 51, 51));
-        jButton1.setFont(new java.awt.Font("Yu Gothic Light", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("CIVIL CASE");
-        jButton1.setVerifyInputWhenFocusTarget(false);
-        jButton1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-
-        jButton5.setBackground(new java.awt.Color(51, 51, 51));
-        jButton5.setFont(new java.awt.Font("Yu Gothic Light", 1, 24)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("CRMINAL CASE");
-        jButton5.setVerifyInputWhenFocusTarget(false);
-        jButton5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(this::jButton5ActionPerformed);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
-                        .addComponent(jLabel11)))
-                .addGap(340, 461, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addGap(4, 4, 4)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(445, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("CASE MANAGEMENT", jPanel4);
-
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel22.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
@@ -504,6 +501,482 @@ public class AdminView extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("REGISTERED CASES", jPanel7);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane3.setBackground(new java.awt.Color(51, 51, 51));
+        jTabbedPane3.setForeground(new java.awt.Color(255, 255, 255));
+
+        jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel13.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+
+        jLabel14.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+        jLabel14.setText("Add Details");
+
+        jLabel15.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel15.setText("Case Id.");
+
+        txtCaseId.setBackground(new java.awt.Color(204, 204, 204));
+        txtCaseId.setForeground(new java.awt.Color(102, 102, 102));
+        txtCaseId.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtCaseId.addActionListener(this::txtCaseIdActionPerformed);
+
+        jLabel16.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel16.setText("Reg No.");
+
+        txtRegNo.setBackground(new java.awt.Color(204, 204, 204));
+        txtRegNo.setForeground(new java.awt.Color(102, 102, 102));
+        txtRegNo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtRegNo.addActionListener(this::txtRegNoActionPerformed);
+
+        jLabel17.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel17.setText("Dispute Type");
+
+        jLabel18.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel18.setText("Case Title/Issue");
+
+        txtCaseTitle.setBackground(new java.awt.Color(204, 204, 204));
+        txtCaseTitle.setForeground(new java.awt.Color(102, 102, 102));
+        txtCaseTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel19.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel19.setText("Subject Matter");
+
+        txtSubjectMatter.setBackground(new java.awt.Color(204, 204, 204));
+        txtSubjectMatter.setColumns(20);
+        txtSubjectMatter.setForeground(new java.awt.Color(102, 102, 102));
+        txtSubjectMatter.setRows(5);
+        txtSubjectMatter.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jScrollPane2.setViewportView(txtSubjectMatter);
+
+        jLabel20.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel20.setText("Assigned Judge");
+
+        cmbJudge.setBackground(new java.awt.Color(204, 204, 204));
+        cmbJudge.setForeground(new java.awt.Color(102, 102, 102));
+        cmbJudge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kamala Singh", "Tek Raj Joshi", "Babu Kaji", " " }));
+
+        txtHearingDate.setBackground(new java.awt.Color(204, 204, 204));
+        txtHearingDate.setForeground(new java.awt.Color(102, 102, 102));
+        txtHearingDate.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtHearingDate.addActionListener(this::txtHearingDateActionPerformed);
+
+        jLabel21.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel21.setText("Hearing Date");
+
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Register Case");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        txtDisputeType.setBackground(new java.awt.Color(204, 204, 204));
+        txtDisputeType.setForeground(new java.awt.Color(102, 102, 102));
+        txtDisputeType.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtDisputeType.addActionListener(this::txtDisputeTypeActionPerformed);
+
+        jLabel25.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel25.setText("Claim Amount");
+
+        txtClaimAmount.setBackground(new java.awt.Color(204, 204, 204));
+        txtClaimAmount.setForeground(new java.awt.Color(102, 102, 102));
+        txtClaimAmount.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtClaimAmount.addActionListener(this::txtClaimAmountActionPerformed);
+
+        jLabel26.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel26.setText("Relief Sought");
+
+        txtReliefSought.setBackground(new java.awt.Color(204, 204, 204));
+        txtReliefSought.setForeground(new java.awt.Color(102, 102, 102));
+        txtReliefSought.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtReliefSought.addActionListener(this::txtReliefSoughtActionPerformed);
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(txtCaseId, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(txtRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(txtDisputeType, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel11Layout.createSequentialGroup()
+                                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel20)
+                                            .addComponent(cmbJudge, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel21)
+                                            .addComponent(txtHearingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel13))
+                            .addComponent(txtCaseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel25)
+                                    .addComponent(txtClaimAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel26)
+                                    .addComponent(txtReliefSought))))))
+                .addGap(24, 24, 24))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCaseId, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDisputeType, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(27, 27, 27)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addGap(161, 161, 161))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCaseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtClaimAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(jLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtReliefSought, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cmbJudge, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel11Layout.createSequentialGroup()
+                                    .addComponent(jLabel20)
+                                    .addGap(27, 27, 27)))
+                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel11Layout.createSequentialGroup()
+                                    .addComponent(jLabel21)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtHearingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(18, Short.MAX_VALUE))))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(235, Short.MAX_VALUE)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(222, 222, 222))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("CIVIL CASE", jPanel5);
+
+        jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel101.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+
+        jLabel102.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+        jLabel102.setText("Add Details");
+
+        jLabel103.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel103.setText("Case Id.");
+
+        rtxtCaseId.setBackground(new java.awt.Color(204, 204, 204));
+        rtxtCaseId.setForeground(new java.awt.Color(102, 102, 102));
+        rtxtCaseId.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        rtxtCaseId.addActionListener(this::rtxtCaseIdActionPerformed);
+
+        jLabel104.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel104.setText("Reg No.");
+
+        rtxtRegisterationNumber.setBackground(new java.awt.Color(204, 204, 204));
+        rtxtRegisterationNumber.setForeground(new java.awt.Color(102, 102, 102));
+        rtxtRegisterationNumber.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        rtxtRegisterationNumber.addActionListener(this::rtxtRegisterationNumberActionPerformed);
+
+        jLabel105.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel105.setText("Crime Type");
+
+        jLabel106.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel106.setText("Case Title/Issue");
+
+        rtxtCaseTitle.setBackground(new java.awt.Color(204, 204, 204));
+        rtxtCaseTitle.setForeground(new java.awt.Color(102, 102, 102));
+        rtxtCaseTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel107.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel107.setText("Subject Matter");
+
+        rtxtSubjectMatter.setBackground(new java.awt.Color(204, 204, 204));
+        rtxtSubjectMatter.setColumns(20);
+        rtxtSubjectMatter.setForeground(new java.awt.Color(102, 102, 102));
+        rtxtSubjectMatter.setRows(5);
+        rtxtSubjectMatter.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jScrollPane10.setViewportView(rtxtSubjectMatter);
+
+        jLabel108.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel108.setText("Assigned Judge");
+
+        rcmbJudge.setBackground(new java.awt.Color(204, 204, 204));
+        rcmbJudge.setForeground(new java.awt.Color(102, 102, 102));
+        rcmbJudge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kamala Singh", "Tek Raj Joshi", "Babu Kaji", " " }));
+
+        rtxtHearingDate.setBackground(new java.awt.Color(204, 204, 204));
+        rtxtHearingDate.setForeground(new java.awt.Color(102, 102, 102));
+        rtxtHearingDate.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        rtxtHearingDate.addActionListener(this::rtxtHearingDateActionPerformed);
+
+        jLabel109.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel109.setText("Hearing Date");
+
+        registerbutton.setBackground(new java.awt.Color(51, 51, 51));
+        registerbutton.setForeground(new java.awt.Color(255, 255, 255));
+        registerbutton.setText("Register Case");
+        registerbutton.addActionListener(this::registerbuttonActionPerformed);
+
+        rtxtCrimeType.setBackground(new java.awt.Color(204, 204, 204));
+        rtxtCrimeType.setForeground(new java.awt.Color(102, 102, 102));
+        rtxtCrimeType.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        rtxtCrimeType.addActionListener(this::rtxtCrimeTypeActionPerformed);
+
+        jLabel110.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel110.setText("Police Station");
+
+        rtxtPoliceStation.setBackground(new java.awt.Color(204, 204, 204));
+        rtxtPoliceStation.setForeground(new java.awt.Color(102, 102, 102));
+        rtxtPoliceStation.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        rtxtPoliceStation.addActionListener(this::rtxtPoliceStationActionPerformed);
+
+        jLabel111.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel111.setText("Fir Number");
+
+        rtxtFirNumber.setBackground(new java.awt.Color(204, 204, 204));
+        rtxtFirNumber.setForeground(new java.awt.Color(102, 102, 102));
+        rtxtFirNumber.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        rtxtFirNumber.addActionListener(this::rtxtFirNumberActionPerformed);
+
+        jLabel112.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel112.setText("Bail Status");
+
+        rchkBailStatus.setBackground(new java.awt.Color(204, 204, 204));
+        rchkBailStatus.setForeground(new java.awt.Color(102, 102, 102));
+        rchkBailStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Granted", "Not Granted" }));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel102)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel106, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel103)
+                                    .addComponent(rtxtCaseId, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel104)
+                                    .addComponent(rtxtRegisterationNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel105)
+                                    .addComponent(rtxtCrimeType, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel107, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel17Layout.createSequentialGroup()
+                                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel108)
+                                            .addComponent(rcmbJudge, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel109)
+                                            .addComponent(rtxtHearingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(27, 27, 27)
+                                        .addComponent(registerbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel101))
+                            .addComponent(rtxtCaseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel110)
+                                    .addComponent(rtxtPoliceStation, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel111)
+                                    .addComponent(rtxtFirNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel112)
+                                    .addComponent(rchkBailStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel102)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(jLabel103)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rtxtCaseId, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(jLabel104)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rtxtRegisterationNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rtxtCrimeType, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addComponent(jLabel105)
+                        .addGap(27, 27, 27)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel106)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel101)
+                        .addGap(161, 161, 161))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rtxtCaseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel107)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel17Layout.createSequentialGroup()
+                                        .addComponent(jLabel110)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rtxtPoliceStation, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel17Layout.createSequentialGroup()
+                                        .addComponent(jLabel111)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(rtxtFirNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(rchkBailStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel17Layout.createSequentialGroup()
+                                .addComponent(jLabel112)
+                                .addGap(28, 28, 28)))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(rcmbJudge, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel17Layout.createSequentialGroup()
+                                    .addComponent(jLabel108)
+                                    .addGap(27, 27, 27)))
+                            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(registerbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel17Layout.createSequentialGroup()
+                                    .addComponent(jLabel109)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(rtxtHearingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(27, Short.MAX_VALUE))))
+        );
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(207, Short.MAX_VALUE)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(206, 206, 206))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("CRIMINAL CASE", jPanel6);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane3)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane3)
+                .addContainerGap())
+        );
+
+        jTabbedPane2.addTab("CASE MANAGEMENT", jPanel4);
+
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Inter", 0, 36)); // NOI18N
@@ -586,19 +1059,197 @@ public class AdminView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        RegisterCivilCase civilRegister = new RegisterCivilCase();
-        civilRegister.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        RegisterCriminalCase criminalRegister = new RegisterCriminalCase();
-        criminalRegister.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         loadRegisteredCases();
     }//GEN-LAST:event_formWindowActivated
+
+    private void txtCaseIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaseIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCaseIdActionPerformed
+
+    private void txtRegNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegNoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRegNoActionPerformed
+
+    private void txtHearingDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHearingDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHearingDateActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // 1. Check for Empty Fields (Basic Validation)
+            if (txtCaseId.getText().isEmpty() || txtRegNo.getText().isEmpty()
+                || txtCaseTitle.getText().isEmpty() || txtHearingDate.getText().isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                    "Please fill in all required fields!", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // 2. Extract Data from TextFields
+            // Use trim() to remove accidental spaces
+            int id = Integer.parseInt(txtCaseId.getText().trim()); // Converts String "101" to int 101
+            String regNo = txtRegNo.getText().trim();
+            String disputeType = txtDisputeType.getText().trim();
+            String title = txtCaseTitle.getText().trim();
+            String subject = txtSubjectMatter.getText().trim();
+
+            // Handle Claim Amount (Parse String to Double)
+            double amount = 0.0;
+            try {
+                amount = Double.parseDouble(txtClaimAmount.getText().trim());
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Claim Amount must be a number.");
+                return;
+            }
+            String relief = txtReliefSought.getText().trim();
+            String judge = cmbJudge.getSelectedItem().toString(); // Get selected item from dropdown
+            String hearingDate = txtHearingDate.getText().trim();
+
+            // getting current date and time
+            LocalDateTime currentDateTime = LocalDateTime.now();
+
+            // 2. FParsing it into String
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedFilingDate = currentDateTime.format(formatter);
+
+            // 3. Create the CivilCase Object
+            CivilCase newCase = new CivilCase(
+                id,
+                regNo,
+                title,
+                formattedFilingDate,
+                hearingDate,
+                judge,
+                "Open",
+                disputeType,
+                subject,
+                amount,
+                relief
+            );
+
+            boolean isSaved = controller.registerCase(newCase);
+
+            if (isSaved) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Success! Case Registered.");
+
+                // Clear the fields so you can add another one
+                txtCaseId.setText("");
+                txtCaseTitle.setText("");
+                // ... clear others if you want
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: Case ID already exists!");
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Case ID must be a valid number.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtDisputeTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDisputeTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDisputeTypeActionPerformed
+
+    private void txtClaimAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaimAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaimAmountActionPerformed
+
+    private void txtReliefSoughtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReliefSoughtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtReliefSoughtActionPerformed
+
+    private void rtxtCaseIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rtxtCaseIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rtxtCaseIdActionPerformed
+
+    private void rtxtRegisterationNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rtxtRegisterationNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rtxtRegisterationNumberActionPerformed
+
+    private void rtxtHearingDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rtxtHearingDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rtxtHearingDateActionPerformed
+
+    private void registerbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerbuttonActionPerformed
+
+        try {
+            // --- 1. VALIDATION ---
+            // Check if important fields are empty
+            if (rtxtCaseId.getText().trim().isEmpty()
+                || rtxtRegisterationNumber.getText().trim().isEmpty()
+                || rtxtPoliceStation.getText().trim().isEmpty()) {
+
+                javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all required fields.");
+                return;
+            }
+
+            // --- 2. GET DATA ---
+            int id = Integer.parseInt(rtxtCaseId.getText().trim());
+            String regNo = rtxtRegisterationNumber.getText().trim();
+            String title = rtxtCaseTitle.getText().trim();
+            String hearingDate = rtxtHearingDate.getText().trim();
+            String judge = rcmbJudge.getSelectedItem().toString();
+
+            String crimeType = rtxtCrimeType.getText().trim();
+            String station = rtxtPoliceStation.getText().trim();
+            String firNo = rtxtFirNumber.getText().trim();
+
+            // Bail Status (ComboBox)
+            String bailStatus = rchkBailStatus.getSelectedItem().toString();
+            // NOTE: If your Model expects a boolean, change this line to:
+            // boolean isBail = bailStatus.equals("Granted");
+            // getting current date and time
+            LocalDateTime currentDateTime = LocalDateTime.now();
+
+            // 2. FParsing it into String
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedFilingDate = currentDateTime.format(formatter);
+
+            // --- 3. CREATE MODEL OBJECT ---
+            // Ensure this matches your CriminalCase Constructor exactly!
+            model.CriminalCase newCase = new model.CriminalCase(
+                id,
+                regNo,
+                title,
+                formattedFilingDate,
+                hearingDate,
+                judge,
+                "Open",
+                crimeType,
+                station,
+                firNo,
+                bailStatus
+            );
+
+            // CALL CONTROLLER
+            boolean isSaved = controller.registerCase(newCase);
+
+            if (isSaved) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Criminal Case Registered Successfully!");
+                // Clear fields
+                rtxtCaseId.setText("");
+                rtxtCaseTitle.setText("");
+                rtxtFirNumber.setText("");
+                rtxtPoliceStation.setText("");
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: Case ID already exists!");
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Case ID must be a valid number.");
+        }
+    }//GEN-LAST:event_registerbuttonActionPerformed
+
+    private void rtxtCrimeTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rtxtCrimeTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rtxtCrimeTypeActionPerformed
+
+    private void rtxtPoliceStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rtxtPoliceStationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rtxtPoliceStationActionPerformed
+
+    private void rtxtFirNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rtxtFirNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rtxtFirNumberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -626,22 +1277,44 @@ public class AdminView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbJudge;
     private javax.swing.JTable dashboardTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel101;
+    private javax.swing.JLabel jLabel102;
+    private javax.swing.JLabel jLabel103;
+    private javax.swing.JLabel jLabel104;
+    private javax.swing.JLabel jLabel105;
+    private javax.swing.JLabel jLabel106;
+    private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel108;
+    private javax.swing.JLabel jLabel109;
+    private javax.swing.JLabel jLabel110;
+    private javax.swing.JLabel jLabel111;
+    private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -651,16 +1324,42 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JComboBox<String> rchkBailStatus;
+    private javax.swing.JComboBox<String> rcmbJudge;
+    private javax.swing.JButton registerbutton;
+    private javax.swing.JTextField rtxtCaseId;
+    private javax.swing.JTextField rtxtCaseTitle;
+    private javax.swing.JTextField rtxtCrimeType;
+    private javax.swing.JTextField rtxtFirNumber;
+    private javax.swing.JTextField rtxtHearingDate;
+    private javax.swing.JTextField rtxtPoliceStation;
+    private javax.swing.JTextField rtxtRegisterationNumber;
+    private javax.swing.JTextArea rtxtSubjectMatter;
     private javax.swing.JTable totalRegisteredCasesTable;
+    private javax.swing.JTextField txtCaseId;
+    private javax.swing.JTextField txtCaseTitle;
+    private javax.swing.JTextField txtClaimAmount;
+    private javax.swing.JTextField txtDisputeType;
+    private javax.swing.JTextField txtHearingDate;
+    private javax.swing.JTextField txtRegNo;
+    private javax.swing.JTextField txtReliefSought;
+    private javax.swing.JTextArea txtSubjectMatter;
     // End of variables declaration//GEN-END:variables
 }
