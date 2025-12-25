@@ -8,35 +8,69 @@ package controller;
  *
  * @author Tejas Shahi
  */
-
 import model.Case;
 import java.util.LinkedList;
 
 public class CaseController {
-    
-    // shared all over the app
+
+    // This list is static so it is shared across the entire app
     private static LinkedList<Case> allCases = new LinkedList<>();
 
     public CaseController() {
-        
     }
-    
-    public boolean registerCase(Case newCase) {
-        // Check if ID already exists
+
+    // helper method to fin case by id
+    // We use this in register, delete, and update to avoid rewriting the loop every time
+    public Case findCaseById(int targetId) {
+        if (allCases.isEmpty()) {
+            return null;
+        }
+
+        // Loop through the list to find the match
         for (Case c : allCases) {
-            if (c.getCaseId() == newCase.getCaseId()) {
-                System.out.println("Error: Case ID " + newCase.getCaseId() + " already exists.");
-                return false; 
+            if (c.getCaseId() == targetId) {
+                return c; // Found it, return the object
             }
         }
-        
-        
-        //  Add to list
-        allCases.add(newCase);
-        return true; 
+        return null; // Didn't find anything
     }
-    
-    // Helper to get the list (for Admin View)
+
+    public boolean registerCase(Case newCase) {
+        // First, check if this ID already exists using our helper method
+        Case existingCase = findCaseById(newCase.getCaseId());
+
+        if (existingCase != null) {
+            System.out.println("Error: Case ID " + newCase.getCaseId() + " already exists.");
+            return false; // Stop here, don't add duplicates
+        }
+
+        // If ID is unique, add it to the list
+        allCases.add(newCase);
+        return true;
+    }
+
+    // deletes case by case id
+    public boolean deleteCase(int targetId) {
+        Case caseToRemove = findCaseById(targetId);
+        if (caseToRemove != null) {
+            allCases.remove(caseToRemove);
+            return true;
+        }
+        return false;
+    }
+
+    // replaces old case by new updated case
+    public boolean updateCase(Case updatedCase) {
+        Case oldCase = findCaseById(updatedCase.getCaseId());
+        if (oldCase != null) {
+            int index = allCases.indexOf(oldCase);
+            allCases.set(index, updatedCase);
+            return true;
+        }
+        return false;
+    }
+
+    // Just returns the whole list so the Table can display it
     public LinkedList<Case> getAllCases() {
         return allCases;
     }

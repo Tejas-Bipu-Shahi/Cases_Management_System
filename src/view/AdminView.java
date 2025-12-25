@@ -68,19 +68,40 @@ public class AdminView extends javax.swing.JFrame {
                 c.getCaseStatus(),
                 c.getHearingDate()
             });
-            
-            if(c.getHearingDate().equals(formattedFilingDate)){
+
+            if (c.getHearingDate().equals(formattedFilingDate)) {
                 model1.addRow(new Object[]{
-                c.getCaseId(),
-                c.getRegistrationNumber(),
-                c.getCaseTitle(),
-                caseType,
-                c.getAssignedJudge(),
-                c.getCaseStatus(),
-                c.getHearingDate()
-            });
+                    c.getCaseId(),
+                    c.getRegistrationNumber(),
+                    c.getCaseTitle(),
+                    caseType,
+                    c.getAssignedJudge(),
+                    c.getCaseStatus(),
+                    c.getHearingDate()
+                });
             }
         }
+    }
+    // Helper to calculate the next hearing number
+
+    private String getNextHearingStep(String currentStatus) {
+        if (currentStatus == null || currentStatus.equalsIgnoreCase("Open")) {
+            return "First";
+        }
+        if (currentStatus.equalsIgnoreCase("First")) {
+            return "Second";
+        }
+        if (currentStatus.equalsIgnoreCase("Second")) {
+            return "Third";
+        }
+        if (currentStatus.equalsIgnoreCase("Third")) {
+            return "Fourth";
+        }
+        if (currentStatus.equalsIgnoreCase("Fourth")) {
+            return "Fifth";
+        }
+
+        return "Final"; // Stops at Final
     }
 
     /**
@@ -172,6 +193,37 @@ public class AdminView extends javax.swing.JFrame {
         rtxtFirNumber = new javax.swing.JTextField();
         jLabel112 = new javax.swing.JLabel();
         rchkBailStatus = new javax.swing.JComboBox<>();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        txtCaseId1 = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        cmbJudge1 = new javax.swing.JComboBox<>();
+        jButton5 = new javax.swing.JButton();
+        txtRelief1 = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        txtClaimAmount1 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jLabel45 = new javax.swing.JLabel();
+        txtHearing1 = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        txtCaseId3 = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        cmbJudge3 = new javax.swing.JComboBox<>();
+        jButton9 = new javax.swing.JButton();
+        jLabel44 = new javax.swing.JLabel();
+        txtClaimAmount3 = new javax.swing.JTextField();
+        jButton10 = new javax.swing.JButton();
+        rchkBailStatus1 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -351,7 +403,7 @@ public class AdminView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,7 +507,7 @@ public class AdminView extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(34, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -709,7 +761,7 @@ public class AdminView extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(235, Short.MAX_VALUE)
+                .addContainerGap(247, Short.MAX_VALUE)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(222, 222, 222))
         );
@@ -944,7 +996,7 @@ public class AdminView extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(207, Short.MAX_VALUE)
+                .addContainerGap(219, Short.MAX_VALUE)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(206, 206, 206))
         );
@@ -957,6 +1009,335 @@ public class AdminView extends javax.swing.JFrame {
         );
 
         jTabbedPane3.addTab("CRIMINAL CASE", jPanel6);
+
+        jPanel12.setBackground(new java.awt.Color(51, 51, 51));
+
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel13.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel13.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel27.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+
+        jLabel28.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("CIVIL");
+
+        jLabel29.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Case Id.");
+
+        txtCaseId1.setBackground(new java.awt.Color(204, 204, 204));
+        txtCaseId1.setForeground(new java.awt.Color(102, 102, 102));
+        txtCaseId1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtCaseId1.addActionListener(this::txtCaseId1ActionPerformed);
+
+        jLabel34.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setText("Assigned Judge");
+
+        cmbJudge1.setBackground(new java.awt.Color(204, 204, 204));
+        cmbJudge1.setForeground(new java.awt.Color(102, 102, 102));
+        cmbJudge1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "Kamala Singh", "Tek Raj Joshi", "Babu Kaji", " " }));
+
+        jButton5.setBackground(new java.awt.Color(51, 51, 51));
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("UPDATE CASE");
+        jButton5.addActionListener(this::jButton5ActionPerformed);
+
+        txtRelief1.setBackground(new java.awt.Color(204, 204, 204));
+        txtRelief1.setForeground(new java.awt.Color(102, 102, 102));
+        txtRelief1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtRelief1.addActionListener(this::txtRelief1ActionPerformed);
+
+        jLabel36.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("Claim Amount");
+
+        txtClaimAmount1.setBackground(new java.awt.Color(204, 204, 204));
+        txtClaimAmount1.setForeground(new java.awt.Color(102, 102, 102));
+        txtClaimAmount1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtClaimAmount1.addActionListener(this::txtClaimAmount1ActionPerformed);
+
+        jButton6.setBackground(new java.awt.Color(51, 51, 51));
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setText("DELETE CASE");
+        jButton6.addActionListener(this::jButton6ActionPerformed);
+
+        jLabel45.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel45.setText("Hearing Date");
+
+        txtHearing1.setBackground(new java.awt.Color(204, 204, 204));
+        txtHearing1.setForeground(new java.awt.Color(102, 102, 102));
+        txtHearing1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtHearing1.addActionListener(this::txtHearing1ActionPerformed);
+
+        jLabel30.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel30.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText("Relief Sought");
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel36)
+                                    .addComponent(jLabel34)
+                                    .addComponent(jLabel45)
+                                    .addComponent(jLabel30))
+                                .addGap(59, 59, 59)
+                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbJudge1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRelief1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtClaimAmount1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtHearing1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel29))
+                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel13Layout.createSequentialGroup()
+                                        .addGap(59, 59, 59)
+                                        .addComponent(txtCaseId1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel13Layout.createSequentialGroup()
+                                        .addGap(109, 109, 109)
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(149, 149, 149)
+                        .addComponent(jLabel27))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(jLabel28)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel27)
+                .addGap(161, 161, 161))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel28)
+                .addGap(46, 46, 46)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCaseId1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRelief1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel30))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel36)
+                            .addComponent(txtClaimAmount1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addComponent(cmbJudge1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(134, 134, 134)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel45)
+                    .addComponent(txtHearing1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel19.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel19.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel39.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+
+        jLabel40.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel40.setText("CRIMINAL");
+
+        jLabel41.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel41.setText("Case Id.");
+
+        txtCaseId3.setBackground(new java.awt.Color(204, 204, 204));
+        txtCaseId3.setForeground(new java.awt.Color(102, 102, 102));
+        txtCaseId3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtCaseId3.addActionListener(this::txtCaseId3ActionPerformed);
+
+        jLabel42.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel42.setText("Bail Status");
+
+        jLabel43.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel43.setText("Assigned Judge");
+
+        cmbJudge3.setBackground(new java.awt.Color(204, 204, 204));
+        cmbJudge3.setForeground(new java.awt.Color(102, 102, 102));
+        cmbJudge3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "Kamala Singh", "Tek Raj Joshi", "Babu Kaji", " " }));
+
+        jButton9.setBackground(new java.awt.Color(51, 51, 51));
+        jButton9.setForeground(new java.awt.Color(255, 255, 255));
+        jButton9.setText("UPDATE CASE");
+        jButton9.addActionListener(this::jButton9ActionPerformed);
+
+        jLabel44.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel44.setText("Hearing Date");
+
+        txtClaimAmount3.setBackground(new java.awt.Color(204, 204, 204));
+        txtClaimAmount3.setForeground(new java.awt.Color(102, 102, 102));
+        txtClaimAmount3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        txtClaimAmount3.addActionListener(this::txtClaimAmount3ActionPerformed);
+
+        jButton10.setBackground(new java.awt.Color(51, 51, 51));
+        jButton10.setForeground(new java.awt.Color(255, 255, 255));
+        jButton10.setText("DELETE CASE");
+        jButton10.addActionListener(this::jButton10ActionPerformed);
+
+        rchkBailStatus1.setBackground(new java.awt.Color(204, 204, 204));
+        rchkBailStatus1.setForeground(new java.awt.Color(102, 102, 102));
+        rchkBailStatus1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "Granted", "Not Granted" }));
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel19Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel42)
+                                    .addComponent(jLabel44)
+                                    .addComponent(jLabel43))
+                                .addGap(59, 59, 59)
+                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbJudge3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtClaimAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rchkBailStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel19Layout.createSequentialGroup()
+                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel41))
+                                .addGap(59, 59, 59)
+                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCaseId3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(149, 149, 149)
+                        .addComponent(jLabel39))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(jLabel40)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel39)
+                .addGap(161, 161, 161))
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel40)
+                .addGap(46, 46, 46)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCaseId3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel41))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel42)
+                            .addComponent(rchkBailStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel44)
+                            .addComponent(txtClaimAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel43)
+                            .addComponent(cmbJudge3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(82, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jTabbedPane3.addTab("Update Case", jPanel12);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1039,7 +1420,7 @@ public class AdminView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1286, Short.MAX_VALUE)
+            .addGap(0, 1298, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1079,9 +1460,9 @@ public class AdminView extends javax.swing.JFrame {
         try {
             // 1. Check for Empty Fields (Basic Validation)
             if (txtCaseId.getText().isEmpty() || txtRegNo.getText().isEmpty()
-                || txtCaseTitle.getText().isEmpty() || txtHearingDate.getText().isEmpty()) {
+                    || txtCaseTitle.getText().isEmpty() || txtHearingDate.getText().isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this,
-                    "Please fill in all required fields!", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "Please fill in all required fields!", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
             // 2. Extract Data from TextFields
@@ -1113,17 +1494,17 @@ public class AdminView extends javax.swing.JFrame {
 
             // 3. Create the CivilCase Object
             CivilCase newCase = new CivilCase(
-                id,
-                regNo,
-                title,
-                formattedFilingDate,
-                hearingDate,
-                judge,
-                "Open",
-                disputeType,
-                subject,
-                amount,
-                relief
+                    id,
+                    regNo,
+                    title,
+                    formattedFilingDate,
+                    hearingDate,
+                    judge,
+                    "Open",
+                    disputeType,
+                    subject,
+                    amount,
+                    relief
             );
 
             boolean isSaved = controller.registerCase(newCase);
@@ -1141,7 +1522,7 @@ public class AdminView extends javax.swing.JFrame {
             }
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                "Case ID must be a valid number.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    "Case ID must be a valid number.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1175,8 +1556,8 @@ public class AdminView extends javax.swing.JFrame {
             // --- 1. VALIDATION ---
             // Check if important fields are empty
             if (rtxtCaseId.getText().trim().isEmpty()
-                || rtxtRegisterationNumber.getText().trim().isEmpty()
-                || rtxtPoliceStation.getText().trim().isEmpty()) {
+                    || rtxtRegisterationNumber.getText().trim().isEmpty()
+                    || rtxtPoliceStation.getText().trim().isEmpty()) {
 
                 javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all required fields.");
                 return;
@@ -1207,17 +1588,17 @@ public class AdminView extends javax.swing.JFrame {
             // --- 3. CREATE MODEL OBJECT ---
             // Ensure this matches your CriminalCase Constructor exactly!
             model.CriminalCase newCase = new model.CriminalCase(
-                id,
-                regNo,
-                title,
-                formattedFilingDate,
-                hearingDate,
-                judge,
-                "Open",
-                crimeType,
-                station,
-                firNo,
-                bailStatus
+                    id,
+                    regNo,
+                    title,
+                    formattedFilingDate,
+                    hearingDate,
+                    judge,
+                    "Open",
+                    crimeType,
+                    station,
+                    firNo,
+                    bailStatus
             );
 
             // CALL CONTROLLER
@@ -1251,6 +1632,362 @@ public class AdminView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rtxtFirNumberActionPerformed
 
+    private void txtCaseId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaseId1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCaseId1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+        try {
+            // --- 1. VALIDATION: Check Case ID ---
+            if (txtCaseId1.getText().trim().isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Please enter a Case ID.");
+                return;
+            }
+
+            // --- 2. CHECK EMPTY FIELDS ---
+            // We check if the user left everything blank/None
+            boolean isReliefEmpty = txtRelief1.getText().trim().isEmpty();
+            boolean isAmountEmpty = txtClaimAmount1.getText().trim().isEmpty();
+            boolean isDateEmpty = txtHearing1.getText().trim().isEmpty();
+
+            String selectedJudge = cmbJudge1.getSelectedItem().toString();
+            boolean isJudgeEmpty = selectedJudge.equals("none") || selectedJudge.trim().isEmpty();
+
+            // If EVERYTHING is empty or "None", stop here
+            if (isReliefEmpty && isAmountEmpty && isDateEmpty && isJudgeEmpty) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Nothing to update. Please change at least one field.");
+                return;
+            }
+
+            // --- 3. FETCH ORIGINAL CASE ---
+            int id = Integer.parseInt(txtCaseId1.getText().trim());
+            Case genericCase = controller.findCaseById(id);
+
+            if (genericCase == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Case ID not found.");
+                return;
+            }
+
+            if (!(genericCase instanceof CivilCase)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: This ID belongs to a Criminal Case.");
+                return;
+            }
+
+            CivilCase original = (CivilCase) genericCase;
+
+            // --- 4. PREPARE data ---
+            // A. Relief Sought
+            String finalRelief;
+            if (isReliefEmpty) {
+                finalRelief = original.getReliefSought();
+            } else {
+                finalRelief = txtRelief1.getText().trim();
+            }
+
+            // B. Hearing Date
+            String finalDate;
+            if (isDateEmpty) {
+                finalDate = original.getHearingDate();
+            } else {
+                finalDate = txtHearing1.getText().trim();
+            }
+
+            // C. Claim Amount
+            double finalAmount;
+            if (isAmountEmpty) {
+                finalAmount = original.getClaimAmount();
+            } else {
+                try {
+                    finalAmount = Double.parseDouble(txtClaimAmount1.getText().trim());
+                } catch (NumberFormatException e) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Invalid Amount. Keeping original.");
+                    finalAmount = original.getClaimAmount();
+                }
+            }
+
+            // D. Assigned Judge 
+            String finalJudge;
+            if (isJudgeEmpty) {
+                finalJudge = original.getAssignedJudge(); // Keep Old
+            } else {
+                finalJudge = selectedJudge; // Use New Selection
+            }
+
+            // --- 5. CREATE UPDATED OBJECT ---
+            CivilCase updatedCase = new CivilCase(
+                    id,
+                    original.getRegistrationNumber(),
+                    original.getCaseTitle(),
+                    original.getFilingDate(),
+                    finalDate,
+                    finalJudge,
+                    original.getCaseStatus(),
+                    original.getDisputeType(),
+                    original.getSubjectMatter(),
+                    finalAmount,
+                    finalRelief
+            );
+
+            // --- 6. SAVE CHANGES ---
+            boolean success = controller.updateCase(updatedCase);
+
+            if (success) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Case Updated Successfully.");
+                loadRegisteredCases();
+
+                // Clear inputs
+                txtCaseId1.setText("");
+                txtRelief1.setText("");
+                txtClaimAmount1.setText("");
+                txtHearing1.setText("");
+                cmbJudge1.setSelectedItem("None"); // Reset dropdown
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Update Failed.");
+            }
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid Case ID format.");
+        }
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txtRelief1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRelief1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRelief1ActionPerformed
+
+    private void txtClaimAmount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaimAmount1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaimAmount1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        try {
+            // 1. VALIDATION: CHECK INPUT
+            // Ensure the user has entered a Case ID before attempting to delete.
+            if (txtCaseId1.getText().trim().isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Please enter the Case ID to delete.");
+                return;
+            }
+
+            int id = Integer.parseInt(txtCaseId1.getText().trim());
+
+            // 2. VALIDATION: VERIFY EXISTENCE
+            // Check if the case actually exists in the system.
+            model.Case caseToDelete = controller.findCaseById(id);
+
+            if (caseToDelete == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Case ID not found in the system.");
+                return;
+            }
+
+            // Ensure we are deleting the correct type (Civil vs Criminal)
+            if (!(caseToDelete instanceof model.CivilCase)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: This ID belongs to a Criminal Case. Please use the Criminal tab.");
+                return;
+            }
+
+            // 3. USER CONFIRMATION
+            // Prompt the user to confirm the action. This is a critical safety step.
+            int choice = javax.swing.JOptionPane.showConfirmDialog(
+                    this,
+                    "Are you sure you want to permanently delete Civil Case #" + id + "?",
+                    "Delete Confirmation",
+                    javax.swing.JOptionPane.YES_NO_OPTION
+            );
+
+            // 4. EXECUTE DELETION
+            // Only proceed if the user clicked "Yes".
+            if (choice == javax.swing.JOptionPane.YES_OPTION) {
+                boolean success = controller.deleteCase(id);
+
+                if (success) {
+                    // 5. SUCCESS FEEDBACK & REFRESH
+                    javax.swing.JOptionPane.showMessageDialog(this, "Case deleted successfully.");
+
+                    // Refresh the main table to reflect the removal
+                    loadRegisteredCases();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Error: Deletion failed.");
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            // Handle invalid (non-numeric) ID input
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid Case ID format. Please enter a number.");
+        }
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void txtCaseId3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaseId3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCaseId3ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+
+        try {
+            // 1. Validation: Check Case ID
+            if (txtCaseId3.getText().trim().isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Please enter a Case ID.");
+                return;
+            }
+
+            // 2. Check Empty Fields (Smart Validation)
+            boolean isDateEmpty = txtClaimAmount3.getText().trim().isEmpty();
+
+            String selectedJudge = cmbJudge3.getSelectedItem().toString();
+            boolean isJudgeEmpty = selectedJudge.equalsIgnoreCase("None") || selectedJudge.trim().isEmpty();
+
+            String selectedBail = rchkBailStatus1.getSelectedItem().toString();
+            boolean isBailEmpty = selectedBail.equalsIgnoreCase("None") || selectedBail.trim().isEmpty();
+
+            // Stop if nothing is changed
+            if (isDateEmpty && isJudgeEmpty && isBailEmpty) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Nothing to update. Please change at least one field.");
+                return;
+            }
+
+            // 3. Fetch Original Case
+            int id = Integer.parseInt(txtCaseId3.getText().trim());
+            Case genericCase = controller.findCaseById(id);
+
+            if (genericCase == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Case ID not found.");
+                return;
+            }
+
+            if (!(genericCase instanceof model.CriminalCase)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: This ID belongs to a Civil Case.");
+                return;
+            }
+
+            CriminalCase original = (CriminalCase) genericCase;
+
+            // 4. Prepare Data
+            // Hearing Date
+            String finalDate;
+            if (isDateEmpty) {
+                finalDate = original.getHearingDate();
+            } else {
+                finalDate = txtClaimAmount3.getText().trim();
+            }
+
+            // Assigned Judge
+            String finalJudge;
+            if (isJudgeEmpty) {
+                finalJudge = original.getAssignedJudge();
+            } else {
+                finalJudge = selectedJudge;
+            }
+
+            // Bail Status
+            String finalBail;
+            if (isBailEmpty) {
+                finalBail = original.getBailGranted(); // Ensure getBailStatus() exists in CriminalCase model
+            } else {
+                finalBail = selectedBail;
+            }
+
+            // 5. Create Updated Object
+            CriminalCase updatedCase = new CriminalCase(
+                    id,
+                    original.getRegistrationNumber(),
+                    original.getCaseTitle(),
+                    original.getFilingDate(),
+                    finalDate,
+                    finalJudge,
+                    original.getCaseStatus(),
+                    original.getCrimeType(),
+                    original.getPoliceStation(),
+                    original.getFirNumber(),
+                    finalBail
+            );
+
+            // 6. Save Changes
+            boolean success = controller.updateCase(updatedCase);
+
+            if (success) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Criminal Case Updated Successfully.");
+                loadRegisteredCases();
+
+                // Clear inputs
+                txtCaseId3.setText("");
+                txtClaimAmount3.setText("");
+                cmbJudge3.setSelectedItem("None");
+
+                rchkBailStatus1.setSelectedItem("None");
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Update Failed.");
+            }
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid Case ID format.");
+        }
+
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void txtClaimAmount3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaimAmount3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaimAmount3ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        try {
+            // 1. Validation: Check Input
+            if (txtCaseId3.getText().trim().isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Please enter the Case ID to delete.");
+                return;
+            }
+
+            int id = Integer.parseInt(txtCaseId3.getText().trim());
+
+            // 2. Verification
+            model.Case caseToDelete = controller.findCaseById(id);
+
+            if (caseToDelete == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Case ID not found.");
+                return;
+            }
+
+            if (!(caseToDelete instanceof model.CriminalCase)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: This ID belongs to a Civil Case.");
+                return;
+            }
+
+            // 3. Confirmation
+            int choice = javax.swing.JOptionPane.showConfirmDialog(
+                    this,
+                    "Are you sure you want to delete Criminal Case #" + id + "?",
+                    "Delete Confirmation",
+                    javax.swing.JOptionPane.YES_NO_OPTION
+            );
+
+            // 4. Execution
+            if (choice == javax.swing.JOptionPane.YES_OPTION) {
+                boolean success = controller.deleteCase(id);
+
+                if (success) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Case deleted successfully.");
+                    loadRegisteredCases();
+
+                    // Clear fields
+                    txtCaseId3.setText("");
+                    txtClaimAmount3.setText("");
+
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Error: Deletion failed.");
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid Case ID format.");
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void txtHearing1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHearing1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHearing1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1278,11 +2015,17 @@ public class AdminView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbJudge;
+    private javax.swing.JComboBox<String> cmbJudge1;
+    private javax.swing.JComboBox<String> cmbJudge3;
     private javax.swing.JTable dashboardTable;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
@@ -1315,8 +2058,21 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1325,7 +2081,12 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1342,6 +2103,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JComboBox<String> rchkBailStatus;
+    private javax.swing.JComboBox<String> rchkBailStatus1;
     private javax.swing.JComboBox<String> rcmbJudge;
     private javax.swing.JButton registerbutton;
     private javax.swing.JTextField rtxtCaseId;
@@ -1354,11 +2116,17 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTextArea rtxtSubjectMatter;
     private javax.swing.JTable totalRegisteredCasesTable;
     private javax.swing.JTextField txtCaseId;
+    private javax.swing.JTextField txtCaseId1;
+    private javax.swing.JTextField txtCaseId3;
     private javax.swing.JTextField txtCaseTitle;
     private javax.swing.JTextField txtClaimAmount;
+    private javax.swing.JTextField txtClaimAmount1;
+    private javax.swing.JTextField txtClaimAmount3;
     private javax.swing.JTextField txtDisputeType;
+    private javax.swing.JTextField txtHearing1;
     private javax.swing.JTextField txtHearingDate;
     private javax.swing.JTextField txtRegNo;
+    private javax.swing.JTextField txtRelief1;
     private javax.swing.JTextField txtReliefSought;
     private javax.swing.JTextArea txtSubjectMatter;
     // End of variables declaration//GEN-END:variables

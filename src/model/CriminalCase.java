@@ -48,7 +48,7 @@ public class CriminalCase extends Case {
         return firNumber;
     }
 
-    public String isBailGranted() {
+    public String getBailGranted() {
         return bailGranted;
     }
 
