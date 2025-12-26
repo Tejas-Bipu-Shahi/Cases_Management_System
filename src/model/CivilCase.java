@@ -8,10 +8,7 @@ package model;
  *
  * @author tejas
  */
-/**
- * Represents Civil disputes (Family law, Property, Contracts). Extends the
- * abstract Case class to inherit common attributes.
- */
+
 
 public class CivilCase extends Case {
 

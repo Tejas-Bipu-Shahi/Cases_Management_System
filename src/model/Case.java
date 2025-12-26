@@ -6,22 +6,19 @@ package model;
 
 /**
  *
- * @author tejas Abstract Parent Class This class cannot be instantiated
- * directly; it must be extended by CivilCase or CriminalCase Polymorphism used
- * so that abstract method are rewritten in subclasses encapsulation values cant
- * be directly accept
+ * @author tejas Abstract Parent Class 
  */
 public abstract class Case {
 
     // 1. COMMON ATTRIBUTES (For all case types)
     // ==========================================
-    private int caseId;                // Unique(Primary Key) 
-    private String registrationNumber; // Official Court Reg No ("REG-2025-001")
-    private String caseTitle;          // The name of the case ("State vs. Smith")
-    private String filingDate;         // When the case was registered
-    private String hearingDate;        // Next scheduled hearing (Mutable)
-    private String assignedJudge;      // Presiding Judge (Mutable)
-    private String caseStatus;         // "Open", "Closed", "Verdict Pending" (Mutable)
+    private int caseId;                
+    private String registrationNumber;
+    private String caseTitle;         
+    private String filingDate;         
+    private String hearingDate;        
+    private String assignedJudge;      
+    private String caseStatus;         
 
     // 2. CONSTRUCTOR
     // ==========================================
@@ -86,17 +83,6 @@ public abstract class Case {
     }
 
     // No setters for caseId, registrationNumber, or filingDate. 
-    // These are permanent records and should not be modified after creation.
-
-    
-    // 5. ABSTRACT METHODS
-    // ==========================================
-    /**
-     * Checks if the case data is valid according to specific laws. Civil cases
-     * checks for claim amounts; Criminal cases check for police details.
-     *
-     * @return true if valid, false otherwise.
-     */
     public abstract boolean validateCase();
 
     /**

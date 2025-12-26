@@ -189,6 +189,7 @@ public class LoginFr extends javax.swing.JFrame {
      if (username.equals("admin") && password.equals("admin")) {
         
         // Success: Open Admin Dashboard
+        javax.swing.JOptionPane.showMessageDialog(this, "Hello Justice Maker, Welcome back.");
         AdminView dashboard = new AdminView();
         dashboard.setVisible(true);
         this.dispose(); 

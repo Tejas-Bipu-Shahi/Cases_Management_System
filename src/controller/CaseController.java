@@ -19,18 +19,14 @@ public class CaseController {
     private static LinkedList<Case> allCases = new LinkedList<>();
 
     // Inside CaseController.java
-    // 1. UPDATED CONSTRUCTOR
     public CaseController() {
-        // If the list is empty, load the 5 sample cases
-        if (allCases.isEmpty()) {
-            loadPredefinedCases();
-        }
+        loadPredefinedCases();
     }
 
     private void loadPredefinedCases() {
         // --- 3 CIVIL CASES ---
         CivilCase c1 = new CivilCase(
-                101, "REG-001", "Smith vs. Doe", "2025-01-10", "2025-05-15",
+                101, "REG-001", "Smith vs. Doe", "2025-01-10", "2025-12-26",
                 "Kamala Singh", "Open", "Property", "Land Dispute in Thamel",
                 500000.0, "Ownership Transfer"
         );
@@ -49,7 +45,7 @@ public class CaseController {
 
         // --- 2 CRIMINAL CASES ---
         CriminalCase cr1 = new CriminalCase(
-                201, "CRM-999", "State vs. Rabin K.", "2025-01-05", "2025-04-10",
+                201, "CRM-999", "State vs. Rabin K.", "2025-01-05", "2025-12-26",
                 "Kamala Singh", "Open", "Theft", "Durbar Marg Police",
                 "FIR-1122", "Not Granted"
         );
@@ -85,7 +81,8 @@ public class CaseController {
         }
         return null; // Didn't find anything
     }
-
+    
+    // To register any case 
     public boolean registerCase(Case newCase) {
         // First, check if this ID already exists using our helper method
         Case existingCase = findCaseById(newCase.getCaseId());
