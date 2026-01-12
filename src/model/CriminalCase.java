@@ -15,7 +15,7 @@ public class CriminalCase extends Case {
     // ==========================================
     private String crimeType;      // "Theft", "Assault", "Fraud"
     private String policeStation;  // Where the FIR was filed
-    private String firNumber;      // First I2nformation Report Number
+    private String firNumber;      // First Information Report Number
     private String bailGranted;   // True = Out on bail, False = In Custody
 
     // 2. CONSTRUCTOR

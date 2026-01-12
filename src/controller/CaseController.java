@@ -12,47 +12,52 @@ import model.Case;
 import java.util.LinkedList;
 import model.CivilCase;
 import model.CriminalCase;
+import java.util.Stack;
 
 public class CaseController {
 
     // This list is static so it is shared across the entire app
     private static LinkedList<Case> allCases = new LinkedList<>();
+    // STACK for Undo Functionality (LIFO - Last In, First Out)
+    private static Stack<Case> deletedCasesStack = new Stack<>();
 
     // Inside CaseController.java
     public CaseController() {
-        loadPredefinedCases();
+        if (allCases.isEmpty()) {
+            loadPredefinedCases();
+        }
     }
 
     private void loadPredefinedCases() {
         // --- 3 CIVIL CASES ---
         CivilCase c1 = new CivilCase(
                 101, "REG-001", "Smith vs. Doe", "2025-01-10", "2025-12-26",
-                "Kamala Singh", "Open", "Property", "Land Dispute in Thamel",
+                "Kamala Singh", "running", "Property", "Land Dispute in Thamel",
                 500000.0, "Ownership Transfer"
         );
 
         CivilCase c2 = new CivilCase(
                 102, "REG-002", "ABC Corp vs. XYZ Ltd", "2025-02-01", "2025-06-20",
-                "Tek Raj Joshi", "First", "Contract", "Breach of Agreement",
+                "Tek Raj Joshi", "closed", "Contract", "Breach of Agreement",
                 120000.0, "Compensation"
         );
 
         CivilCase c3 = new CivilCase(
                 103, "REG-003", "Family Estate Issue", "2025-03-12", "2025-07-01",
-                "Babu Kaji", "Open", "Family", "Inheritance Claim",
+                "Babu Kaji", "running", "Family", "Inheritance Claim",
                 75000.0, "Equal Division"
         );
 
         // --- 2 CRIMINAL CASES ---
         CriminalCase cr1 = new CriminalCase(
                 201, "CRM-999", "State vs. Rabin K.", "2025-01-05", "2025-12-26",
-                "Kamala Singh", "Open", "Theft", "Durbar Marg Police",
+                "Kamala Singh", "running", "Theft", "Durbar Marg Police",
                 "FIR-1122", "Not Granted"
         );
 
         CriminalCase cr2 = new CriminalCase(
                 202, "CRM-888", "Fraud Investigation", "2025-02-20", "2025-05-25",
-                "Tek Raj Joshi", "Second", "Fraud", "Lazimpat Station",
+                "Tek Raj Joshi", "closed", "Fraud", "Lazimpat Station",
                 "FIR-3344", "Granted"
         );
 
@@ -81,7 +86,7 @@ public class CaseController {
         }
         return null; // Didn't find anything
     }
-    
+
     // To register any case 
     public boolean registerCase(Case newCase) {
         // First, check if this ID already exists using our helper method
@@ -97,14 +102,47 @@ public class CaseController {
         return true;
     }
 
-    // deletes case by case id
+    // UPDATED: Deletes case but saves it to the Stack first
     public boolean deleteCase(int targetId) {
         Case caseToRemove = findCaseById(targetId);
+
         if (caseToRemove != null) {
+            // 1. Push to Stack (Save it!)
+            deletedCasesStack.push(caseToRemove);
+
+            // 2. Remove from active list
             allCases.remove(caseToRemove);
             return true;
         }
         return false;
+    }
+    // NEW: Restores the last deleted case
+
+    public boolean restoreCase() {
+        // Check if stack is empty
+        if (deletedCasesStack.isEmpty()) {
+            return false; // Nothing to undo
+        }
+
+        // 1. Pop the last item (LIFO)
+        Case restoredCase = deletedCasesStack.pop();
+
+        // 2. Add it back to the main list
+        allCases.add(restoredCase);
+        return true;
+    }
+    
+    public boolean cleardDeletedStack(){
+        if(deletedCasesStack.isEmpty()){
+            return false;
+        }
+        deletedCasesStack.clear();
+        return true;
+    }
+
+    // 4. GET DELETED CASES: Used to display the table in your "Recently Deleted" tab
+    public Stack<Case> getDeletedCases() {
+        return deletedCasesStack;
     }
 
     // replaces old case by new updated case

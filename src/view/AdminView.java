@@ -17,6 +17,7 @@ import controller.CaseController;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Stack;
 import model.Judge;
 import controller.JudgeController;
 public class AdminView extends javax.swing.JFrame {
@@ -33,6 +34,26 @@ public class AdminView extends javax.swing.JFrame {
         initComponents();
         loadRegisteredCases();
         loadJudgesToComboBox();
+        loadDeletedTable();
+    }
+    //Load Deleted data in deleted table 
+    public void loadDeletedTable() {
+        Stack<model.Case> deletedStack = controller.getDeletedCases();
+        
+        DefaultTableModel model = (DefaultTableModel) tblDeleted.getModel();
+        model.setRowCount(0); // Clear old data
+        
+        // ITERATE BACKWARDS (From Top of Stack -> Bottom)
+        for (int i = deletedStack.size() - 1; i >= 0; i--) {
+            model.Case c = deletedStack.get(i);
+            
+            model.addRow(new Object[]{
+                c.getCaseId(),
+                c.getCaseTitle(),
+                c.getCaseType(),
+                "Deleted" // Status
+            });
+        }
     }
 
     //load data in the table
@@ -244,6 +265,12 @@ public class AdminView extends javax.swing.JFrame {
         txtClaimAmount3 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
         rchkBailStatus1 = new javax.swing.JComboBox<>();
+        jPanel24 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblDeleted = new javax.swing.JTable();
+        btnClear = new javax.swing.JButton();
+        jLabel47 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel23 = new javax.swing.JPanel();
@@ -447,7 +474,7 @@ public class AdminView extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "CaseNo.", "RegNo.", "Title", "Type", "Judge", "Hearing", "Hearing Date"
+                "CaseNo.", "RegNo.", "Title", "Type", "Judge", "Case Status", "Hearing Date"
             }
         ) {
             Class[] types = new Class [] {
@@ -537,7 +564,7 @@ public class AdminView extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "CaseNo.", "RegNo.", "Title", "Type", "Judge", "Hearing", "Hearing Date"
+                "CaseNo.", "RegNo.", "Title", "Type", "Judge", "Case Status", "Hearing Date"
             }
         ) {
             Class[] types = new Class [] {
@@ -844,7 +871,7 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("CIVIL CASE", jPanel5);
@@ -1079,7 +1106,7 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("CRIMINAL CASE", jPanel6);
@@ -1310,27 +1337,31 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel19Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel42)
-                                    .addComponent(jLabel44)
-                                    .addComponent(jLabel43))
-                                .addGap(59, 59, 59)
+                                .addGap(128, 128, 128)
+                                .addComponent(jLabel41)
                                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbJudge3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtClaimAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(rchkBailStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel19Layout.createSequentialGroup()
+                                        .addGap(59, 59, 59)
+                                        .addComponent(txtCaseId3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel19Layout.createSequentialGroup()
+                                        .addGap(121, 121, 121)
+                                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel19Layout.createSequentialGroup()
-                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel41))
-                                .addGap(59, 59, 59)
+                                .addGap(72, 72, 72)
                                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCaseId3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel19Layout.createSequentialGroup()
+                                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel42)
+                                            .addComponent(jLabel44)
+                                            .addComponent(jLabel43))
+                                        .addGap(59, 59, 59)
+                                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cmbJudge3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtClaimAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(rchkBailStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(149, 149, 149)
                         .addComponent(jLabel39))
                     .addGroup(jPanel19Layout.createSequentialGroup()
@@ -1355,7 +1386,7 @@ public class AdminView extends javax.swing.JFrame {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel42)
                             .addComponent(rchkBailStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1368,7 +1399,7 @@ public class AdminView extends javax.swing.JFrame {
                             .addComponent(jLabel43)
                             .addComponent(cmbJudge3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -1410,6 +1441,72 @@ public class AdminView extends javax.swing.JFrame {
         );
 
         jTabbedPane3.addTab("Update Case", jPanel12);
+
+        jPanel24.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel24.setLayout(null);
+
+        tblDeleted.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        tblDeleted.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                { new Integer(1), "reg-01", "Marriage Devorce", "Civil", "Tek Raj Joshi", "First", "25/10/2025"},
+                { new Integer(2), "reg-02", "Murder", "Criminal", "Kalpana Singh", "Second", "25/10/2025"},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "CaseNo.", "RegNo.", "Title", "Type", "Judge", "Case Status", "Hearing Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblDeleted.setGridColor(new java.awt.Color(0, 0, 0));
+        jScrollPane4.setViewportView(tblDeleted);
+
+        jPanel24.add(jScrollPane4);
+        jScrollPane4.setBounds(10, 130, 1090, 360);
+
+        btnClear.setBackground(new java.awt.Color(51, 51, 51));
+        btnClear.setForeground(new java.awt.Color(255, 255, 255));
+        btnClear.setText("Clear All ");
+        btnClear.addActionListener(this::btnClearActionPerformed);
+        jPanel24.add(btnClear);
+        btnClear.setBounds(780, 100, 150, 23);
+
+        jLabel47.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel47.setText("RECYCLE BIN");
+        jPanel24.add(jLabel47);
+        jLabel47.setBounds(20, 20, 170, 32);
+
+        jButton12.setBackground(new java.awt.Color(51, 51, 51));
+        jButton12.setForeground(new java.awt.Color(255, 255, 255));
+        jButton12.setText("Undo Delete");
+        jButton12.addActionListener(this::jButton12ActionPerformed);
+        jPanel24.add(jButton12);
+        jButton12.setBounds(940, 100, 150, 23);
+
+        jTabbedPane3.addTab("Recycle Bin", jPanel24);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1839,6 +1936,7 @@ public class AdminView extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         loadRegisteredCases();
+        loadDeletedTable();
     }//GEN-LAST:event_formWindowActivated
 
     private void txtCaseIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaseIdActionPerformed
@@ -2382,10 +2480,6 @@ public class AdminView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHearing1ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         int response = javax.swing.JOptionPane.showConfirmDialog(this,
                 "Are you sure you want to logout?",
@@ -2492,6 +2586,36 @@ public class AdminView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+    
+    boolean success = controller.restoreCase();
+    
+    if (success) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Case Restored Successfully!");
+        
+        // Refresh BOTH tables so the changes are visible
+        loadDeletedTable(); // Refresh the current tab (item disappears)
+        loadRegisteredCases();    // Refresh the main dashboard (item reappears)
+        
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Recycle Bin is empty.");
+    }
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    boolean is_cleared = controller.cleardDeletedStack();
+    if(is_cleared){
+        javax.swing.JOptionPane.showMessageDialog(this, "Success: Bin has been cleared successfully!!");
+    }
+    else{
+        javax.swing.JOptionPane.showMessageDialog(this, "Nothing to clear!");
+    }
+    }//GEN-LAST:event_jButton12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2518,12 +2642,14 @@ public class AdminView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClear;
     private javax.swing.JComboBox<String> cmbJudge;
     private javax.swing.JComboBox<String> cmbJudge1;
     private javax.swing.JComboBox<String> cmbJudge3;
     private javax.swing.JTable dashboardTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
@@ -2589,6 +2715,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
@@ -2626,6 +2753,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2637,6 +2765,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
@@ -2653,6 +2782,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTextField rtxtPoliceStation;
     private javax.swing.JTextField rtxtRegisterationNumber;
     private javax.swing.JTextArea rtxtSubjectMatter;
+    private javax.swing.JTable tblDeleted;
     private javax.swing.JTable totalRegisteredCasesTable;
     private javax.swing.JTextField txtCaseId;
     private javax.swing.JTextField txtCaseId1;
