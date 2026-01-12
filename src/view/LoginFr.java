@@ -4,6 +4,7 @@
  */
 package view;
 
+
 /**
  *
  * @author tejas
@@ -33,10 +34,10 @@ public class LoginFr extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,11 +59,6 @@ public class LoginFr extends javax.swing.JFrame {
             }
         });
         txtUsername.addActionListener(this::txtUsernameActionPerformed);
-
-        txtPassword.setBackground(new java.awt.Color(204, 204, 204));
-        txtPassword.setForeground(new java.awt.Color(153, 153, 153));
-        txtPassword.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtPassword.addActionListener(this::txtPasswordActionPerformed);
 
         jLabel6.setFont(new java.awt.Font("Adwaita Sans", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
@@ -99,11 +95,11 @@ public class LoginFr extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtPassword))))))
                 .addContainerGap(239, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -124,10 +120,10 @@ public class LoginFr extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,9 +136,11 @@ public class LoginFr extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 624, Short.MAX_VALUE)
+            .addGap(0, 399, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -152,13 +150,9 @@ public class LoginFr extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     String username = txtUsername.getText();
-    String password = txtPassword.getText();
+    String password = new String(txtPassword.getPassword());
     
     // Check 1: Is the Username empty?
     if (username.isEmpty()) {
@@ -186,29 +180,38 @@ public class LoginFr extends javax.swing.JFrame {
         return; 
     }
     
-     if (username.equals("admin") && password.equals("admin")) {
+     // ... (Your validation code for empty fields stays here) ...
+
+    // 1. CHECK IF ADMIN (Hardcoded for safety/simplicity)
+    if (username.equals("admin") && password.equals("admin")) {
         
-        // Success: Open Admin Dashboard
         javax.swing.JOptionPane.showMessageDialog(this, "Hello Justice Maker, Welcome back.");
         AdminView dashboard = new AdminView();
         dashboard.setVisible(true);
         this.dispose(); 
         
-    } else if (username.equals("judge") && password.equals("judge123")) {
-        
-        // Success: Open Judge Dashboard
-        // JudgeDashboard judgeView = new JudgeDashboard();
-        // judgeView.setVisible(true);
-        this.dispose();
-        
     } else {
-        // Failure: Wrong Login
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Incorrect Username or Password.", 
-            "Login Failed", 
-            javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
-     
+        // 2. CHECK IF JUDGE (Dynamic check against your list)
+        controller.JudgeController jc = new controller.JudgeController();
+        model.Judge loggedInJudge = jc.loginJudge(username, password);
+        
+        if (loggedInJudge != null) {
+            // SUCCESS: Judge Found!
+            javax.swing.JOptionPane.showMessageDialog(this, "Welcome, Judge " + loggedInJudge.getName());
+            
+            // Pass the specific judge object to the dashboard so they only see their cases
+            view.JudgeDashboard judgeView = new view.JudgeDashboard(loggedInJudge);
+            judgeView.setVisible(true);
+            this.dispose();
+            
+        } else {
+            // FAILURE: Neither Admin nor Judge
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Incorrect Username or Password.", 
+                "Login Failed", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
@@ -254,7 +257,7 @@ public class LoginFr extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
