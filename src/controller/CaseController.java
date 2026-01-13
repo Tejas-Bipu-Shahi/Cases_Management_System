@@ -232,5 +232,69 @@ public class CaseController {
     public CaseStack getDeletedCases() {
         return deletedCasesStack;
     }
+    
+    // SEARCHING ALGORTHIMS 
+    public java.util.LinkedList<Case> linearSearch(String query) {
+        java.util.LinkedList<Case> results = new java.util.LinkedList<>();
+        String lowerQuery = query.toLowerCase().trim();
+
+        // Slide 9: "for (int i = 0; i < n; i++)"
+        for (int i = 0; i < allCases.size(); i++) {
+            Case c = allCases.get(i);
+            
+            // Slide 10: "if (a[i] == val)" - We check if string contains the query
+            if (c.getCaseTitle().toLowerCase().contains(lowerQuery) ||
+                c.getAssignedJudge().toLowerCase().contains(lowerQuery) ||
+                c.getCaseType().toLowerCase().contains(lowerQuery)) {
+                
+                results.add(c);
+            }
+        }
+        return results;
+    }
+    
+    public Case binarySearchById(int targetId) {
+        // 1. Sort Data First (Slide 24 says: "sorted data is required")
+        sortCasesById(); 
+
+        // Slide 14: Initialize Low and High
+        int low = 0;
+        int high = allCases.size() - 1;
+
+        while (low <= high) {
+            // Slide 15: Find mid value
+            int mid = (low + high) / 2;
+            Case midCase = allCases.get(mid);
+
+            // Slide 16: Check if match found
+            if (midCase.getCaseId() == targetId) {
+                return midCase; // Value found
+            }
+
+            // Slide 18: If Value > arr[mid], set low = mid + 1
+            if (midCase.getCaseId() < targetId) {
+                low = mid + 1;
+            } 
+            // Slide 17: If Value < arr[mid], set high = mid - 1
+            else {
+                high = mid - 1;
+            }
+        }
+        
+        return null; // Slide 23: "If search value is not in the list return -1" (or null)
+    }
+    
+    private void sortCasesById() {
+        int n = allCases.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (allCases.get(j).getCaseId() > allCases.get(j + 1).getCaseId()) {
+                    Case temp = allCases.get(j);
+                    allCases.set(j, allCases.get(j + 1));
+                    allCases.set(j + 1, temp);
+                }
+            }
+        }
+    }
 
 }

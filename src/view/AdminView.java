@@ -180,7 +180,7 @@ public class AdminView extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         totalRegisteredCasesTable = new javax.swing.JTable();
@@ -553,15 +553,16 @@ public class AdminView extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
         jLabel22.setText("REGISTERED CASES");
 
-        jTextField5.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField5.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField5.setText("   Search CaseID");
-        jTextField5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jTextField5.addActionListener(this::jTextField5ActionPerformed);
+        txtSearch.setBackground(new java.awt.Color(204, 204, 204));
+        txtSearch.setForeground(new java.awt.Color(102, 102, 102));
+        txtSearch.setText("   Search CaseID");
+        txtSearch.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        txtSearch.addActionListener(this::txtSearchActionPerformed);
 
         jButton2.setBackground(new java.awt.Color(51, 51, 51));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("SEARCH");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         totalRegisteredCasesTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         totalRegisteredCasesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -649,7 +650,7 @@ public class AdminView extends javax.swing.JFrame {
                         .addGap(336, 336, 336)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2))
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -666,7 +667,7 @@ public class AdminView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2618,9 +2619,9 @@ public class AdminView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // Check if empty
@@ -2689,22 +2690,22 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-                                
+
         // Get the Selected Row Index
         int selectedRow = totalRegisteredCasesTable.getSelectedRow();
-        
+
         if (selectedRow == -1) {
             javax.swing.JOptionPane.showMessageDialog(this, "Please select a case from the table first.");
             return;
         }
-        
+
         // Get the Case ID from the Table
         // Note: Assuming Case ID is in the first column (index 0)
         int caseId = (int) totalRegisteredCasesTable.getValueAt(selectedRow, 0);
-        
+
         // Find the Actual Object using Controller
         model.Case selectedCase = controller.findCaseById(caseId);
-        
+
         if (selectedCase != null) {
             // 4. Open the Details Frame
             CaseDetail detailsPage = new CaseDetail(selectedCase);
@@ -2714,6 +2715,55 @@ public class AdminView extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Error: Case not found in database.");
         }
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        String query = txtSearch.getText().trim();
+
+        // Validation: Empty check
+        if (query.isEmpty()) {
+            loadRegisteredCases(); // Reset table
+            return;
+        }
+
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) totalRegisteredCasesTable.getModel();
+        model.setRowCount(0); // Clear table for results
+
+        // CHECK: Is the query a Number? (For Binary Search)
+        if (query.matches("\\d+")) {
+            // --- USE BINARY SEARCH (Slide 12) ---
+            int searchId = Integer.parseInt(query);
+            model.Case result = controller.binarySearchById(searchId);
+
+            if (result != null) {
+                // Add the single finding to the table
+                model.addRow(new Object[]{
+                    result.getCaseId(), result.getRegistrationNumber(), result.getCaseTitle(),
+                    result.getCaseType(), result.getAssignedJudge(), result.getCaseStatus(),
+                    result.getHearingDate()
+                });
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Case ID " + searchId + " not found.");
+            }
+
+        } else {
+            // --- USE LINEAR SEARCH (Slide 6) ---
+            java.util.LinkedList<model.Case> results = controller.linearSearch(query);
+
+            if (results.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No cases found matching: " + query);
+            } else {
+                for (model.Case c : results) {
+                    model.addRow(new Object[]{
+                        c.getCaseId(), c.getRegistrationNumber(), c.getCaseTitle(),
+                        c.getCaseType(), c.getAssignedJudge(), c.getCaseStatus(),
+                        c.getHearingDate()
+                    });
+                }
+            }
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2870,7 +2920,6 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JComboBox<String> rchkBailStatus;
     private javax.swing.JComboBox<String> rchkBailStatus1;
     private javax.swing.JComboBox<String> rcmbJudge;
@@ -2914,6 +2963,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTextField txtRelief1;
     private javax.swing.JTextField txtReliefSought;
     private javax.swing.JTextField txtReliefSought1;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextArea txtSubjectMatter;
     // End of variables declaration//GEN-END:variables
 }
