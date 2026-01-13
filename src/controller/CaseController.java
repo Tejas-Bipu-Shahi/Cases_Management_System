@@ -72,16 +72,20 @@ public class CaseController {
 
     // REGISTER CASE 
     public boolean registerCase(Case newCase) {
-        // Checks if the case id matches to any existing cases if it does it returns false
         if (findCaseById(newCase.getCaseId()) != null) {
             return false;
         }
 
-        // Add case to the linked list
+        // 1. Add to Main List
         allCases.add(newCase);
+        
+        // 2. REFRESH QUEUE
+        // Instead of manually checking dates here, just run the generator!
+        // This ensures the new case gets SORTED correctly into the top 3.
+        generateUpcomingQueue(); 
+        
         return true;
     }
-
     // DELETE CASE 
     public boolean deleteCase(int targetId) {
         Case caseToRemove = findCaseById(targetId);
@@ -171,39 +175,45 @@ public class CaseController {
         }
     }
 
-    // Adds the case obj with date of today and after today in the queue until its full
+// This method finds upcoming cases, sorts them, and puts them in the queue
     public void generateUpcomingQueue() {
+        // First, I need to clear the old queue so I don't get duplicates
+        hearingQueue.clear();
+
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        //  Create a Temporrary LinkedList
+        // I'm using a temporary list to hold valid cases so I can sort them before adding to queue
         java.util.LinkedList<Case> tempUpcomingList = new java.util.LinkedList<>();
 
-        //  Find valid upcoming cases
+        // Loop through all my cases to find the ones for the dashboard
         for (Case c : allCases) {
             try {
                 LocalDate hearingDate = LocalDate.parse(c.getHearingDate(), formatter);
 
-                // Check: Today/Future AND Open/Running
+                // Filter 1: Date must be Today or in the Future
                 if (!hearingDate.isBefore(today)) {
-                    if (c.getCaseStatus().equalsIgnoreCase("Open") || c.getCaseStatus().equalsIgnoreCase("running")) {
+                    // Filter 2: Case must be Open or Running (Closed cases don't need hearings)
+                    if (c.getCaseStatus().equalsIgnoreCase("Open")
+                            || c.getCaseStatus().equalsIgnoreCase("running")) {
+
                         tempUpcomingList.add(c);
                     }
                 }
             } catch (Exception e) {
-                // Skip invalid dates
+                System.out.println("Skipping invalid date case: " + c.getCaseId());
             }
         }
 
-        // SORT: PassING the list to our Bubble Sort
+        // Now I sort the list using my Bubble Sort method above!
         sortCasesByDate(tempUpcomingList);
 
-        // Fill the hearingQueue until it is full
+        // Finally, fill the queue with the top cases (until the queue is full)
         for (Case c : tempUpcomingList) {
             if (!hearingQueue.isFull()) {
                 hearingQueue.enQueue(c);
             } else {
-                break; // Stop if queue is full
+                break; // Stop if queue size limit is reached
             }
         }
     }

@@ -22,7 +22,6 @@ import controller.JudgeController;
 import controller.CaseStack;
 import controller.CaseQueue;
 
-
 public class AdminView extends javax.swing.JFrame {
 
     //connect with controller
@@ -191,6 +190,7 @@ public class AdminView extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -623,6 +623,11 @@ public class AdminView extends javax.swing.JFrame {
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Sort");
 
+        jButton15.setBackground(new java.awt.Color(51, 51, 51));
+        jButton15.setForeground(new java.awt.Color(255, 255, 255));
+        jButton15.setText("View Detail");
+        jButton15.addActionListener(this::jButton15ActionPerformed);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -630,6 +635,7 @@ public class AdminView extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -643,15 +649,15 @@ public class AdminView extends javax.swing.JFrame {
                         .addGap(336, 336, 336)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))))
+                                .addComponent(jButton4)))))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -670,9 +676,11 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(jLabel24)
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("REGISTERED CASES", jPanel7);
@@ -2653,55 +2661,84 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-// 1. Dequeue the first case (Remove from Queue)
-        // calls controller's nextHearing() 
-        model.Case caseStarting = controller.nextHearing();
+
+        // Process the current case (remove from queue)
+        Case caseStarting = controller.nextHearing();
 
         if (caseStarting != null) {
-            // 2. Update Status to "Closed" 
+            // Update Status
             caseStarting.setCaseStatus("Closed");
-
-            
             controller.updateCase(caseStarting);
 
-            // 4. Refresh Tables
-            loadQueueTable();       // Removes the item from the dashboard
-            loadRegisteredCases();  // Updates the status in the main list
+            // 3. CRITICAL STEP: REGENERATE THE QUEUE
+            // This goes back to the list, finds the next waiting case
+            // and puts it into the queue to fill the empty spot.
+            controller.generateUpcomingQueue();
 
-            // 5. Show Success Message
+            // 4. Refresh the GUI Tables
+            loadQueueTable();
+            loadRegisteredCases();
+
             javax.swing.JOptionPane.showMessageDialog(this,
-                    "Hearing Started for Case #" + caseStarting.getCaseId() + "\nStatus updated to 'Closed'.");
+                    "Hearing Started for Case #" + caseStarting.getCaseId());
 
         } else {
-            // Queue was empty
-            javax.swing.JOptionPane.showMessageDialog(this, "No upcoming hearings in the queue.");
+            javax.swing.JOptionPane.showMessageDialog(this, "No upcoming hearings.");
         }
+
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+                                
+        // Get the Selected Row Index
+        int selectedRow = totalRegisteredCasesTable.getSelectedRow();
+        
+        if (selectedRow == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a case from the table first.");
+            return;
+        }
+        
+        // Get the Case ID from the Table
+        // Note: Assuming Case ID is in the first column (index 0)
+        int caseId = (int) totalRegisteredCasesTable.getValueAt(selectedRow, 0);
+        
+        // Find the Actual Object using Controller
+        model.Case selectedCase = controller.findCaseById(caseId);
+        
+        if (selectedCase != null) {
+            // 4. Open the Details Frame
+            CaseDetail detailsPage = new CaseDetail(selectedCase);
+            detailsPage.setVisible(true);
+            detailsPage.setLocationRelativeTo(null); // Center the window
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: Case not found in database.");
+        }
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-        logger.log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(() -> new AdminView().setVisible(true));
-}
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new AdminView().setVisible(true));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
@@ -2715,6 +2752,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

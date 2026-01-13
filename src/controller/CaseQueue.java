@@ -80,4 +80,10 @@ public boolean isFull() {
         }
         return rear - front + 1;
     }
+    
+    // Reset the queue to empty state
+    public void clear() {
+        front = -1;
+        rear = -1;
+    }
 }
