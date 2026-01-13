@@ -17,9 +17,10 @@ import controller.CaseController;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Stack;
 import model.Judge;
 import controller.JudgeController;
+import controller.CaseStack;
+
 public class AdminView extends javax.swing.JFrame {
 
     //connect with controller
@@ -36,23 +37,27 @@ public class AdminView extends javax.swing.JFrame {
         loadJudgesToComboBox();
         loadDeletedTable();
     }
+
     //Load Deleted data in deleted table 
     public void loadDeletedTable() {
-        Stack<model.Case> deletedStack = controller.getDeletedCases();
-        
+        CaseStack deletedStack = controller.getDeletedCases();
+
         DefaultTableModel model = (DefaultTableModel) tblDeleted.getModel();
         model.setRowCount(0); // Clear old data
-        
-        // ITERATE BACKWARDS (From Top of Stack -> Bottom)
+
+        // Iterate BACKWARDS to show the most recently deleted item first
         for (int i = deletedStack.size() - 1; i >= 0; i--) {
-            model.Case c = deletedStack.get(i);
-            
-            model.addRow(new Object[]{
-                c.getCaseId(),
-                c.getCaseTitle(),
-                c.getCaseType(),
-                "Deleted" // Status
-            });
+
+            Case c = deletedStack.get(i);
+
+            if (c != null) {
+                model.addRow(new Object[]{
+                    c.getCaseId(),
+                    c.getCaseTitle(),
+                    c.getCaseType(),
+                    "Deleted"
+                });
+            }
         }
     }
 
@@ -1491,7 +1496,7 @@ public class AdminView extends javax.swing.JFrame {
         btnClear.setText("Clear All ");
         btnClear.addActionListener(this::btnClearActionPerformed);
         jPanel24.add(btnClear);
-        btnClear.setBounds(780, 100, 150, 23);
+        btnClear.setBounds(780, 93, 150, 30);
 
         jLabel47.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(255, 255, 255));
@@ -1504,7 +1509,7 @@ public class AdminView extends javax.swing.JFrame {
         jButton12.setText("Undo Delete");
         jButton12.addActionListener(this::jButton12ActionPerformed);
         jPanel24.add(jButton12);
-        jButton12.setBounds(940, 100, 150, 23);
+        jButton12.setBounds(940, 93, 150, 30);
 
         jTabbedPane3.addTab("Recycle Bin", jPanel24);
 
@@ -2537,7 +2542,7 @@ public class AdminView extends javax.swing.JFrame {
 
             // Handle Passwords
             String password = new String(txtJudgePassword.getPassword());
-            String confirmPass = new String(txtJudgeConfirmPass.getPassword()); 
+            String confirmPass = new String(txtJudgeConfirmPass.getPassword());
 
             // 2. VALIDATION
             // Check A: Empty fields
@@ -2571,7 +2576,7 @@ public class AdminView extends javax.swing.JFrame {
                 txtJudgeLastName.setText("");
                 txtJudgeUsername.setText("");
                 txtJudgePassword.setText("");
-                txtJudgeConfirmPass.setText(""); 
+                txtJudgeConfirmPass.setText("");
                 txtJudgeContact.setText("");
 
                 // 5. Update the Dropdown in the other tab
@@ -2591,29 +2596,41 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-    
-    boolean success = controller.restoreCase();
-    
-    if (success) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Case Restored Successfully!");
-        
-        // Refresh BOTH tables so the changes are visible
-        loadDeletedTable(); // Refresh the current tab (item disappears)
-        loadRegisteredCases();    // Refresh the main dashboard (item reappears)
-        
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Recycle Bin is empty.");
-    }
+        // Check if empty
+        if (controller.getDeletedCases().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Recycle Bin is already empty.");
+            return;
+        }
+
+        // Confirmation
+        int choice = javax.swing.JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to empty the Recycle Bin?",
+                "Clear All", javax.swing.JOptionPane.YES_NO_OPTION);
+
+        if (choice == javax.swing.JOptionPane.YES_OPTION) {
+            boolean isCleared = controller.cleardDeletedStack();
+
+            if (isCleared) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Recycle Bin Cleared.");
+                loadDeletedTable();
+            }
+        }
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-    boolean is_cleared = controller.cleardDeletedStack();
-    if(is_cleared){
-        javax.swing.JOptionPane.showMessageDialog(this, "Success: Bin has been cleared successfully!!");
-    }
-    else{
-        javax.swing.JOptionPane.showMessageDialog(this, "Nothing to clear!");
-    }
+        //  Call the RESTORE method
+        boolean success = controller.restoreCase();
+
+        if (success) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Case Restored Successfully!");
+
+            //  Refresh BOTH tables
+            loadDeletedTable();      // Remove from Recycle Bin table
+            loadRegisteredCases();   // Add back to Main table
+
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Recycle Bin is empty.");
+        }
     }//GEN-LAST:event_jButton12ActionPerformed
 
     /**

@@ -12,140 +12,112 @@ import model.Case;
 import java.util.LinkedList;
 import model.CivilCase;
 import model.CriminalCase;
-import java.util.Stack;
 
 public class CaseController {
 
-    // This list is static so it is shared across the entire app
+    // MAIN STORAGE: LinkedList (Keeps all active cases)
     private static LinkedList<Case> allCases = new LinkedList<>();
-    // STACK for Undo Functionality (LIFO - Last In, First Out)
-    private static Stack<Case> deletedCasesStack = new Stack<>();
 
-    // Inside CaseController.java
+    // RECYCLE BIN: Custom Stack (array based stack)
+    private static CaseStack deletedCasesStack = new CaseStack(5);
+
+    // CONSTRUCTOR
     public CaseController() {
+        // Only load if empty to prevent duplicates
         if (allCases.isEmpty()) {
             loadPredefinedCases();
         }
     }
 
+    // --- PRELOAD DATA ---
     private void loadPredefinedCases() {
-        // --- 3 CIVIL CASES ---
-        CivilCase c1 = new CivilCase(
-                101, "REG-001", "Smith vs. Doe", "2025-01-10", "2025-12-26",
-                "Kamala Singh", "running", "Property", "Land Dispute in Thamel",
-                500000.0, "Ownership Transfer"
-        );
+        // CIVIL CASES 
+        CivilCase c1 = new CivilCase(101, "REG-001", "Smith vs. Doe", "2025-01-10", "2025-12-26", "Kamala Singh", "running", "Property", "Land Dispute in Thamel", 500000.0, "Ownership Transfer");
+        CivilCase c2 = new CivilCase(102, "REG-002", "ABC Corp vs. XYZ Ltd", "2025-02-01", "2025-06-20", "Tek Raj Joshi", "closed", "Contract", "Breach of Agreement", 120000.0, "Compensation");
+        CivilCase c3 = new CivilCase(103, "REG-003", "Family Estate Issue", "2025-03-12", "2025-07-01", "Babu Kaji", "running", "Family", "Inheritance Claim", 75000.0, "Equal Division");
 
-        CivilCase c2 = new CivilCase(
-                102, "REG-002", "ABC Corp vs. XYZ Ltd", "2025-02-01", "2025-06-20",
-                "Tek Raj Joshi", "closed", "Contract", "Breach of Agreement",
-                120000.0, "Compensation"
-        );
+        // CRIMINAL CASES 
+        CriminalCase cr1 = new CriminalCase(201, "CRM-999", "State vs. Rabin K.", "2025-01-05", "2025-12-26", "Kamala Singh", "running", "Theft", "Durbar Marg Police", "FIR-1122", "Not Granted");
+        CriminalCase cr2 = new CriminalCase(202, "CRM-888", "Fraud Investigation", "2025-02-20", "2025-05-25", "Tek Raj Joshi", "closed", "Fraud", "Lazimpat Station", "FIR-3344", "Granted");
 
-        CivilCase c3 = new CivilCase(
-                103, "REG-003", "Family Estate Issue", "2025-03-12", "2025-07-01",
-                "Babu Kaji", "running", "Family", "Inheritance Claim",
-                75000.0, "Equal Division"
-        );
-
-        // --- 2 CRIMINAL CASES ---
-        CriminalCase cr1 = new CriminalCase(
-                201, "CRM-999", "State vs. Rabin K.", "2025-01-05", "2025-12-26",
-                "Kamala Singh", "running", "Theft", "Durbar Marg Police",
-                "FIR-1122", "Not Granted"
-        );
-
-        CriminalCase cr2 = new CriminalCase(
-                202, "CRM-888", "Fraud Investigation", "2025-02-20", "2025-05-25",
-                "Tek Raj Joshi", "closed", "Fraud", "Lazimpat Station",
-                "FIR-3344", "Granted"
-        );
-
-        // Add them to the static list
+        // Add to main list
         allCases.add(c1);
         allCases.add(c2);
         allCases.add(c3);
         allCases.add(cr1);
         allCases.add(cr2);
-
-        System.out.println("Preloaded 5 sample cases successfully.");
     }
 
-    // helper method to fin case by id
-    // We use this in register, delete, and update to avoid rewriting the loop every time
+    // Find Case by ID 
     public Case findCaseById(int targetId) {
         if (allCases.isEmpty()) {
             return null;
         }
-
-        // Loop through the list to find the match
         for (Case c : allCases) {
             if (c.getCaseId() == targetId) {
-                return c; // Found it, return the object
+                return c;
             }
         }
-        return null; // Didn't find anything
+        return null;
     }
 
-    // To register any case 
+    // REGISTER CASE 
     public boolean registerCase(Case newCase) {
-        // First, check if this ID already exists using our helper method
-        Case existingCase = findCaseById(newCase.getCaseId());
-
-        if (existingCase != null) {
-            System.out.println("Error: Case ID " + newCase.getCaseId() + " already exists.");
-            return false; // Stop here, don't add duplicates
+        if (findCaseById(newCase.getCaseId()) != null) {
+            return false;
         }
 
-        // If ID is unique, add it to the list
+        // Add to Main List only
         allCases.add(newCase);
+
         return true;
     }
 
-    // UPDATED: Deletes case but saves it to the Stack first
+    // DELETE CASE 
     public boolean deleteCase(int targetId) {
         Case caseToRemove = findCaseById(targetId);
-
         if (caseToRemove != null) {
-            // 1. Push to Stack (Save it!)
-            deletedCasesStack.push(caseToRemove);
+            // Check if your custom stack is full before pushing
+            if (!deletedCasesStack.isFull()) {
+                deletedCasesStack.push(caseToRemove);
+                allCases.remove(caseToRemove);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
 
-            // 2. Remove from active list
-            allCases.remove(caseToRemove);
+    // RESTORE CASE 
+    public boolean restoreCase() {
+        if (deletedCasesStack.isEmpty()) {
+            return false;
+        }
+
+        Case restoredCase = deletedCasesStack.pop();
+
+        if (restoredCase != null) {
+            allCases.add(restoredCase);
             return true;
         }
         return false;
     }
-    // NEW: Restores the last deleted case
 
-    public boolean restoreCase() {
-        // Check if stack is empty
+    // --- CLEAR RECYCLE BIN ---
+    public boolean cleardDeletedStack() {
         if (deletedCasesStack.isEmpty()) {
-            return false; // Nothing to undo
-        }
-
-        // 1. Pop the last item (LIFO)
-        Case restoredCase = deletedCasesStack.pop();
-
-        // 2. Add it back to the main list
-        allCases.add(restoredCase);
-        return true;
-    }
-    
-    public boolean cleardDeletedStack(){
-        if(deletedCasesStack.isEmpty()){
             return false;
         }
         deletedCasesStack.clear();
         return true;
     }
 
-    // 4. GET DELETED CASES: Used to display the table in your "Recently Deleted" tab
-    public Stack<Case> getDeletedCases() {
+    // GET Deleted Cases 
+    public CaseStack getDeletedCases() {
         return deletedCasesStack;
     }
 
-    // replaces old case by new updated case
     public boolean updateCase(Case updatedCase) {
         Case oldCase = findCaseById(updatedCase.getCaseId());
         if (oldCase != null) {
@@ -156,7 +128,7 @@ public class CaseController {
         return false;
     }
 
-    // Just returns the whole list so the Table can display it
+    //Get cases from the linked list
     public LinkedList<Case> getAllCases() {
         return allCases;
     }
