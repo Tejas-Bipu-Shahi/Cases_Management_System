@@ -21,14 +21,10 @@ public class CaseQueue {
         front = -1;
         rear = -1;
     }
-
-    // Check if Queue is Full 
-    public boolean isFull() {
-        if (front == 0 && rear == SIZE - 1) {
-            return true;
-        }
-        return false;
-    }
+    
+public boolean isFull() {
+    return rear == SIZE - 1; 
+}
 
     // Check if Queue is Empty 
     public boolean isEmpty() {

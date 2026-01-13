@@ -11,6 +11,8 @@
             <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/view/JudgeDashboard.java</file>
             <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/model/CivilCase.java</file>
             <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/model/Judge.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/controller/CaseStack.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/controller/CaseQueue.java</file>
         </group>
     </open-files>
 </project-private>

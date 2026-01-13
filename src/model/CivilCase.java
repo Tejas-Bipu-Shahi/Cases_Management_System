@@ -8,16 +8,14 @@ package model;
  *
  * @author tejas
  */
-
-
 public class CivilCase extends Case {
 
     // 1. SPECIFIC ATTRIBUTES (For Civil Cases)
     // ==========================================
-    private String disputeType;   
-    private String subjectMatter; 
-    private double claimAmount;   
-    private String reliefSought;  
+    private String disputeType;
+    private String subjectMatter;
+    private double claimAmount;
+    private String reliefSought;
 
     // 2. CONSTRUCTOR
     // ==========================================
@@ -61,15 +59,13 @@ public class CivilCase extends Case {
 
     @Override
     public boolean validateCase() {
-        // Rule 1: Subject Matter is mandatory for ALL civil cases
+        // Subject Matter is mandatory for ALL civil cases
         if (this.subjectMatter == null || this.subjectMatter.trim().isEmpty()) {
-            System.err.println("Validation Error: Subject Matter (what the case is about) is required.");
             return false;
         }
 
-        // Rule 2: Cannot claim negative money
+        // Cannot claim negative money
         if (this.claimAmount < 0) {
-            System.err.println("Validation Error: Claim amount cannot be negative.");
             return false;
         }
 

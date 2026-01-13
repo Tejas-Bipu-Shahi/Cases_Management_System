@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import model.Judge;
 import controller.JudgeController;
 import controller.CaseStack;
+import controller.CaseQueue;
+
 
 public class AdminView extends javax.swing.JFrame {
 
@@ -36,6 +38,35 @@ public class AdminView extends javax.swing.JFrame {
         loadRegisteredCases();
         loadJudgesToComboBox();
         loadDeletedTable();
+        loadQueueTable();
+    }
+
+    public void loadQueueTable() {
+        // 1. Get the Custom Queue from Controller
+        CaseQueue queue = controller.getHearingQueue();
+
+        // 2. Get the Dashboard Table Model
+        DefaultTableModel model = (DefaultTableModel) dashboardTable.getModel();
+        model.setRowCount(0); // Clear old data
+
+        // 3. Loop through the Custom Queue
+        for (int i = 0; i < queue.size(); i++) {
+
+            // Use peek(i) to look at data without removing it
+            model.Case c = queue.peek(i);
+
+            if (c != null) {
+                model.addRow(new Object[]{
+                    c.getCaseId(),
+                    c.getRegistrationNumber(),
+                    c.getCaseTitle(),
+                    c.getCaseType(),
+                    c.getAssignedJudge(),
+                    "UPCOMING",
+                    c.getHearingDate()
+                });
+            }
+        }
     }
 
     //Load Deleted data in deleted table 
@@ -62,53 +93,25 @@ public class AdminView extends javax.swing.JFrame {
     }
 
     //load data in the table
+    // Only loads the big "Registered Cases" table
     public void loadRegisteredCases() {
         DefaultTableModel model = (DefaultTableModel) totalRegisteredCasesTable.getModel();
-        DefaultTableModel model1 = (DefaultTableModel) dashboardTable.getModel();
-        //clear existing row
-        model.setRowCount(0);
-        model1.setRowCount(0);
+        model.setRowCount(0); // Clear table
 
-        // getting current date and time
-        LocalDateTime currentDateTime = LocalDateTime.now();
-
-        // 2. Parsing it into String
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedFilingDate = currentDateTime.format(formatter);
-
-        // Get the list of cases from linked list existing in controller
+        // Get the list of cases from linked list
         LinkedList<Case> allCases = controller.getAllCases();
 
-        // loop through all cases
         for (Case c : allCases) {
-            String caseType = null;
-            if (c instanceof CivilCase) {
-                caseType = "Civil";
-            }
-            if (c instanceof CriminalCase) {
-                caseType = "Criminal";
-            }
+
             model.addRow(new Object[]{
                 c.getCaseId(),
                 c.getRegistrationNumber(),
                 c.getCaseTitle(),
-                caseType,
+                c.getCaseType(),
                 c.getAssignedJudge(),
                 c.getCaseStatus(),
                 c.getHearingDate()
             });
-
-            if (c.getHearingDate().equals(formattedFilingDate)) {
-                model1.addRow(new Object[]{
-                    c.getCaseId(),
-                    c.getRegistrationNumber(),
-                    c.getCaseTitle(),
-                    caseType,
-                    c.getAssignedJudge(),
-                    c.getCaseStatus(),
-                    c.getHearingDate()
-                });
-            }
         }
     }
 
@@ -175,6 +178,7 @@ public class AdminView extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dashboardTable = new javax.swing.JTable();
+        jButton11 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
@@ -457,7 +461,7 @@ public class AdminView extends javax.swing.JFrame {
         );
 
         jLabel12.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
-        jLabel12.setText("TODAY'S HEARINGS");
+        jLabel12.setText("Upcoming Hearings");
 
         dashboardTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         dashboardTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -493,23 +497,35 @@ public class AdminView extends javax.swing.JFrame {
         dashboardTable.setGridColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(dashboardTable);
 
+        jButton11.setBackground(new java.awt.Color(51, 51, 51));
+        jButton11.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setText("Next Case ->");
+        jButton11.addActionListener(this::jButton11ActionPerformed);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(686, 686, 686)
+                        .addComponent(jButton11)
+                        .addGap(37, 37, 37))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -521,10 +537,12 @@ public class AdminView extends javax.swing.JFrame {
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE))
+                .addGap(97, 97, 97)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
+                    .addComponent(jButton11))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -1942,6 +1960,7 @@ public class AdminView extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         loadRegisteredCases();
         loadDeletedTable();
+        loadQueueTable();
     }//GEN-LAST:event_formWindowActivated
 
     private void txtCaseIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaseIdActionPerformed
@@ -2608,7 +2627,7 @@ public class AdminView extends javax.swing.JFrame {
                 "Clear All", javax.swing.JOptionPane.YES_NO_OPTION);
 
         if (choice == javax.swing.JOptionPane.YES_OPTION) {
-            boolean isCleared = controller.cleardDeletedStack();
+            boolean isCleared = controller.clearDeletedStack();
 
             if (isCleared) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Recycle Bin Cleared.");
@@ -2633,30 +2652,56 @@ public class AdminView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+// 1. Dequeue the first case (Remove from Queue)
+        // calls controller's nextHearing() 
+        model.Case caseStarting = controller.nextHearing();
+
+        if (caseStarting != null) {
+            // 2. Update Status to "Closed" 
+            caseStarting.setCaseStatus("Closed");
+
+            
+            controller.updateCase(caseStarting);
+
+            // 4. Refresh Tables
+            loadQueueTable();       // Removes the item from the dashboard
+            loadRegisteredCases();  // Updates the status in the main list
+
+            // 5. Show Success Message
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Hearing Started for Case #" + caseStarting.getCaseId() + "\nStatus updated to 'Closed'.");
+
+        } else {
+            // Queue was empty
+            javax.swing.JOptionPane.showMessageDialog(this, "No upcoming hearings in the queue.");
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new AdminView().setVisible(true));
+    } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+        logger.log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(() -> new AdminView().setVisible(true));
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
@@ -2666,6 +2711,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTable dashboardTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;

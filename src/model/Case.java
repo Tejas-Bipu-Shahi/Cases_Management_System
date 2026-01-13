@@ -10,8 +10,7 @@ package model;
  */
 public abstract class Case {
 
-    // 1. COMMON ATTRIBUTES (For all case types)
-    // ==========================================
+    // Common Attributes of every cases
     private int caseId;                
     private String registrationNumber;
     private String caseTitle;         
@@ -20,8 +19,7 @@ public abstract class Case {
     private String assignedJudge;      
     private String caseStatus;         
 
-    // 2. CONSTRUCTOR
-    // ==========================================
+    // Initializing Constructor
     public Case(int caseId, String registrationNumber, String caseTitle,
             String filingDate, String hearingDate, String assignedJudge, String caseStatus) {
         // this refers to each instance
@@ -33,10 +31,8 @@ public abstract class Case {
         this.assignedJudge = assignedJudge;
         this.caseStatus = caseStatus;
     }
-
-    // ==========================================
+    
     // 3. GETTERS (Accessors)
-    // ==========================================
     public int getCaseId() {
         return caseId;
     }
@@ -66,8 +62,6 @@ public abstract class Case {
     }
 
     // 4. SETTERS (Mutators) - Only for attributes that change!
-    // ==========================================
-    // Hearing dates change often (postponements)
     public void setHearingDate(String hearingDate) {
         this.hearingDate = hearingDate;
     }
@@ -82,12 +76,9 @@ public abstract class Case {
         this.caseStatus = caseStatus;
     }
 
-    // No setters for caseId, registrationNumber, or filingDate. 
+    //method to validate case
     public abstract boolean validateCase();
 
-    /**
-     * Returns the specific "Type" of the case as a String. Used for display in
-     * the table (e.g., "Civil", "Criminal").
-     */
+    // to get the Case Type 
     public abstract String getCaseType();
 }

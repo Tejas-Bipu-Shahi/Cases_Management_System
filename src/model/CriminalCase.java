@@ -6,20 +6,18 @@ package model;
 
 /**
  *
- * @author Tejas Shahi
- * Represents Criminal offenses involving the State and Police.
+ * @author Tejas Shahi Represents Criminal offenses involving the State and
+ * Police.
  */
 public class CriminalCase extends Case {
 
-    // 1. SPECIFIC ATTRIBUTES (For Criminal Cases)
-    // ==========================================
-    private String crimeType;      // "Theft", "Assault", "Fraud"
-    private String policeStation;  // Where the FIR was filed
-    private String firNumber;      // First Information Report Number
-    private String bailGranted;   // True = Out on bail, False = In Custody
+    // Attributes for Criminal Case
+    private String crimeType;
+    private String policeStation;
+    private String firNumber;
+    private String bailGranted;
 
-    // 2. CONSTRUCTOR
-    // ==========================================
+    // CONSTRUCTOR
     public CriminalCase(int caseId, String registrationNumber, String caseTitle,
             String filingDate, String hearingDate, String assignedJudge, String caseStatus,
             String crimeType, String policeStation, String firNumber, String bailGranted) {
@@ -33,9 +31,7 @@ public class CriminalCase extends Case {
         this.bailGranted = bailGranted;
     }
 
-    // ==========================================
-    // 3. GETTERS
-    // ==========================================
+    // GETTERS
     public String getCrimeType() {
         return crimeType;
     }
@@ -52,9 +48,7 @@ public class CriminalCase extends Case {
         return bailGranted;
     }
 
-    // ==========================================
-    // 4. IMPLEMENTING ABSTRACT METHODS
-    // ==========================================
+    // IMPLEMENTING ABSTRACT METHODS
     @Override
     public String getCaseType() {
         return "Criminal";
@@ -62,15 +56,13 @@ public class CriminalCase extends Case {
 
     @Override
     public boolean validateCase() {
-        // Rule 1: Police Station is mandatory for criminal cases
+        // Police Station is mandatory for criminal cases
         if (this.policeStation == null || this.policeStation.trim().isEmpty()) {
-            System.err.println("Validation Error: Police Station is required for Criminal Cases.");
             return false;
         }
 
-        // Rule 2: FIR Number is mandatory
+        // FIR Number is mandatory
         if (this.firNumber == null || this.firNumber.trim().isEmpty()) {
-            System.err.println("Validation Error: FIR Number is required.");
             return false;
         }
 
