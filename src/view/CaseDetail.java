@@ -3,21 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+
 import model.Case;
 import model.CivilCase;
 import model.CriminalCase;
+
 /**
  *
  * @author Tejas Shahi
  */
 public class CaseDetail extends javax.swing.JFrame {
-    
+
+    controller.CaseController controller = new controller.CaseController();
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CaseDetail.class.getName());
 
     /**
      * Creates new form CaseDetail
      */
     public CaseDetail(Case c) {
+        this.setSize(900, 800);
         initComponents();
         populateData(c);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE); // Close only this window, not the whole app
@@ -37,22 +41,22 @@ public class CaseDetail extends javax.swing.JFrame {
         if (c instanceof CivilCase) {
             CivilCase cc = (CivilCase) c;
             txtDetails.setText(
-                "Dispute Type: " + cc.getDisputeType() + "\n" +
-                "Subject Matter: " + cc.getSubjectMatter() + "\n" +
-                "Claim Amount: " + cc.getClaimAmount() + "\n" +
-                "Relief Sought: " + cc.getReliefSought()
+                    "Dispute Type: " + cc.getDisputeType() + "\n"
+                    + "Subject Matter: " + cc.getSubjectMatter() + "\n"
+                    + "Claim Amount: " + cc.getClaimAmount() + "\n"
+                    + "Relief Sought: " + cc.getReliefSought()
             );
         } else if (c instanceof CriminalCase) {
             CriminalCase cc = (CriminalCase) c;
             txtDetails.setText(
-                "Crime Type: " + cc.getCrimeType() + "\n" +
-                "Police Station: " + cc.getPoliceStation() + "\n" +
-                "FIR Number: " + cc.getFirNumber() + "\n" +
-                "Bail Status: " + cc.getBailGranted()
+                    "Crime Type: " + cc.getCrimeType() + "\n"
+                    + "Police Station: " + cc.getPoliceStation() + "\n"
+                    + "FIR Number: " + cc.getFirNumber() + "\n"
+                    + "Bail Status: " + cc.getBailGranted()
             );
         }
     }
-    
+
     public CaseDetail() {
         initComponents();
     }
@@ -87,10 +91,12 @@ public class CaseDetail extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDetails = new javax.swing.JTextArea();
+        jButton2 = new javax.swing.JButton();
         lblType = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(900, 600));
+        setMaximumSize(new java.awt.Dimension(900, 800));
+        setMinimumSize(new java.awt.Dimension(915, 840));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
@@ -189,7 +195,16 @@ public class CaseDetail extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDetails);
 
         jPanel4.add(jScrollPane1);
-        jScrollPane1.setBounds(30, 30, 800, 420);
+        jScrollPane1.setBounds(30, 30, 800, 380);
+
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Delete Case");
+        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+        jPanel4.add(jButton2);
+        jButton2.setBounds(360, 420, 130, 40);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(10, 240, 860, 480);
@@ -208,6 +223,45 @@ public class CaseDetail extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        // 1. Get Case ID from the label
+        // The text is "101", so we parse it to an integer
+        String idText = lblCaseId.getText();
+
+        if (idText.isEmpty() || idText.equals("-")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: Invalid Case ID.");
+            return;
+        }
+
+        int caseId = Integer.parseInt(idText);
+
+        // 2. CONFIRMATION DIALOG (Safety Check)
+        int choice = javax.swing.JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to delete Case #" + caseId + "?\nThis will move it to the Recycle Bin.",
+                "Confirm Deletion",
+                javax.swing.JOptionPane.YES_NO_OPTION);
+
+        // 3. EXECUTE DELETE
+        if (choice == javax.swing.JOptionPane.YES_OPTION) {
+
+            // Call the controller to delete (move to stack)
+            boolean success = controller.deleteCase(caseId);
+
+            if (success) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Case moved to Recycle Bin.");
+
+                // 4. CLOSE THIS WINDOW
+                // This closes the detail popup and reveals the main dashboard again
+                this.dispose();
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: Could not delete case (Case not found or Stack full).");
+            }
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,6 +289,7 @@ public class CaseDetail extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;

@@ -26,8 +26,8 @@ public class JudgeController {
     private void loadPredefinedJudges() {
         // Pre-loading 3 judges so you can log in immediately
         allJudges.add(new Judge(1, "Tek Raj Joshi", "9841009210", "Tek", "pass123"));
-        allJudges.add(new Judge(2, "Kalpana Singh", "9842005640", "Kalpana", "pass123"));
-        allJudges.add(new Judge(3, "Hari Krishna", "9843023140", "Hari", "pass123"));
+        allJudges.add(new Judge(2, "Kamala Singh", "9842005640", "kamala", "pass123"));
+        allJudges.add(new Judge(3, "Babu Kaji", "9843023140", "Babu", "pass123"));
     }
 
     public Judge findJudgeById(int targetId) {

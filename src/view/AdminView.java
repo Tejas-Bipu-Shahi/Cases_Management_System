@@ -36,8 +36,30 @@ public class AdminView extends javax.swing.JFrame {
         initComponents();
         loadRegisteredCases();
         loadJudgesToComboBox();
+        updateDashboardStats();
         loadDeletedTable();
         loadQueueTable();
+    }
+
+    public void updateDashboardStats() {
+        // 1. Get the lists
+        int total = controller.getAllCases().size();
+        int pending = 0;
+        int closed = 0;
+
+        // 2. Loop to count specific statuses
+        for (model.Case c : controller.getAllCases()) {
+            if (c.getCaseStatus().equalsIgnoreCase("Closed")) {
+                closed++;
+            } else {
+                pending++; // Assuming anything not closed is "Pending/Active"
+            }
+        }
+
+        // 3. Update the UI Labels
+        lblTotalCount.setText(String.valueOf(total));
+        lblPendingCount.setText(String.valueOf(pending));
+        lblClosedCount.setText(String.valueOf(closed));
     }
 
     public void loadQueueTable() {
@@ -109,7 +131,8 @@ public class AdminView extends javax.swing.JFrame {
                 c.getCaseType(),
                 c.getAssignedJudge(),
                 c.getCaseStatus(),
-                c.getHearingDate()
+                c.getHearingDate(),
+                c.getFilingDate()
             });
         }
     }
@@ -120,14 +143,15 @@ public class AdminView extends javax.swing.JFrame {
         ArrayList<model.Judge> judgeList = jc.getAllJudges();
 
         // Remove old items
-        // REPLACE 'cmbAssignJudge' with your actual ComboBox variable name!
         cmbJudge.removeAllItems();
         rcmbJudge.removeAllItems();
+        cmbFilterByJudge.removeAllItems();
+        cmbFilterByJudge.addItem("All");
 
         for (model.Judge j : judgeList) {
             rcmbJudge.addItem(j.getName());
             cmbJudge.addItem(j.getName());
-
+            cmbFilterByJudge.addItem(j.getName());
         }
     }
 
@@ -165,32 +189,54 @@ public class AdminView extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        lblTotalCount = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lblPendingCount = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        lblClosedCount = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dashboardTable = new javax.swing.JTable();
         jButton11 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        totalRegisteredCasesTable = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbSortBy = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        cmbFilterByJudge = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        totalRegisteredCasesTable = new javax.swing.JTable();
+        jPanel15 = new javax.swing.JPanel();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel23 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
+        jButton14 = new javax.swing.JButton();
+        jLabel68 = new javax.swing.JLabel();
+        txtJudgeId = new javax.swing.JTextField();
+        txtJudgeFirstName = new javax.swing.JTextField();
+        jLabel69 = new javax.swing.JLabel();
+        jLabel70 = new javax.swing.JLabel();
+        txtJudgeLastName = new javax.swing.JTextField();
+        txtJudgeContact = new javax.swing.JTextField();
+        jLabel71 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        txtJudgeUsername = new javax.swing.JTextField();
+        jLabel73 = new javax.swing.JLabel();
+        jLabel74 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        txtJudgeConfirmPass = new javax.swing.JPasswordField();
+        txtJudgePassword = new javax.swing.JPasswordField();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -280,72 +326,24 @@ public class AdminView extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         jLabel47 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
-        jPanel15 = new javax.swing.JPanel();
-        jTabbedPane4 = new javax.swing.JTabbedPane();
-        jPanel23 = new javax.swing.JPanel();
-        jPanel22 = new javax.swing.JPanel();
-        jButton14 = new javax.swing.JButton();
-        jLabel68 = new javax.swing.JLabel();
-        txtJudgeId = new javax.swing.JTextField();
-        txtJudgeFirstName = new javax.swing.JTextField();
-        jLabel69 = new javax.swing.JLabel();
-        jLabel70 = new javax.swing.JLabel();
-        txtJudgeLastName = new javax.swing.JTextField();
-        txtJudgeContact = new javax.swing.JTextField();
-        jLabel71 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel72 = new javax.swing.JLabel();
-        txtJudgeUsername = new javax.swing.JTextField();
-        jLabel73 = new javax.swing.JLabel();
-        jLabel74 = new javax.swing.JLabel();
-        jLabel75 = new javax.swing.JLabel();
-        txtJudgeConfirmPass = new javax.swing.JPasswordField();
-        txtJudgePassword = new javax.swing.JPasswordField();
-        jPanel16 = new javax.swing.JPanel();
-        jPanel20 = new javax.swing.JPanel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        txtCaseId2 = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
-        txtRegNo1 = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        txtCaseTitle1 = new javax.swing.JTextField();
-        txtHearingDate1 = new javax.swing.JTextField();
-        jLabel48 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        txtDisputeType1 = new javax.swing.JTextField();
-        jLabel50 = new javax.swing.JLabel();
-        txtReliefSought1 = new javax.swing.JTextField();
-        jLabel46 = new javax.swing.JLabel();
-        jPanel21 = new javax.swing.JPanel();
-        jButton13 = new javax.swing.JButton();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
-        txtCaseTitle8 = new javax.swing.JTextField();
-        txtCaseTitle9 = new javax.swing.JTextField();
-        jLabel63 = new javax.swing.JLabel();
-        txtCaseTitle10 = new javax.swing.JTextField();
-        jLabel66 = new javax.swing.JLabel();
-        jLabel67 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1287, 732));
+        setMinimumSize(new java.awt.Dimension(1300, 800));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setLayout(null);
 
         jTabbedPane2.setBackground(new java.awt.Color(51, 51, 51));
         jTabbedPane2.setForeground(new java.awt.Color(255, 255, 255));
@@ -355,119 +353,82 @@ public class AdminView extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setMaximumSize(new java.awt.Dimension(1120, 550));
         jPanel2.setPreferredSize(new java.awt.Dimension(1120, 550));
+        jPanel2.setLayout(null);
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 10, true));
         jPanel8.setPreferredSize(new java.awt.Dimension(180, 70));
+        jPanel8.setLayout(null);
 
-        jLabel3.setFont(new java.awt.Font("Science Gothic", 0, 18)); // NOI18N
-        jLabel3.setText("Total Cases");
+        lblTotalCount.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
+        lblTotalCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTotalCount.setText("00230");
+        jPanel8.add(lblTotalCount);
+        lblTotalCount.setBounds(60, 50, 100, 47);
 
-        jLabel8.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
-        jLabel8.setText("00230");
+        jLabel8.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
+        jLabel8.setText("Total Cases");
+        jPanel8.add(jLabel8);
+        jLabel8.setBounds(50, 10, 130, 32);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel8)))
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel7.setFont(new java.awt.Font("Science Gothic", 0, 28)); // NOI18N
-        jLabel7.setText("OVERVIEW");
+        jPanel2.add(jPanel8);
+        jPanel8.setBounds(220, 80, 220, 110);
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
         jPanel9.setPreferredSize(new java.awt.Dimension(180, 70));
+        jPanel9.setLayout(null);
 
-        jLabel5.setFont(new java.awt.Font("Science Gothic", 0, 18)); // NOI18N
-        jLabel5.setText("Pending");
+        lblPendingCount.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
+        lblPendingCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPendingCount.setText("00030");
+        jPanel9.add(lblPendingCount);
+        lblPendingCount.setBounds(60, 50, 100, 47);
 
-        jLabel10.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
-        jLabel10.setText("00030");
+        jLabel9.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
+        jLabel9.setText("Pending Cases");
+        jPanel9.add(jLabel9);
+        jLabel9.setBounds(30, 10, 170, 32);
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(30, 30, 30))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel2.add(jPanel9);
+        jPanel9.setBounds(460, 80, 220, 110);
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
         jPanel10.setPreferredSize(new java.awt.Dimension(180, 70));
+        jPanel10.setLayout(null);
 
-        jLabel6.setFont(new java.awt.Font("Science Gothic", 0, 18)); // NOI18N
-        jLabel6.setText("Closed");
+        lblClosedCount.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
+        lblClosedCount.setText("00200");
+        jPanel10.add(lblClosedCount);
+        lblClosedCount.setBounds(60, 50, 100, 47);
 
-        jLabel9.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
-        jLabel9.setText("00200");
+        jLabel3.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
+        jLabel3.setText("Closed Cases");
+        jPanel10.add(jLabel3);
+        jLabel3.setBounds(40, 10, 150, 32);
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel9)))
-                .addContainerGap(89, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel2.add(jPanel10);
+        jPanel10.setBounds(700, 80, 220, 110);
 
-        jLabel12.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
-        jLabel12.setText("Upcoming Hearings");
+        jLabel10.setFont(new java.awt.Font("Science Gothic", 0, 28)); // NOI18N
+        jLabel10.setText("CASE DASHBOARD");
+        jPanel2.add(jLabel10);
+        jLabel10.setBounds(430, 10, 270, 37);
+
+        jPanel25.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel25.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel25.setLayout(null);
 
         dashboardTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        dashboardTable.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         dashboardTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "reg-01", "Marriage Devorce", "Civil", "Tek Raj Joshi", "First", "25/10/2025"},
                 { new Integer(2), "reg-02", "Murder", "Criminal", "Kalpana Singh", "Second", "25/10/2025"},
+                { new Integer(3), null, null, null, null, null, null},
+                { new Integer(4), null, null, null, null, null, null},
+                { new Integer(5), null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -489,246 +450,355 @@ public class AdminView extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        dashboardTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         dashboardTable.setGridColor(new java.awt.Color(0, 0, 0));
+        dashboardTable.setRowHeight(40);
+        dashboardTable.setSelectionBackground(new java.awt.Color(0, 0, 102));
+        dashboardTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(dashboardTable);
 
-        jButton11.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel25.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 50, 1010, 220);
+
+        jButton11.setBackground(new java.awt.Color(0, 0, 0));
         jButton11.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
         jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setText("Next Case ->");
+        jButton11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
         jButton11.addActionListener(this::jButton11ActionPerformed);
+        jPanel25.add(jButton11);
+        jButton11.setBounds(870, 290, 160, 40);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(686, 686, 686)
-                        .addComponent(jButton11)
-                        .addGap(37, 37, 37))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE))
-                .addGap(97, 97, 97)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12)
-                    .addComponent(jButton11))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
+        jLabel7.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("UPCOMING CASES");
+        jPanel25.add(jLabel7);
+        jLabel7.setBounds(370, 0, 340, 50);
+
+        jPanel2.add(jPanel25);
+        jPanel25.setBounds(20, 210, 1050, 350);
 
         jTabbedPane2.addTab("       DASHBOARD      ", jPanel2);
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setLayout(null);
 
-        jLabel22.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
         jLabel22.setText("REGISTERED CASES");
+        jPanel7.add(jLabel22);
+        jLabel22.setBounds(20, 20, 370, 50);
 
-        txtSearch.setBackground(new java.awt.Color(204, 204, 204));
-        txtSearch.setForeground(new java.awt.Color(102, 102, 102));
-        txtSearch.setText("   Search CaseID");
         txtSearch.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         txtSearch.addActionListener(this::txtSearchActionPerformed);
+        jPanel7.add(txtSearch);
+        txtSearch.setBounds(660, 90, 300, 36);
 
-        jButton2.setBackground(new java.awt.Color(51, 51, 51));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("SEARCH");
+        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         jButton2.addActionListener(this::jButton2ActionPerformed);
+        jPanel7.add(jButton2);
+        jButton2.setBounds(960, 90, 110, 36);
 
-        totalRegisteredCasesTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jLabel23.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
+        jLabel23.setText("Sort By :");
+        jPanel7.add(jLabel23);
+        jLabel23.setBounds(20, 90, 93, 32);
+
+        cmbSortBy.setBackground(new java.awt.Color(0, 0, 0));
+        cmbSortBy.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbSortBy.setForeground(new java.awt.Color(255, 255, 255));
+        cmbSortBy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Hearing Date", "Filing Date", "Case Status" }));
+        jPanel7.add(cmbSortBy);
+        cmbSortBy.setBounds(130, 90, 150, 36);
+
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Sort");
+        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        jButton3.addActionListener(this::jButton3ActionPerformed);
+        jPanel7.add(jButton3);
+        jButton3.setBounds(280, 90, 90, 36);
+
+        jLabel24.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
+        jLabel24.setText("Filter By Judge");
+        jPanel7.add(jLabel24);
+        jLabel24.setBounds(660, 50, 167, 32);
+
+        cmbFilterByJudge.setBackground(new java.awt.Color(0, 0, 0));
+        cmbFilterByJudge.setForeground(new java.awt.Color(255, 255, 255));
+        cmbFilterByJudge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Kamala Singh", "Tek Raj Joshi" }));
+        jPanel7.add(cmbFilterByJudge);
+        cmbFilterByJudge.setBounds(830, 50, 150, 36);
+
+        jButton4.setBackground(new java.awt.Color(0, 0, 0));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setText("Filter");
+        jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        jButton4.addActionListener(this::jButton4ActionPerformed);
+        jPanel7.add(jButton4);
+        jButton4.setBounds(980, 50, 90, 36);
+
+        jButton15.setBackground(new java.awt.Color(0, 0, 0));
+        jButton15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton15.setForeground(new java.awt.Color(255, 255, 255));
+        jButton15.setText("View Detail");
+        jButton15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        jButton15.addActionListener(this::jButton15ActionPerformed);
+        jPanel7.add(jButton15);
+        jButton15.setBounds(460, 520, 180, 40);
+
+        totalRegisteredCasesTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        totalRegisteredCasesTable.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         totalRegisteredCasesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1), "reg-01", "Marriage Devorce", "Civil", "Tek Raj Joshi", "First", "25/10/2025"},
-                { new Integer(2), "reg-02", "Murder", "Criminal", "Kalpana Singh", "Second", "25/10/2025"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                { new Integer(1), "reg-01", "Marriage Devorce", "Civil", "Tek Raj Joshi", "First", "25/10/2025", "26-02-22"},
+                { new Integer(2), "reg-02", "Murder", "Criminal", "Kalpana Singh", "Second", "25/10/2025", null},
+                { new Integer(3), null, null, null, null, null, null, null},
+                { new Integer(4), null, null, null, null, null, null, null},
+                { new Integer(5), null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "CaseNo.", "RegNo.", "Title", "Type", "Judge", "Case Status", "Hearing Date"
+                "CaseNo.", "RegNo.", "Title", "Type", "Judge", "Case Status", "Hearing Date", "Filing Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        totalRegisteredCasesTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         totalRegisteredCasesTable.setGridColor(new java.awt.Color(0, 0, 0));
-        jScrollPane3.setViewportView(totalRegisteredCasesTable);
+        totalRegisteredCasesTable.setRowHeight(40);
+        totalRegisteredCasesTable.setSelectionBackground(new java.awt.Color(0, 0, 102));
+        totalRegisteredCasesTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane5.setViewportView(totalRegisteredCasesTable);
 
-        jLabel23.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
-        jLabel23.setText("Sort By :");
-
-        jComboBox3.setBackground(new java.awt.Color(51, 51, 51));
-        jComboBox3.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Hearing Date", "Case Type" }));
-
-        jButton3.setBackground(new java.awt.Color(51, 51, 51));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Sort");
-
-        jLabel24.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
-        jLabel24.setText("Sort By Judge :");
-
-        jComboBox4.setBackground(new java.awt.Color(51, 51, 51));
-        jComboBox4.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Kamala Singh", "Tek Raj Joshi" }));
-
-        jButton4.setBackground(new java.awt.Color(51, 51, 51));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Sort");
-
-        jButton15.setBackground(new java.awt.Color(51, 51, 51));
-        jButton15.setForeground(new java.awt.Color(255, 255, 255));
-        jButton15.setText("View Detail");
-        jButton15.addActionListener(this::jButton15ActionPerformed);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3))
-                            .addComponent(jLabel22))
-                        .addGap(336, 336, 336)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4)))))
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel7.add(jScrollPane5);
+        jScrollPane5.setBounds(20, 130, 1050, 380);
 
         jTabbedPane2.addTab("REGISTERED CASES", jPanel7);
 
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel15.setLayout(null);
+
+        jTabbedPane4.setBackground(new java.awt.Color(51, 51, 51));
+        jTabbedPane4.setForeground(new java.awt.Color(255, 255, 255));
+
+        jPanel23.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel23.setLayout(null);
+
+        jPanel22.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel22.setLayout(null);
+
+        jButton14.setBackground(new java.awt.Color(0, 0, 0));
+        jButton14.setForeground(new java.awt.Color(255, 255, 255));
+        jButton14.setText("REGISTER JUDGE");
+        jButton14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        jButton14.addActionListener(this::jButton14ActionPerformed);
+        jPanel22.add(jButton14);
+        jButton14.setBounds(430, 400, 170, 50);
+
+        jLabel68.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel68.setText("ID :");
+        jPanel22.add(jLabel68);
+        jLabel68.setBounds(230, 160, 30, 30);
+
+        txtJudgeId.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeId.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeId.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeId);
+        txtJudgeId.setBounds(280, 160, 200, 30);
+
+        txtJudgeFirstName.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeFirstName.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeFirstName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeFirstName);
+        txtJudgeFirstName.setBounds(280, 210, 200, 30);
+
+        jLabel69.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel69.setText("First Name :");
+        jPanel22.add(jLabel69);
+        jLabel69.setBounds(170, 210, 100, 30);
+
+        jLabel70.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel70.setText("Last Name :");
+        jPanel22.add(jLabel70);
+        jLabel70.setBounds(170, 260, 90, 30);
+
+        txtJudgeLastName.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeLastName.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeLastName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeLastName);
+        txtJudgeLastName.setBounds(280, 260, 200, 30);
+
+        txtJudgeContact.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeContact.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeContact.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeContact);
+        txtJudgeContact.setBounds(280, 310, 200, 30);
+
+        jLabel71.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel71.setText("Contact :");
+        jPanel22.add(jLabel71);
+        jLabel71.setBounds(190, 310, 70, 30);
+
+        jLabel53.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
+        jLabel53.setText("REGISTER JUDGE");
+        jPanel22.add(jLabel53);
+        jLabel53.setBounds(370, 50, 320, 47);
+
+        jLabel72.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jLabel72.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel72.setText("password must be 8 characters long");
+        jPanel22.add(jLabel72);
+        jLabel72.setBounds(670, 240, 200, 20);
+
+        txtJudgeUsername.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeUsername.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeUsername);
+        txtJudgeUsername.setBounds(670, 160, 200, 30);
+
+        jLabel73.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel73.setText("Password :");
+        jPanel22.add(jLabel73);
+        jLabel73.setBounds(570, 260, 100, 30);
+
+        jLabel74.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel74.setText("Confirm Password :");
+        jPanel22.add(jLabel74);
+        jLabel74.setBounds(510, 310, 150, 30);
+
+        jLabel75.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel75.setText("Username  :");
+        jPanel22.add(jLabel75);
+        jLabel75.setBounds(560, 160, 100, 30);
+
+        txtJudgeConfirmPass.setText("jPasswordField1");
+        jPanel22.add(txtJudgeConfirmPass);
+        txtJudgeConfirmPass.setBounds(670, 310, 200, 30);
+
+        txtJudgePassword.setText("jPasswordField1");
+        jPanel22.add(txtJudgePassword);
+        txtJudgePassword.setBounds(670, 260, 200, 30);
+
+        jPanel23.add(jPanel22);
+        jPanel22.setBounds(10, 16, 1050, 480);
+
+        jTabbedPane4.addTab("ADD JUDGE", jPanel23);
+
+        jPanel15.add(jTabbedPane4);
+        jTabbedPane4.setBounds(10, 10, 1080, 550);
+
+        jTabbedPane2.addTab("MANAGE JUDGES", jPanel15);
+
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(null);
 
         jTabbedPane3.setBackground(new java.awt.Color(51, 51, 51));
         jTabbedPane3.setForeground(new java.awt.Color(255, 255, 255));
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel5.setLayout(null);
 
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel11.setLayout(null);
 
         jLabel13.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+        jPanel11.add(jLabel13);
+        jLabel13.setBounds(640, 237, 0, 0);
 
         jLabel14.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
         jLabel14.setText("Add Details");
+        jPanel11.add(jLabel14);
+        jLabel14.setBounds(31, 8, 115, 29);
 
         jLabel15.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel15.setText("Case Id.");
+        jPanel11.add(jLabel15);
+        jLabel15.setBounds(37, 49, 70, 21);
 
         txtCaseId.setBackground(new java.awt.Color(204, 204, 204));
         txtCaseId.setForeground(new java.awt.Color(102, 102, 102));
         txtCaseId.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtCaseId.addActionListener(this::txtCaseIdActionPerformed);
+        jPanel11.add(txtCaseId);
+        txtCaseId.setBounds(37, 76, 159, 22);
 
         jLabel16.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel16.setText("Reg No.");
+        jPanel11.add(jLabel16);
+        jLabel16.setBounds(214, 49, 80, 21);
 
         txtRegNo.setBackground(new java.awt.Color(204, 204, 204));
         txtRegNo.setForeground(new java.awt.Color(102, 102, 102));
         txtRegNo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtRegNo.addActionListener(this::txtRegNoActionPerformed);
+        jPanel11.add(txtRegNo);
+        txtRegNo.setBounds(214, 76, 159, 22);
 
         jLabel17.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel17.setText("Dispute Type");
+        jPanel11.add(jLabel17);
+        jLabel17.setBounds(391, 50, 110, 21);
 
         jLabel18.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel18.setText("Case Title/Issue");
+        jPanel11.add(jLabel18);
+        jLabel18.setBounds(37, 116, 181, 21);
 
         txtCaseTitle.setBackground(new java.awt.Color(204, 204, 204));
         txtCaseTitle.setForeground(new java.awt.Color(102, 102, 102));
         txtCaseTitle.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel11.add(txtCaseTitle);
+        txtCaseTitle.setBounds(37, 143, 440, 22);
 
         jLabel19.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel19.setText("Subject Matter");
+        jPanel11.add(jLabel19);
+        jLabel19.setBounds(37, 183, 181, 21);
 
         txtSubjectMatter.setBackground(new java.awt.Color(204, 204, 204));
         txtSubjectMatter.setColumns(20);
@@ -737,178 +807,77 @@ public class AdminView extends javax.swing.JFrame {
         txtSubjectMatter.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jScrollPane2.setViewportView(txtSubjectMatter);
 
+        jPanel11.add(jScrollPane2);
+        jScrollPane2.setBounds(37, 210, 597, 35);
+
         jLabel20.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel20.setText("Assigned Judge");
+        jPanel11.add(jLabel20);
+        jLabel20.setBounds(37, 321, 115, 21);
 
         cmbJudge.setBackground(new java.awt.Color(204, 204, 204));
         cmbJudge.setForeground(new java.awt.Color(102, 102, 102));
         cmbJudge.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kamala Singh", "Tek Raj Joshi", "Babu Kaji", " " }));
+        jPanel11.add(cmbJudge);
+        cmbJudge.setBounds(37, 347, 243, 22);
 
         txtHearingDate.setBackground(new java.awt.Color(204, 204, 204));
         txtHearingDate.setForeground(new java.awt.Color(102, 102, 102));
         txtHearingDate.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtHearingDate.addActionListener(this::txtHearingDateActionPerformed);
+        jPanel11.add(txtHearingDate);
+        txtHearingDate.setBounds(298, 348, 159, 22);
 
         jLabel21.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel21.setText("Hearing Date");
+        jPanel11.add(jLabel21);
+        jLabel21.setBounds(298, 321, 93, 21);
 
         jButton1.setBackground(new java.awt.Color(51, 51, 51));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Register Case");
         jButton1.addActionListener(this::jButton1ActionPerformed);
+        jPanel11.add(jButton1);
+        jButton1.setBounds(484, 339, 150, 31);
 
         txtDisputeType.setBackground(new java.awt.Color(204, 204, 204));
         txtDisputeType.setForeground(new java.awt.Color(102, 102, 102));
         txtDisputeType.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtDisputeType.addActionListener(this::txtDisputeTypeActionPerformed);
+        jPanel11.add(txtDisputeType);
+        txtDisputeType.setBounds(391, 76, 159, 22);
 
         jLabel25.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel25.setText("Claim Amount");
+        jPanel11.add(jLabel25);
+        jLabel25.setBounds(37, 257, 120, 21);
 
         txtClaimAmount.setBackground(new java.awt.Color(204, 204, 204));
         txtClaimAmount.setForeground(new java.awt.Color(102, 102, 102));
         txtClaimAmount.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtClaimAmount.addActionListener(this::txtClaimAmountActionPerformed);
+        jPanel11.add(txtClaimAmount);
+        txtClaimAmount.setBounds(37, 284, 159, 22);
 
         jLabel26.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel26.setText("Relief Sought");
+        jPanel11.add(jLabel26);
+        jLabel26.setBounds(214, 257, 140, 21);
 
         txtReliefSought.setBackground(new java.awt.Color(204, 204, 204));
         txtReliefSought.setForeground(new java.awt.Color(102, 102, 102));
         txtReliefSought.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtReliefSought.addActionListener(this::txtReliefSoughtActionPerformed);
+        jPanel11.add(txtReliefSought);
+        txtReliefSought.setBounds(214, 284, 440, 22);
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(txtCaseId, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16)
-                                    .addComponent(txtRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel17)
-                                    .addComponent(txtDisputeType, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel11Layout.createSequentialGroup()
-                                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel20)
-                                            .addComponent(cmbJudge, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel21)
-                                            .addComponent(txtHearingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel13))
-                            .addComponent(txtCaseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel25)
-                                    .addComponent(txtClaimAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel26)
-                                    .addComponent(txtReliefSought))))))
-                .addGap(24, 24, 24))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCaseId, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtRegNo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDisputeType, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(27, 27, 27)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel18)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel13)
-                        .addGap(161, 161, 161))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCaseTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addComponent(jLabel25)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtClaimAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel11Layout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtReliefSought, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cmbJudge, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel11Layout.createSequentialGroup()
-                                    .addComponent(jLabel20)
-                                    .addGap(27, 27, 27)))
-                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel11Layout.createSequentialGroup()
-                                    .addComponent(jLabel21)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtHearingDate, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(18, Short.MAX_VALUE))))
-        );
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(224, Short.MAX_VALUE)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(222, 222, 222))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel5.add(jPanel11);
+        jPanel11.setBounds(215, 45, 680, 400);
 
         jTabbedPane3.addTab("CIVIL CASE", jPanel5);
 
         jPanel6.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel6.setLayout(null);
 
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1124,26 +1093,13 @@ public class AdminView extends javax.swing.JFrame {
                         .addContainerGap(27, Short.MAX_VALUE))))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(196, Short.MAX_VALUE)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(206, 206, 206))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel6.add(jPanel17);
+        jPanel17.setBounds(201, 51, 710, 399);
 
         jTabbedPane3.addTab("CRIMINAL CASE", jPanel6);
 
         jPanel12.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel12.setLayout(null);
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1217,40 +1173,37 @@ public class AdminView extends javax.swing.JFrame {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel36)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel45)
+                            .addComponent(jLabel30))
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbJudge1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRelief1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtClaimAmount1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHearing1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel29))
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel36)
-                                    .addComponent(jLabel34)
-                                    .addComponent(jLabel45)
-                                    .addComponent(jLabel30))
                                 .addGap(59, 59, 59)
-                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbJudge1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtRelief1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtClaimAmount1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtHearing1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtCaseId1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel29))
-                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel13Layout.createSequentialGroup()
-                                        .addGap(59, 59, 59)
-                                        .addComponent(txtCaseId1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel13Layout.createSequentialGroup()
-                                        .addGap(109, 109, 109)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(149, 149, 149)
-                        .addComponent(jLabel27))
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(jLabel28)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(141, 141, 141)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(149, 149, 149)
+                .addComponent(jLabel27))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addComponent(jLabel28))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1295,144 +1248,100 @@ public class AdminView extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(59, 59, 59))
         );
+
+        jPanel12.add(jPanel14);
+        jPanel14.setBounds(6, 6, 541, 493);
 
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel19.setBackground(new java.awt.Color(51, 51, 51));
         jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel19.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel19.setLayout(null);
 
         jLabel39.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
+        jPanel19.add(jLabel39);
+        jLabel39.setBounds(640, 209, 0, 0);
 
         jLabel40.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setText("CRIMINAL");
+        jPanel19.add(jLabel40);
+        jLabel40.setBounds(213, 8, 107, 29);
 
         jLabel41.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(255, 255, 255));
         jLabel41.setText("Case Id.");
+        jPanel19.add(jLabel41);
+        jLabel41.setBounds(110, 90, 60, 21);
 
         txtCaseId3.setBackground(new java.awt.Color(204, 204, 204));
         txtCaseId3.setForeground(new java.awt.Color(102, 102, 102));
         txtCaseId3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtCaseId3.addActionListener(this::txtCaseId3ActionPerformed);
+        jPanel19.add(txtCaseId3);
+        txtCaseId3.setBounds(230, 90, 159, 22);
 
         jLabel42.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setText("Bail Status");
+        jPanel19.add(jLabel42);
+        jLabel42.setBounds(85, 190, 80, 21);
 
         jLabel43.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(255, 255, 255));
         jLabel43.setText("Assigned Judge");
+        jPanel19.add(jLabel43);
+        jLabel43.setBounds(48, 270, 120, 21);
 
         cmbJudge3.setBackground(new java.awt.Color(204, 204, 204));
         cmbJudge3.setForeground(new java.awt.Color(102, 102, 102));
         cmbJudge3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "Kamala Singh", "Tek Raj Joshi", "Babu Kaji", " " }));
+        jPanel19.add(cmbJudge3);
+        cmbJudge3.setBounds(230, 270, 243, 22);
 
         jButton9.setBackground(new java.awt.Color(51, 51, 51));
         jButton9.setForeground(new java.awt.Color(255, 255, 255));
         jButton9.setText("UPDATE CASE");
         jButton9.addActionListener(this::jButton9ActionPerformed);
+        jPanel19.add(jButton9);
+        jButton9.setBounds(50, 130, 150, 31);
 
         jLabel44.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(255, 255, 255));
         jLabel44.setText("Hearing Date");
+        jPanel19.add(jLabel44);
+        jLabel44.setBounds(70, 230, 93, 21);
 
         txtClaimAmount3.setBackground(new java.awt.Color(204, 204, 204));
         txtClaimAmount3.setForeground(new java.awt.Color(102, 102, 102));
         txtClaimAmount3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtClaimAmount3.addActionListener(this::txtClaimAmount3ActionPerformed);
+        jPanel19.add(txtClaimAmount3);
+        txtClaimAmount3.setBounds(230, 230, 159, 22);
 
         jButton10.setBackground(new java.awt.Color(51, 51, 51));
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
         jButton10.setText("DELETE CASE");
         jButton10.addActionListener(this::jButton10ActionPerformed);
+        jPanel19.add(jButton10);
+        jButton10.setBounds(300, 130, 150, 31);
 
         rchkBailStatus1.setBackground(new java.awt.Color(204, 204, 204));
         rchkBailStatus1.setForeground(new java.awt.Color(102, 102, 102));
         rchkBailStatus1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "none", "Granted", "Not Granted" }));
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel19Layout.createSequentialGroup()
-                                .addGap(128, 128, 128)
-                                .addComponent(jLabel41)
-                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel19Layout.createSequentialGroup()
-                                        .addGap(59, 59, 59)
-                                        .addComponent(txtCaseId3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel19Layout.createSequentialGroup()
-                                        .addGap(121, 121, 121)
-                                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel19Layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel19Layout.createSequentialGroup()
-                                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel42)
-                                            .addComponent(jLabel44)
-                                            .addComponent(jLabel43))
-                                        .addGap(59, 59, 59)
-                                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmbJudge3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtClaimAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(rchkBailStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(149, 149, 149)
-                        .addComponent(jLabel39))
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(jLabel40)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel39)
-                .addGap(161, 161, 161))
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel40)
-                .addGap(46, 46, 46)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCaseId3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel41))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel42)
-                            .addComponent(rchkBailStatus1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel44)
-                            .addComponent(txtClaimAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel43)
-                            .addComponent(cmbJudge3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
-        );
+        jPanel19.add(rchkBailStatus1);
+        rchkBailStatus1.setBounds(230, 190, 203, 22);
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -1440,39 +1349,21 @@ public class AdminView extends javax.swing.JFrame {
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
         );
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jPanel12.add(jPanel18);
+        jPanel18.setBounds(565, 6, 500, 493);
 
-        jTabbedPane3.addTab("Update Case", jPanel12);
+        jTabbedPane3.addTab("UPDATE CASE", jPanel12);
 
         jPanel24.setBackground(new java.awt.Color(51, 51, 51));
         jPanel24.setLayout(null);
@@ -1516,14 +1407,14 @@ public class AdminView extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tblDeleted);
 
         jPanel24.add(jScrollPane4);
-        jScrollPane4.setBounds(10, 130, 1090, 360);
+        jScrollPane4.setBounds(10, 130, 1060, 370);
 
         btnClear.setBackground(new java.awt.Color(51, 51, 51));
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setText("Clear All ");
         btnClear.addActionListener(this::btnClearActionPerformed);
         jPanel24.add(btnClear);
-        btnClear.setBounds(780, 93, 150, 30);
+        btnClear.setBounds(730, 90, 150, 30);
 
         jLabel47.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(255, 255, 255));
@@ -1536,432 +1427,42 @@ public class AdminView extends javax.swing.JFrame {
         jButton12.setText("Undo Delete");
         jButton12.addActionListener(this::jButton12ActionPerformed);
         jPanel24.add(jButton12);
-        jButton12.setBounds(940, 93, 150, 30);
+        jButton12.setBounds(900, 90, 150, 30);
 
-        jTabbedPane3.addTab("Recycle Bin", jPanel24);
+        jTabbedPane3.addTab("RECYCLE BIN", jPanel24);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane3)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane3)
-                .addContainerGap())
-        );
+        jPanel4.add(jTabbedPane3);
+        jTabbedPane3.setBounds(6, 6, 1080, 550);
 
         jTabbedPane2.addTab("CASE MANAGEMENT", jPanel4);
 
-        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTabbedPane4.setBackground(new java.awt.Color(51, 51, 51));
-        jTabbedPane4.setForeground(new java.awt.Color(255, 255, 255));
-
-        jPanel23.setBackground(new java.awt.Color(51, 51, 51));
-
-        jPanel22.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel22.setLayout(null);
-
-        jButton14.setBackground(new java.awt.Color(51, 51, 51));
-        jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("REGISTER JUDGE");
-        jButton14.addActionListener(this::jButton14ActionPerformed);
-        jPanel22.add(jButton14);
-        jButton14.setBounds(420, 350, 170, 50);
-
-        jLabel68.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel68.setText("ID :");
-        jPanel22.add(jLabel68);
-        jLabel68.setBounds(150, 120, 40, 30);
-
-        txtJudgeId.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeId.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeId.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeId);
-        txtJudgeId.setBounds(260, 120, 200, 30);
-
-        txtJudgeFirstName.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeFirstName.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeFirstName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeFirstName);
-        txtJudgeFirstName.setBounds(260, 170, 200, 30);
-
-        jLabel69.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel69.setText("First Name :");
-        jPanel22.add(jLabel69);
-        jLabel69.setBounds(150, 170, 100, 30);
-
-        jLabel70.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel70.setText("Last Name :");
-        jPanel22.add(jLabel70);
-        jLabel70.setBounds(150, 220, 90, 30);
-
-        txtJudgeLastName.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeLastName.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeLastName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeLastName);
-        txtJudgeLastName.setBounds(260, 220, 200, 30);
-
-        txtJudgeContact.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeContact.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeContact.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeContact);
-        txtJudgeContact.setBounds(260, 270, 200, 30);
-
-        jLabel71.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel71.setText("Contact :");
-        jPanel22.add(jLabel71);
-        jLabel71.setBounds(150, 270, 70, 30);
-
-        jLabel53.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
-        jLabel53.setText("REGISTER JUDGE");
-        jPanel22.add(jLabel53);
-        jLabel53.setBounds(350, 40, 320, 47);
-
-        jLabel72.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
-        jLabel72.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel72.setText("password must be 8 characters long");
-        jPanel22.add(jLabel72);
-        jLabel72.setBounds(650, 200, 200, 20);
-
-        txtJudgeUsername.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeUsername.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeUsername);
-        txtJudgeUsername.setBounds(650, 120, 200, 30);
-
-        jLabel73.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel73.setText("Password :");
-        jPanel22.add(jLabel73);
-        jLabel73.setBounds(550, 220, 100, 30);
-
-        jLabel74.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel74.setText("Confirm Password :");
-        jPanel22.add(jLabel74);
-        jLabel74.setBounds(490, 270, 150, 30);
-
-        jLabel75.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel75.setText("Username  :");
-        jPanel22.add(jLabel75);
-        jLabel75.setBounds(540, 120, 100, 30);
-
-        txtJudgeConfirmPass.setText("jPasswordField1");
-        jPanel22.add(txtJudgeConfirmPass);
-        txtJudgeConfirmPass.setBounds(650, 270, 200, 30);
-
-        txtJudgePassword.setText("jPasswordField1");
-        jPanel22.add(txtJudgePassword);
-        txtJudgePassword.setBounds(650, 222, 200, 30);
-
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel23Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-        );
-
-        jTabbedPane4.addTab("ADD JUDGE", jPanel23);
-
-        jPanel16.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel16.setLayout(null);
-
-        jPanel20.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel20.setLayout(null);
-
-        jLabel31.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
-        jPanel20.add(jLabel31);
-        jLabel31.setBounds(485, 227, 0, 0);
-
-        jLabel32.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
-        jLabel32.setText("Create Credential");
-        jPanel20.add(jLabel32);
-        jLabel32.setBounds(37, 161, 181, 29);
-
-        jLabel33.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel33.setText("Judge Id");
-        jPanel20.add(jLabel33);
-        jLabel33.setBounds(37, 49, 62, 21);
-
-        txtCaseId2.setBackground(new java.awt.Color(204, 204, 204));
-        txtCaseId2.setForeground(new java.awt.Color(102, 102, 102));
-        txtCaseId2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        txtCaseId2.addActionListener(this::txtCaseId2ActionPerformed);
-        jPanel20.add(txtCaseId2);
-        txtCaseId2.setBounds(37, 76, 200, 22);
-
-        jLabel35.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel35.setText("Full Name");
-        jPanel20.add(jLabel35);
-        jLabel35.setBounds(37, 104, 73, 21);
-
-        txtRegNo1.setBackground(new java.awt.Color(204, 204, 204));
-        txtRegNo1.setForeground(new java.awt.Color(102, 102, 102));
-        txtRegNo1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        txtRegNo1.addActionListener(this::txtRegNo1ActionPerformed);
-        jPanel20.add(txtRegNo1);
-        txtRegNo1.setBounds(37, 131, 200, 22);
-
-        jLabel37.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel37.setText("Contact");
-        jPanel20.add(jLabel37);
-        jLabel37.setBounds(278, 49, 55, 21);
-
-        jLabel38.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel38.setText("USERNAME");
-        jPanel20.add(jLabel38);
-        jLabel38.setBounds(37, 196, 181, 21);
-
-        txtCaseTitle1.setBackground(new java.awt.Color(204, 204, 204));
-        txtCaseTitle1.setForeground(new java.awt.Color(102, 102, 102));
-        txtCaseTitle1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        txtCaseTitle1.addActionListener(this::txtCaseTitle1ActionPerformed);
-        jPanel20.add(txtCaseTitle1);
-        txtCaseTitle1.setBounds(37, 229, 250, 22);
-
-        txtHearingDate1.setBackground(new java.awt.Color(204, 204, 204));
-        txtHearingDate1.setForeground(new java.awt.Color(102, 102, 102));
-        txtHearingDate1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        txtHearingDate1.addActionListener(this::txtHearingDate1ActionPerformed);
-        jPanel20.add(txtHearingDate1);
-        txtHearingDate1.setBounds(37, 340, 250, 22);
-
-        jLabel48.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel48.setText("CONFIRM PASSWORD");
-        jPanel20.add(jLabel48);
-        jLabel48.setBounds(37, 313, 174, 21);
-
-        jButton8.setBackground(new java.awt.Color(51, 51, 51));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("REGISTER JUDGE");
-        jButton8.addActionListener(this::jButton8ActionPerformed);
-        jPanel20.add(jButton8);
-        jButton8.setBounds(410, 310, 230, 50);
-
-        txtDisputeType1.setBackground(new java.awt.Color(204, 204, 204));
-        txtDisputeType1.setForeground(new java.awt.Color(102, 102, 102));
-        txtDisputeType1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        txtDisputeType1.addActionListener(this::txtDisputeType1ActionPerformed);
-        jPanel20.add(txtDisputeType1);
-        txtDisputeType1.setBounds(277, 76, 200, 22);
-
-        jLabel50.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel50.setText("PASSWORD");
-        jPanel20.add(jLabel50);
-        jLabel50.setBounds(37, 257, 95, 21);
-
-        txtReliefSought1.setBackground(new java.awt.Color(204, 204, 204));
-        txtReliefSought1.setForeground(new java.awt.Color(102, 102, 102));
-        txtReliefSought1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        txtReliefSought1.addActionListener(this::txtReliefSought1ActionPerformed);
-        jPanel20.add(txtReliefSought1);
-        txtReliefSought1.setBounds(37, 284, 250, 22);
-
-        jLabel46.setFont(new java.awt.Font("Science Gothic", 0, 22)); // NOI18N
-        jLabel46.setText("Add Judge to System");
-        jPanel20.add(jLabel46);
-        jLabel46.setBounds(41, 18, 251, 29);
-
-        jPanel16.add(jPanel20);
-        jPanel20.setBounds(224, 55, 0, 0);
-
-        jPanel21.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel21.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel21.setLayout(null);
-
-        jButton13.setBackground(new java.awt.Color(51, 51, 51));
-        jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setText("REGISTER JUDGE");
-        jButton13.addActionListener(this::jButton13ActionPerformed);
-        jPanel21.add(jButton13);
-        jButton13.setBounds(130, 350, 170, 50);
-
-        jLabel52.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
-        jLabel52.setText("MANAGE JUDGE DETAILS");
-        jPanel21.add(jLabel52);
-        jLabel52.setBounds(270, 30, 460, 47);
-
-        jLabel62.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
-        jLabel62.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel62.setText("password must be 8 characters long");
-        jPanel21.add(jLabel62);
-        jLabel62.setBounds(290, 210, 200, 20);
-
-        txtCaseTitle8.setBackground(new java.awt.Color(204, 204, 204));
-        txtCaseTitle8.setForeground(new java.awt.Color(102, 102, 102));
-        txtCaseTitle8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel21.add(txtCaseTitle8);
-        txtCaseTitle8.setBounds(290, 130, 200, 30);
-
-        txtCaseTitle9.setBackground(new java.awt.Color(204, 204, 204));
-        txtCaseTitle9.setForeground(new java.awt.Color(102, 102, 102));
-        txtCaseTitle9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel21.add(txtCaseTitle9);
-        txtCaseTitle9.setBounds(290, 230, 200, 30);
-
-        jLabel63.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel63.setText("Password :");
-        jPanel21.add(jLabel63);
-        jLabel63.setBounds(190, 230, 100, 30);
-
-        txtCaseTitle10.setBackground(new java.awt.Color(204, 204, 204));
-        txtCaseTitle10.setForeground(new java.awt.Color(102, 102, 102));
-        txtCaseTitle10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel21.add(txtCaseTitle10);
-        txtCaseTitle10.setBounds(290, 280, 200, 30);
-
-        jLabel66.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel66.setText("Confirm Password :");
-        jPanel21.add(jLabel66);
-        jLabel66.setBounds(130, 280, 150, 30);
-
-        jLabel67.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel67.setText("Username  :");
-        jPanel21.add(jLabel67);
-        jLabel67.setBounds(180, 130, 100, 30);
-
-        jPanel16.add(jPanel21);
-        jPanel21.setBounds(40, 30, 1030, 450);
-
-        jTabbedPane4.addTab("MANAGE  JUDGE", jPanel16);
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane4)
-                .addContainerGap())
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane4)
-                .addContainerGap())
-        );
-
-        jTabbedPane2.addTab("MANAGE JUDGES", jPanel15);
+        jPanel1.add(jTabbedPane2);
+        jTabbedPane2.setBounds(19, 180, 1240, 570);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Inter", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Inter", 0, 48)); // NOI18N
         jLabel1.setText("CASE MANAGEMENT SYSTEM");
+        jPanel3.add(jLabel1);
+        jLabel1.setBounds(260, 20, 700, 100);
+        jPanel3.add(jLabel4);
+        jLabel4.setBounds(843, 51, 51, 0);
 
-        jLabel2.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        jLabel2.setText("Admin");
-
-        jLabel11.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        jLabel11.setText("Welcome Back,");
-
-        jButton7.setBackground(new java.awt.Color(51, 51, 51));
+        jButton7.setBackground(new java.awt.Color(0, 0, 0));
         jButton7.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Log Out");
+        jButton7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         jButton7.addActionListener(this::jButton7ActionPerformed);
+        jPanel3.add(jButton7);
+        jButton7.setBounds(1090, 10, 140, 43);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addGap(198, 198, 198)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(jLabel4))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(20, 20, 1240, 140);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1287, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 732, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(2, -4, 1280, 770);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1969,6 +1470,7 @@ public class AdminView extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         loadRegisteredCases();
         loadDeletedTable();
+        updateDashboardStats();
         loadQueueTable();
     }//GEN-LAST:event_formWindowActivated
 
@@ -2528,97 +2030,6 @@ public class AdminView extends javax.swing.JFrame {
         }       // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void txtReliefSought1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReliefSought1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtReliefSought1ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void txtHearingDate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHearingDate1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtHearingDate1ActionPerformed
-
-    private void txtCaseId2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaseId2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCaseId2ActionPerformed
-
-    private void txtDisputeType1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDisputeType1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDisputeType1ActionPerformed
-
-    private void txtRegNo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegNo1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRegNo1ActionPerformed
-
-    private void txtCaseTitle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaseTitle1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCaseTitle1ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        try {
-            // 1. Gather Input
-            int id = Integer.parseInt(txtJudgeId.getText());
-            String name = txtJudgeFirstName.getText() + " " + txtJudgeLastName.getText();
-            String username = txtJudgeUsername.getText();
-            String contact = txtJudgeContact.getText();
-
-            // Handle Passwords
-            String password = new String(txtJudgePassword.getPassword());
-            String confirmPass = new String(txtJudgeConfirmPass.getPassword());
-
-            // 2. VALIDATION
-            // Check A: Empty fields
-            if (username.isEmpty() || password.isEmpty() || contact.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Please fill all fields.");
-                return;
-            }
-
-            // Check B: Password Length
-            if (password.length() < 8) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Password must be at least 8 characters.");
-                return;
-            }
-
-            // Check C: Confirm Password Match (The logic you asked for)
-            if (!password.equals(confirmPass)) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Passwords do not match! Please try again.");
-                return; // Stop here, don't register
-            }
-
-            // 3. Create Object & Register
-            Judge newJudge = new Judge(id, name, contact, username, password);
-            JudgeController jc = new JudgeController();
-
-            if (jc.registerJudge(newJudge)) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Judge Registered Successfully!");
-
-                // 4. Clear Fields
-                txtJudgeId.setText("");
-                txtJudgeFirstName.setText("");
-                txtJudgeLastName.setText("");
-                txtJudgeUsername.setText("");
-                txtJudgePassword.setText("");
-                txtJudgeConfirmPass.setText("");
-                txtJudgeContact.setText("");
-
-                // 5. Update the Dropdown in the other tab
-                loadJudgesToComboBox();
-
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Error: Judge ID or Username already exists.");
-            }
-
-        } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error: Judge ID must be a number.");
-        }
-    }//GEN-LAST:event_jButton14ActionPerformed
-
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
@@ -2765,6 +2176,123 @@ public class AdminView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        // 1. Get the selected category from the ComboBox
+        // Replace 'cmbSortBy' with your actual variable name!
+        String criteria = cmbSortBy.getSelectedItem().toString();
+
+        if (criteria.equalsIgnoreCase("None")) {
+            // Optional: Reload original order if you tracked it, or do nothing
+            return;
+        }
+
+        // 2. Call the Controller to Sort
+        controller.sortCases(criteria);
+
+        // 3. Refresh the Table to show the new order
+        loadRegisteredCases();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        // 1. Get Selected Judge from Dropdown
+        // Note: Make sure your variable name is cmbFilterByJudge (as in your code)
+        String selectedJudge = cmbFilterByJudge.getSelectedItem().toString();
+
+        // 2. Check for "None" to reset
+        // If "None", we just call your existing method to load everything back
+        if (selectedJudge.equalsIgnoreCase("All") || selectedJudge.trim().isEmpty()) {
+            loadRegisteredCases();
+            return;
+        }
+
+        // 3. Get Filtered List from Controller
+        java.util.LinkedList<model.Case> judgeCases = controller.filterByJudge(selectedJudge);
+
+        // 4. Update the Table MANUALLY (Since we aren't changing loadRegisteredCases)
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) totalRegisteredCasesTable.getModel();
+        model.setRowCount(0); // Clear the table
+
+        if (judgeCases.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No cases found for Judge: " + selectedJudge);
+        } else {
+            // Loop through the FILTERED list and add rows
+            for (model.Case c : judgeCases) {
+                model.addRow(new Object[]{
+                    c.getCaseId(),
+                    c.getRegistrationNumber(),
+                    c.getCaseTitle(),
+                    c.getCaseType(),
+                    c.getAssignedJudge(),
+                    c.getCaseStatus(),
+                    c.getHearingDate()
+                });
+            }
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        try {
+            // 1. Gather Input
+            int id = Integer.parseInt(txtJudgeId.getText());
+            String name = txtJudgeFirstName.getText() + " " + txtJudgeLastName.getText();
+            String username = txtJudgeUsername.getText();
+            String contact = txtJudgeContact.getText();
+
+            // Handle Passwords
+            String password = new String(txtJudgePassword.getPassword());
+            String confirmPass = new String(txtJudgeConfirmPass.getPassword());
+
+            // 2. VALIDATION
+            // Check A: Empty fields
+            if (username.isEmpty() || password.isEmpty() || contact.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Please fill all fields.");
+                return;
+            }
+
+            // Check B: Password Length
+            if (password.length() < 8) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Password must be at least 8 characters.");
+                return;
+            }
+
+            // Check C: Confirm Password Match (The logic you asked for)
+            if (!password.equals(confirmPass)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Passwords do not match! Please try again.");
+                return; // Stop here, don't register
+            }
+
+            // 3. Create Object & Register
+            Judge newJudge = new Judge(id, name, contact, username, password);
+            JudgeController jc = new JudgeController();
+
+            if (jc.registerJudge(newJudge)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Judge Registered Successfully!");
+
+                // 4. Clear Fields
+                txtJudgeId.setText("");
+                txtJudgeFirstName.setText("");
+                txtJudgeLastName.setText("");
+                txtJudgeUsername.setText("");
+                txtJudgePassword.setText("");
+                txtJudgeConfirmPass.setText("");
+                txtJudgeContact.setText("");
+
+                // 5. Update the Dropdown in the other tab
+                loadJudgesToComboBox();
+
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: Judge ID or Username already exists.");
+            }
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error: Judge ID must be a number.");
+        }
+    }//GEN-LAST:event_jButton14ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2792,15 +2320,16 @@ public class AdminView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
+    private javax.swing.JComboBox<String> cmbFilterByJudge;
     private javax.swing.JComboBox<String> cmbJudge;
     private javax.swing.JComboBox<String> cmbJudge1;
     private javax.swing.JComboBox<String> cmbJudge3;
+    private javax.swing.JComboBox<String> cmbSortBy;
     private javax.swing.JTable dashboardTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
@@ -2809,10 +2338,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel101;
@@ -2824,11 +2350,9 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel107;
     private javax.swing.JLabel jLabel108;
     private javax.swing.JLabel jLabel109;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel110;
     private javax.swing.JLabel jLabel111;
     private javax.swing.JLabel jLabel112;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -2836,7 +2360,6 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -2849,14 +2372,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
@@ -2865,18 +2382,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
@@ -2895,16 +2402,14 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2915,11 +2420,14 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
+    private javax.swing.JLabel lblClosedCount;
+    private javax.swing.JLabel lblPendingCount;
+    private javax.swing.JLabel lblTotalCount;
     private javax.swing.JComboBox<String> rchkBailStatus;
     private javax.swing.JComboBox<String> rchkBailStatus1;
     private javax.swing.JComboBox<String> rcmbJudge;
@@ -2936,21 +2444,14 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTable totalRegisteredCasesTable;
     private javax.swing.JTextField txtCaseId;
     private javax.swing.JTextField txtCaseId1;
-    private javax.swing.JTextField txtCaseId2;
     private javax.swing.JTextField txtCaseId3;
     private javax.swing.JTextField txtCaseTitle;
-    private javax.swing.JTextField txtCaseTitle1;
-    private javax.swing.JTextField txtCaseTitle10;
-    private javax.swing.JTextField txtCaseTitle8;
-    private javax.swing.JTextField txtCaseTitle9;
     private javax.swing.JTextField txtClaimAmount;
     private javax.swing.JTextField txtClaimAmount1;
     private javax.swing.JTextField txtClaimAmount3;
     private javax.swing.JTextField txtDisputeType;
-    private javax.swing.JTextField txtDisputeType1;
     private javax.swing.JTextField txtHearing1;
     private javax.swing.JTextField txtHearingDate;
-    private javax.swing.JTextField txtHearingDate1;
     private javax.swing.JPasswordField txtJudgeConfirmPass;
     private javax.swing.JTextField txtJudgeContact;
     private javax.swing.JTextField txtJudgeFirstName;
@@ -2959,10 +2460,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtJudgePassword;
     private javax.swing.JTextField txtJudgeUsername;
     private javax.swing.JTextField txtRegNo;
-    private javax.swing.JTextField txtRegNo1;
     private javax.swing.JTextField txtRelief1;
     private javax.swing.JTextField txtReliefSought;
-    private javax.swing.JTextField txtReliefSought1;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextArea txtSubjectMatter;
     // End of variables declaration//GEN-END:variables

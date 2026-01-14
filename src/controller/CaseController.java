@@ -26,7 +26,7 @@ public class CaseController {
     private static CaseStack deletedCasesStack = new CaseStack(5); // Size = 5
 
     // To create Upcoming cases table we need a queue storage
-    private static CaseQueue hearingQueue = new CaseQueue(3);  // Size = 3
+    private static CaseQueue hearingQueue = new CaseQueue(5);  // Size = 3
 
     // CONSTRUCTOR
     public CaseController() {
@@ -78,14 +78,15 @@ public class CaseController {
 
         // 1. Add to Main List
         allCases.add(newCase);
-        
+
         // 2. REFRESH QUEUE
         // Instead of manually checking dates here, just run the generator!
         // This ensures the new case gets SORTED correctly into the top 3.
-        generateUpcomingQueue(); 
-        
+        generateUpcomingQueue();
+
         return true;
     }
+
     // DELETE CASE 
     public boolean deleteCase(int targetId) {
         Case caseToRemove = findCaseById(targetId);
@@ -232,7 +233,7 @@ public class CaseController {
     public CaseStack getDeletedCases() {
         return deletedCasesStack;
     }
-    
+
     // SEARCHING ALGORTHIMS 
     public java.util.LinkedList<Case> linearSearch(String query) {
         java.util.LinkedList<Case> results = new java.util.LinkedList<>();
@@ -241,21 +242,21 @@ public class CaseController {
         // Slide 9: "for (int i = 0; i < n; i++)"
         for (int i = 0; i < allCases.size(); i++) {
             Case c = allCases.get(i);
-            
+
             // Slide 10: "if (a[i] == val)" - We check if string contains the query
-            if (c.getCaseTitle().toLowerCase().contains(lowerQuery) ||
-                c.getAssignedJudge().toLowerCase().contains(lowerQuery) ||
-                c.getCaseType().toLowerCase().contains(lowerQuery)) {
-                
+            if (c.getCaseTitle().toLowerCase().contains(lowerQuery)
+                    || c.getAssignedJudge().toLowerCase().contains(lowerQuery)
+                    || c.getCaseType().toLowerCase().contains(lowerQuery)) {
+
                 results.add(c);
             }
         }
         return results;
     }
-    
+
     public Case binarySearchById(int targetId) {
         // 1. Sort Data First (Slide 24 says: "sorted data is required")
-        sortCasesById(); 
+        sortCasesById();
 
         // Slide 14: Initialize Low and High
         int low = 0;
@@ -274,16 +275,15 @@ public class CaseController {
             // Slide 18: If Value > arr[mid], set low = mid + 1
             if (midCase.getCaseId() < targetId) {
                 low = mid + 1;
-            } 
-            // Slide 17: If Value < arr[mid], set high = mid - 1
+            } // Slide 17: If Value < arr[mid], set high = mid - 1
             else {
                 high = mid - 1;
             }
         }
-        
+
         return null; // Slide 23: "If search value is not in the list return -1" (or null)
     }
-    
+
     private void sortCasesById() {
         int n = allCases.size();
         for (int i = 0; i < n - 1; i++) {
@@ -297,4 +297,89 @@ public class CaseController {
         }
     }
 
+    /**
+     * MULTI-CRITERIA BUBBLE SORT Sorts the main list based on the user's
+     * selection. Criteria: "Case Type", "Hearing Date", "Filing Date", "Case
+     * Status"
+     */
+    public void sortCases(String criteria) {
+        int n = allCases.size();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // Outer Loop
+        for (int i = 0; i < n - 1; i++) {
+            // Inner Loop
+            for (int j = 0; j < n - i - 1; j++) {
+
+                Case c1 = allCases.get(j);
+                Case c2 = allCases.get(j + 1);
+                boolean shouldSwap = false;
+
+                try {
+                    // 1. SORT BY HEARING DATE (Ascending: Earliest first)
+                    if (criteria.equalsIgnoreCase("Hearing Date")) {
+                        LocalDate d1 = LocalDate.parse(c1.getHearingDate(), formatter);
+                        LocalDate d2 = LocalDate.parse(c2.getHearingDate(), formatter);
+                        if (d1.isAfter(d2)) {
+                            shouldSwap = true;
+                        }
+                    } // 2. SORT BY FILING DATE (Descending: Latest first)
+                    else if (criteria.equalsIgnoreCase("Filing Date")) { // Check your GUI exact text
+                        LocalDate d1 = LocalDate.parse(c1.getFilingDate(), formatter); // Ensure Case has getFilingDate()
+                        LocalDate d2 = LocalDate.parse(c2.getFilingDate(), formatter);
+                        if (d1.isBefore(d2)) {
+                            shouldSwap = true; // Reverse check for Descending
+                        }
+                    } // 3. SORT BY CASE TYPE (Alphabetical: Civil -> Criminal)
+                    else if (criteria.equalsIgnoreCase("Case Type")) {
+                        // compareTo returns > 0 if c1 is alphabetically "bigger" than c2
+                        if (c1.getCaseType().compareTo(c2.getCaseType()) > 0) {
+                            shouldSwap = true;
+                        }
+                    } // 4. SORT BY CASE STATUS (Alphabetical: Closed -> Running)
+                    else if (criteria.equalsIgnoreCase("Case Status")) {
+                        if (c1.getCaseStatus().compareToIgnoreCase(c2.getCaseStatus()) > 0) {
+                            shouldSwap = true;
+                        }
+                    }
+
+                    // --- SWAP ACTION ---
+                    if (shouldSwap) {
+                        allCases.set(j, c2);
+                        allCases.set(j + 1, c1);
+                    }
+
+                } catch (Exception e) {
+                    // Ignore data errors during sort
+                }
+            }
+        }
+    }
+
+    /**
+     * FILTER BY JUDGE Returns a list of cases assigned to a specific judge.
+     */
+    public java.util.LinkedList<Case> filterByJudge(String judgeName) {
+        java.util.LinkedList<Case> filteredList = new java.util.LinkedList<>();
+
+        for (Case c : allCases) {
+            // Check if the judge's name matches (ignoring case sensitivity)
+            if (c.getAssignedJudge().equalsIgnoreCase(judgeName)) {
+                filteredList.add(c);
+            }
+        }
+        return filteredList;
+    }
+
+    /**
+     * GET ALL JUDGES (Optional but helpful) Returns a list of unique judge
+     * names to populate the dropdown.
+     */
+    public java.util.HashSet<String> getAllJudges() {
+        java.util.HashSet<String> judges = new java.util.HashSet<>();
+        for (Case c : allCases) {
+            judges.add(c.getAssignedJudge());
+        }
+        return judges;
+    }
 }
