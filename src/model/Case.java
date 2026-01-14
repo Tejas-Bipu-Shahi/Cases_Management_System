@@ -6,18 +6,19 @@ package model;
 
 /**
  *
- * @author tejas Abstract Parent Class 
+ * @author tejas Abstract Parent Class
  */
 public abstract class Case {
 
     // Common Attributes of every cases
-    private int caseId;                
+    private int caseId;
     private String registrationNumber;
-    private String caseTitle;         
-    private String filingDate;         
-    private String hearingDate;        
-    private String assignedJudge;      
-    private String caseStatus;         
+    private String caseTitle;
+    private String filingDate;
+    private String hearingDate;
+    private String assignedJudge;
+    private String caseStatus;
+    private String evidenceFilePath;
 
     // Initializing Constructor
     public Case(int caseId, String registrationNumber, String caseTitle,
@@ -31,7 +32,7 @@ public abstract class Case {
         this.assignedJudge = assignedJudge;
         this.caseStatus = caseStatus;
     }
-    
+
     // 3. GETTERS (Accessors)
     public int getCaseId() {
         return caseId;
@@ -61,11 +62,19 @@ public abstract class Case {
         return caseStatus;
     }
 
+    public String getEvidenceFilePath() {
+        return evidenceFilePath;
+    }
+
+    public void setEvidenceFilePath(String path) {
+        this.evidenceFilePath = path;
+    }
+
     // 4. SETTERS (Mutators) - Only for attributes that change!
     public void setHearingDate(String hearingDate) {
         this.hearingDate = hearingDate;
     }
-    
+
     // Judges can be reassigned 
     public void setAssignedJudge(String assignedJudge) {
         this.assignedJudge = assignedJudge;

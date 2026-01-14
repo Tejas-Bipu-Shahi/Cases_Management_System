@@ -216,27 +216,6 @@ public class AdminView extends javax.swing.JFrame {
         jButton15 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         totalRegisteredCasesTable = new javax.swing.JTable();
-        jPanel15 = new javax.swing.JPanel();
-        jTabbedPane4 = new javax.swing.JTabbedPane();
-        jPanel23 = new javax.swing.JPanel();
-        jPanel22 = new javax.swing.JPanel();
-        jButton14 = new javax.swing.JButton();
-        jLabel68 = new javax.swing.JLabel();
-        txtJudgeId = new javax.swing.JTextField();
-        txtJudgeFirstName = new javax.swing.JTextField();
-        jLabel69 = new javax.swing.JLabel();
-        jLabel70 = new javax.swing.JLabel();
-        txtJudgeLastName = new javax.swing.JTextField();
-        txtJudgeContact = new javax.swing.JTextField();
-        jLabel71 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel72 = new javax.swing.JLabel();
-        txtJudgeUsername = new javax.swing.JTextField();
-        jLabel73 = new javax.swing.JLabel();
-        jLabel74 = new javax.swing.JLabel();
-        jLabel75 = new javax.swing.JLabel();
-        txtJudgeConfirmPass = new javax.swing.JPasswordField();
-        txtJudgePassword = new javax.swing.JPasswordField();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -326,10 +305,32 @@ public class AdminView extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         jLabel47 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
+        jPanel15 = new javax.swing.JPanel();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel23 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
+        jButton14 = new javax.swing.JButton();
+        jLabel68 = new javax.swing.JLabel();
+        txtJudgeId = new javax.swing.JTextField();
+        txtJudgeFirstName = new javax.swing.JTextField();
+        jLabel69 = new javax.swing.JLabel();
+        jLabel70 = new javax.swing.JLabel();
+        txtJudgeLastName = new javax.swing.JTextField();
+        txtJudgeContact = new javax.swing.JTextField();
+        jLabel71 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel72 = new javax.swing.JLabel();
+        txtJudgeUsername = new javax.swing.JTextField();
+        jLabel73 = new javax.swing.JLabel();
+        jLabel74 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        txtJudgeConfirmPass = new javax.swing.JPasswordField();
+        txtJudgePassword = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1287, 732));
@@ -617,121 +618,6 @@ public class AdminView extends javax.swing.JFrame {
         jScrollPane5.setBounds(20, 130, 1050, 380);
 
         jTabbedPane2.addTab("REGISTERED CASES", jPanel7);
-
-        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel15.setLayout(null);
-
-        jTabbedPane4.setBackground(new java.awt.Color(51, 51, 51));
-        jTabbedPane4.setForeground(new java.awt.Color(255, 255, 255));
-
-        jPanel23.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel23.setLayout(null);
-
-        jPanel22.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel22.setLayout(null);
-
-        jButton14.setBackground(new java.awt.Color(0, 0, 0));
-        jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("REGISTER JUDGE");
-        jButton14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
-        jButton14.addActionListener(this::jButton14ActionPerformed);
-        jPanel22.add(jButton14);
-        jButton14.setBounds(430, 400, 170, 50);
-
-        jLabel68.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel68.setText("ID :");
-        jPanel22.add(jLabel68);
-        jLabel68.setBounds(230, 160, 30, 30);
-
-        txtJudgeId.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeId.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeId.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeId);
-        txtJudgeId.setBounds(280, 160, 200, 30);
-
-        txtJudgeFirstName.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeFirstName.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeFirstName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeFirstName);
-        txtJudgeFirstName.setBounds(280, 210, 200, 30);
-
-        jLabel69.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel69.setText("First Name :");
-        jPanel22.add(jLabel69);
-        jLabel69.setBounds(170, 210, 100, 30);
-
-        jLabel70.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel70.setText("Last Name :");
-        jPanel22.add(jLabel70);
-        jLabel70.setBounds(170, 260, 90, 30);
-
-        txtJudgeLastName.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeLastName.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeLastName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeLastName);
-        txtJudgeLastName.setBounds(280, 260, 200, 30);
-
-        txtJudgeContact.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeContact.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeContact.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeContact);
-        txtJudgeContact.setBounds(280, 310, 200, 30);
-
-        jLabel71.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel71.setText("Contact :");
-        jPanel22.add(jLabel71);
-        jLabel71.setBounds(190, 310, 70, 30);
-
-        jLabel53.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
-        jLabel53.setText("REGISTER JUDGE");
-        jPanel22.add(jLabel53);
-        jLabel53.setBounds(370, 50, 320, 47);
-
-        jLabel72.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
-        jLabel72.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel72.setText("password must be 8 characters long");
-        jPanel22.add(jLabel72);
-        jLabel72.setBounds(670, 240, 200, 20);
-
-        txtJudgeUsername.setBackground(new java.awt.Color(204, 204, 204));
-        txtJudgeUsername.setForeground(new java.awt.Color(102, 102, 102));
-        txtJudgeUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jPanel22.add(txtJudgeUsername);
-        txtJudgeUsername.setBounds(670, 160, 200, 30);
-
-        jLabel73.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel73.setText("Password :");
-        jPanel22.add(jLabel73);
-        jLabel73.setBounds(570, 260, 100, 30);
-
-        jLabel74.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel74.setText("Confirm Password :");
-        jPanel22.add(jLabel74);
-        jLabel74.setBounds(510, 310, 150, 30);
-
-        jLabel75.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
-        jLabel75.setText("Username  :");
-        jPanel22.add(jLabel75);
-        jLabel75.setBounds(560, 160, 100, 30);
-
-        txtJudgeConfirmPass.setText("jPasswordField1");
-        jPanel22.add(txtJudgeConfirmPass);
-        txtJudgeConfirmPass.setBounds(670, 310, 200, 30);
-
-        txtJudgePassword.setText("jPasswordField1");
-        jPanel22.add(txtJudgePassword);
-        txtJudgePassword.setBounds(670, 260, 200, 30);
-
-        jPanel23.add(jPanel22);
-        jPanel22.setBounds(10, 16, 1050, 480);
-
-        jTabbedPane4.addTab("ADD JUDGE", jPanel23);
-
-        jPanel15.add(jTabbedPane4);
-        jTabbedPane4.setBounds(10, 10, 1080, 550);
-
-        jTabbedPane2.addTab("MANAGE JUDGES", jPanel15);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(null);
@@ -1436,6 +1322,121 @@ public class AdminView extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("CASE MANAGEMENT", jPanel4);
 
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel15.setLayout(null);
+
+        jTabbedPane4.setBackground(new java.awt.Color(51, 51, 51));
+        jTabbedPane4.setForeground(new java.awt.Color(255, 255, 255));
+
+        jPanel23.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel23.setLayout(null);
+
+        jPanel22.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel22.setLayout(null);
+
+        jButton14.setBackground(new java.awt.Color(0, 0, 0));
+        jButton14.setForeground(new java.awt.Color(255, 255, 255));
+        jButton14.setText("REGISTER JUDGE");
+        jButton14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        jButton14.addActionListener(this::jButton14ActionPerformed);
+        jPanel22.add(jButton14);
+        jButton14.setBounds(430, 400, 170, 50);
+
+        jLabel68.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel68.setText("ID :");
+        jPanel22.add(jLabel68);
+        jLabel68.setBounds(230, 160, 30, 30);
+
+        txtJudgeId.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeId.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeId.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeId);
+        txtJudgeId.setBounds(280, 160, 200, 30);
+
+        txtJudgeFirstName.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeFirstName.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeFirstName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeFirstName);
+        txtJudgeFirstName.setBounds(280, 210, 200, 30);
+
+        jLabel69.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel69.setText("First Name :");
+        jPanel22.add(jLabel69);
+        jLabel69.setBounds(170, 210, 100, 30);
+
+        jLabel70.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel70.setText("Last Name :");
+        jPanel22.add(jLabel70);
+        jLabel70.setBounds(170, 260, 90, 30);
+
+        txtJudgeLastName.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeLastName.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeLastName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeLastName);
+        txtJudgeLastName.setBounds(280, 260, 200, 30);
+
+        txtJudgeContact.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeContact.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeContact.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeContact);
+        txtJudgeContact.setBounds(280, 310, 200, 30);
+
+        jLabel71.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel71.setText("Contact :");
+        jPanel22.add(jLabel71);
+        jLabel71.setBounds(190, 310, 70, 30);
+
+        jLabel53.setFont(new java.awt.Font("Science Gothic", 0, 36)); // NOI18N
+        jLabel53.setText("REGISTER JUDGE");
+        jPanel22.add(jLabel53);
+        jLabel53.setBounds(370, 50, 320, 47);
+
+        jLabel72.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 12)); // NOI18N
+        jLabel72.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel72.setText("password must be 8 characters long");
+        jPanel22.add(jLabel72);
+        jLabel72.setBounds(670, 240, 200, 20);
+
+        txtJudgeUsername.setBackground(new java.awt.Color(204, 204, 204));
+        txtJudgeUsername.setForeground(new java.awt.Color(102, 102, 102));
+        txtJudgeUsername.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel22.add(txtJudgeUsername);
+        txtJudgeUsername.setBounds(670, 160, 200, 30);
+
+        jLabel73.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel73.setText("Password :");
+        jPanel22.add(jLabel73);
+        jLabel73.setBounds(570, 260, 100, 30);
+
+        jLabel74.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel74.setText("Confirm Password :");
+        jPanel22.add(jLabel74);
+        jLabel74.setBounds(510, 310, 150, 30);
+
+        jLabel75.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 16)); // NOI18N
+        jLabel75.setText("Username  :");
+        jPanel22.add(jLabel75);
+        jLabel75.setBounds(560, 160, 100, 30);
+
+        txtJudgeConfirmPass.setText("jPasswordField1");
+        jPanel22.add(txtJudgeConfirmPass);
+        txtJudgeConfirmPass.setBounds(670, 310, 200, 30);
+
+        txtJudgePassword.setText("jPasswordField1");
+        jPanel22.add(txtJudgePassword);
+        txtJudgePassword.setBounds(670, 260, 200, 30);
+
+        jPanel23.add(jPanel22);
+        jPanel22.setBounds(10, 16, 1050, 480);
+
+        jTabbedPane4.addTab("ADD JUDGE", jPanel23);
+
+        jPanel15.add(jTabbedPane4);
+        jTabbedPane4.setBounds(10, 10, 1080, 550);
+
+        jTabbedPane2.addTab("MANAGE JUDGES", jPanel15);
+
         jPanel1.add(jTabbedPane2);
         jTabbedPane2.setBounds(19, 180, 1240, 570);
 
@@ -1445,7 +1446,7 @@ public class AdminView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Inter", 0, 48)); // NOI18N
         jLabel1.setText("CASE MANAGEMENT SYSTEM");
         jPanel3.add(jLabel1);
-        jLabel1.setBounds(260, 20, 700, 100);
+        jLabel1.setBounds(270, 20, 700, 100);
         jPanel3.add(jLabel4);
         jLabel4.setBounds(843, 51, 51, 0);
 
@@ -1457,6 +1458,11 @@ public class AdminView extends javax.swing.JFrame {
         jButton7.addActionListener(this::jButton7ActionPerformed);
         jPanel3.add(jButton7);
         jButton7.setBounds(1090, 10, 140, 43);
+
+        jLabel11.setFont(new java.awt.Font("Science Gothic", 0, 24)); // NOI18N
+        jLabel11.setText("Welcome Back, Admin");
+        jPanel3.add(jLabel11);
+        jLabel11.setBounds(10, 10, 290, 32);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(20, 20, 1240, 140);
@@ -1514,6 +1520,15 @@ public class AdminView extends javax.swing.JFrame {
             String relief = txtReliefSought.getText().trim();
             String judge = cmbJudge.getSelectedItem().toString(); // Get selected item from dropdown
             String hearingDate = txtHearingDate.getText().trim();
+            try {
+                // This strictly checks if the date matches yyyy-MM-dd
+                java.time.LocalDate.parse(hearingDate, java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            } catch (java.time.format.DateTimeParseException e) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Invalid Date Format! Please use yyyy-MM-dd (e.g., 2026-01-26).",
+                        "Date Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return; // Stop the registration
+            }
 
             // getting current date and time
             LocalDateTime currentDateTime = LocalDateTime.now();
@@ -1598,6 +1613,15 @@ public class AdminView extends javax.swing.JFrame {
             String regNo = rtxtRegisterationNumber.getText().trim();
             String title = rtxtCaseTitle.getText().trim();
             String hearingDate = rtxtHearingDate.getText().trim();
+            try {
+                // This strictly checks if the date matches yyyy-MM-dd
+                java.time.LocalDate.parse(hearingDate, java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            } catch (java.time.format.DateTimeParseException e) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Invalid Date Format! Please use yyyy-MM-dd (e.g., 2026-01-26).",
+                        "Date Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return; // Stop the registration
+            }
             String judge = rcmbJudge.getSelectedItem().toString();
 
             String crimeType = rtxtCrimeType.getText().trim();
@@ -1718,6 +1742,16 @@ public class AdminView extends javax.swing.JFrame {
                 finalDate = original.getHearingDate();
             } else {
                 finalDate = txtHearing1.getText().trim();
+
+                try {
+                    java.time.LocalDate.parse(finalDate, java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                } catch (java.time.format.DateTimeParseException e) {
+                    javax.swing.JOptionPane.showMessageDialog(this,
+                            "Invalid Date Format! Please use yyyy-MM-dd (e.g., 2026-01-26).",
+                            "Date Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return; // Stop the update
+                }
+                // --------------------------------------------------------
             }
 
             // C. Claim Amount
@@ -1891,12 +1925,23 @@ public class AdminView extends javax.swing.JFrame {
             CriminalCase original = (CriminalCase) genericCase;
 
             // 4. Prepare Data
-            // Hearing Date
+            // B. Hearing Date
             String finalDate;
             if (isDateEmpty) {
                 finalDate = original.getHearingDate();
             } else {
-                finalDate = txtClaimAmount3.getText().trim();
+                finalDate = txtHearing1.getText().trim();
+
+                // --- NEW VALIDATION: Check the format of the NEW date ---
+                try {
+                    java.time.LocalDate.parse(finalDate, java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                } catch (java.time.format.DateTimeParseException e) {
+                    javax.swing.JOptionPane.showMessageDialog(this,
+                            "Invalid Date Format! Please use yyyy-MM-dd (e.g., 2026-01-26).",
+                            "Date Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return; // Stop the update
+                }
+                // --------------------------------------------------------
             }
 
             // Assigned Judge
@@ -2350,6 +2395,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel107;
     private javax.swing.JLabel jLabel108;
     private javax.swing.JLabel jLabel109;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel110;
     private javax.swing.JLabel jLabel111;
     private javax.swing.JLabel jLabel112;

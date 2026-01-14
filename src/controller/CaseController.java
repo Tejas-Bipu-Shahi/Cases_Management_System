@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.io.FileWriter;
 
 // Our main CaseController class begins here
 public class CaseController {
@@ -297,11 +298,6 @@ public class CaseController {
         }
     }
 
-    /**
-     * MULTI-CRITERIA BUBBLE SORT Sorts the main list based on the user's
-     * selection. Criteria: "Case Type", "Hearing Date", "Filing Date", "Case
-     * Status"
-     */
     public void sortCases(String criteria) {
         int n = allCases.size();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -356,9 +352,6 @@ public class CaseController {
         }
     }
 
-    /**
-     * FILTER BY JUDGE Returns a list of cases assigned to a specific judge.
-     */
     public java.util.LinkedList<Case> filterByJudge(String judgeName) {
         java.util.LinkedList<Case> filteredList = new java.util.LinkedList<>();
 
@@ -371,15 +364,72 @@ public class CaseController {
         return filteredList;
     }
 
-    /**
-     * GET ALL JUDGES (Optional but helpful) Returns a list of unique judge
-     * names to populate the dropdown.
-     */
     public java.util.HashSet<String> getAllJudges() {
         java.util.HashSet<String> judges = new java.util.HashSet<>();
         for (Case c : allCases) {
             judges.add(c.getAssignedJudge());
         }
         return judges;
+    }
+    
+    // Save Case as a text file
+    // --- FILE I/O: EXPORT FULL DETAILS (Satisfies Coursework Requirement) ---
+    
+    public boolean saveCaseToTextFile(Case c) {
+        try {
+            // Create filename
+            FileWriter writer = new FileWriter("Case_" + c.getCaseId() + "_Details.txt");
+            
+            // Write details
+            writer.write("=========================================\n");
+            writer.write("       CASE MANAGEMENT SYSTEM REPORT     \n");
+            writer.write("=========================================\n\n");
+            
+            writer.write("--- GENERAL INFORMATION ---\n");
+            writer.write("Case ID:        " + c.getCaseId() + "\n");
+            writer.write("Registration:   " + c.getRegistrationNumber() + "\n");
+            writer.write("Title:          " + c.getCaseTitle() + "\n");
+            writer.write("Type:           " + c.getCaseType() + "\n");
+            writer.write("Judge:          " + c.getAssignedJudge() + "\n");
+            writer.write("Current Status: " + c.getCaseStatus() + "\n");
+            writer.write("Hearing Date:   " + c.getHearingDate() + "\n");
+            writer.write("Filing Date:    " + c.getFilingDate() + "\n\n");
+            
+            // Write Specific Details 
+            writer.write("--- SPECIFIC DETAILS ---\n");
+            
+            if (c instanceof model.CivilCase) {
+                // Cast to CivilCase 
+                model.CivilCase cc = (model.CivilCase) c;
+                
+                writer.write("Category:       Civil Litigation\n");
+                writer.write("Dispute Type:   " + cc.getDisputeType() + "\n");
+                writer.write("Claim Amount:   Rs. " + cc.getClaimAmount() + "\n");
+                writer.write("Relief Sought:  " + cc.getReliefSought() + "\n");
+                writer.write("Subject Matter: " + cc.getSubjectMatter() + "\n");
+                
+            } else if (c instanceof model.CriminalCase) {
+                // Cast to CriminalCase
+                model.CriminalCase cr = (model.CriminalCase) c;
+                
+                writer.write("Category:       Criminal Offense\n");
+                writer.write("Crime Type:     " + cr.getCrimeType() + "\n");
+                writer.write("Police Station: " + cr.getPoliceStation() + "\n");
+                writer.write("FIR Number:     " + cr.getFirNumber() + "\n");
+                writer.write("Bail Status:    " + cr.getBailGranted() + "\n");
+            }
+            
+            writer.write("\n=========================================\n");
+            writer.write("Generated on: " + java.time.LocalDate.now());
+            
+            // Closing File
+            writer.close();
+            return true; // 
+            
+        } catch (java.io.IOException e) {
+            //Handling the Exception
+            System.out.println("Error writing file: " + e.getMessage());
+            return false;
+        }
     }
 }

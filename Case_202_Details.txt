@@ -1,0 +1,23 @@
+=========================================
+       CASE MANAGEMENT SYSTEM REPORT     
+=========================================
+
+--- GENERAL INFORMATION ---
+Case ID:        202
+Registration:   CRM-888
+Title:          Fraud Investigation
+Type:           Criminal
+Judge:          Tek Raj Joshi
+Current Status: running
+Hearing Date:   2026-01-25
+Filing Date:    2025-02-20
+
+--- SPECIFIC DETAILS ---
+Category:       Criminal Offense
+Crime Type:     Fraud
+Police Station: Lazimpat Station
+FIR Number:     FIR-3344
+Bail Status:    Granted
+
+=========================================
+Generated on: 2026-01-15

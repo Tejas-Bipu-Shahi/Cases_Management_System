@@ -92,6 +92,7 @@ public class CaseDetail extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDetails = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         lblType = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -204,7 +205,16 @@ public class CaseDetail extends javax.swing.JFrame {
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
         jButton2.addActionListener(this::jButton2ActionPerformed);
         jPanel4.add(jButton2);
-        jButton2.setBounds(360, 420, 130, 40);
+        jButton2.setBounds(310, 420, 130, 40);
+
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Save as File");
+        jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        jButton3.addActionListener(this::jButton3ActionPerformed);
+        jPanel4.add(jButton3);
+        jButton3.setBounds(460, 420, 130, 40);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(10, 240, 860, 480);
@@ -263,6 +273,27 @@ public class CaseDetail extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        //  Get the Case ID from the screen
+        int caseId = Integer.parseInt(lblCaseId.getText());
+
+        //  Find the object
+        model.Case c = controller.findCaseById(caseId);
+
+        if (c != null) {
+            //  Call our simple save method
+            boolean success = controller.saveCaseToTextFile(c);
+
+            if (success) {
+                javax.swing.JOptionPane.showMessageDialog(this, "File Saved: Case_" + caseId + ".txt");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error: Could not save file.");
+            }
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -290,6 +321,7 @@ public class CaseDetail extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
