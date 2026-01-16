@@ -1419,12 +1419,10 @@ public class AdminView extends javax.swing.JFrame {
         jLabel75.setText("Username  :");
         jPanel22.add(jLabel75);
         jLabel75.setBounds(560, 160, 100, 30);
-
-        txtJudgeConfirmPass.setText("jPasswordField1");
         jPanel22.add(txtJudgeConfirmPass);
         txtJudgeConfirmPass.setBounds(670, 310, 200, 30);
 
-        txtJudgePassword.setText("jPasswordField1");
+        txtJudgePassword.addActionListener(this::txtJudgePasswordActionPerformed);
         jPanel22.add(txtJudgePassword);
         txtJudgePassword.setBounds(670, 260, 200, 30);
 
@@ -1561,7 +1559,11 @@ public class AdminView extends javax.swing.JFrame {
                 // Clear the fields so you can add another one
                 txtCaseId.setText("");
                 txtCaseTitle.setText("");
-                // ... clear others if you want
+                txtRegNo.setText("");
+                txtDisputeType.setText("");
+                txtSubjectMatter.setText("");
+                txtClaimAmount.setText("");
+                
 
             } else {
                 javax.swing.JOptionPane.showMessageDialog(this, "Error: Case ID already exists!");
@@ -1638,7 +1640,7 @@ public class AdminView extends javax.swing.JFrame {
             String formattedFilingDate = currentDateTime.format(formatter);
 
             // --- 3. CREATE MODEL OBJECT ---
-            // Ensure this matches your CriminalCase Constructor exactly!
+            // Ensure this matches  CriminalCase Constructor exactly!
             model.CriminalCase newCase = new model.CriminalCase(
                     id,
                     regNo,
@@ -2069,15 +2071,15 @@ public class AdminView extends javax.swing.JFrame {
 
 // 2. Check if the user clicked "Yes"
         if (response == javax.swing.JOptionPane.YES_OPTION) {
-            // Execute your transition code
+            // Execute  transition code
             LoginFr login = new LoginFr();
             login.setVisible(true);
             this.dispose();
-        }       // TODO add your handling code here:
+        }       // TODO add  handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
+        // TODO add  handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -2225,7 +2227,7 @@ public class AdminView extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         // 1. Get the selected category from the ComboBox
-        // Replace 'cmbSortBy' with your actual variable name!
+        // Replace 'cmbSortBy' with  actual variable name!
         String criteria = cmbSortBy.getSelectedItem().toString();
 
         if (criteria.equalsIgnoreCase("None")) {
@@ -2244,11 +2246,10 @@ public class AdminView extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
         // 1. Get Selected Judge from Dropdown
-        // Note: Make sure your variable name is cmbFilterByJudge (as in your code)
         String selectedJudge = cmbFilterByJudge.getSelectedItem().toString();
 
         // 2. Check for "None" to reset
-        // If "None", we just call your existing method to load everything back
+        // If "None", we just call  existing method to load everything back
         if (selectedJudge.equalsIgnoreCase("All") || selectedJudge.trim().isEmpty()) {
             loadRegisteredCases();
             return;
@@ -2338,6 +2339,10 @@ public class AdminView extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Error: Judge ID must be a number.");
         }
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void txtJudgePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJudgePasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtJudgePasswordActionPerformed
 
     /**
      * @param args the command line arguments
