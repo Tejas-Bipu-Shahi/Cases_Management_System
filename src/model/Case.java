@@ -62,14 +62,6 @@ public abstract class Case {
         return caseStatus;
     }
 
-    public String getEvidenceFilePath() {
-        return evidenceFilePath;
-    }
-
-    public void setEvidenceFilePath(String path) {
-        this.evidenceFilePath = path;
-    }
-
     // 4. SETTERS (Mutators) - Only for attributes that change!
     public void setHearingDate(String hearingDate) {
         this.hearingDate = hearingDate;

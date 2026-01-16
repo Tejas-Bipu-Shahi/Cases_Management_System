@@ -256,7 +256,7 @@ public class CaseController {
     }
 
     public Case binarySearchById(int targetId) {
-        // 1. Sort Data First (Slide 24 says: "sorted data is required")
+        // 1. Sort Data First
         sortCasesById();
 
         // Slide 14: Initialize Low and High
@@ -282,7 +282,7 @@ public class CaseController {
             }
         }
 
-        return null; // Slide 23: "If search value is not in the list return -1" (or null)
+        return null; // "If search value is not in the list return -1" (or null)
     }
 
     private void sortCasesById() {

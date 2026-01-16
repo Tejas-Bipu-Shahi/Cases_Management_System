@@ -11,6 +11,10 @@
             <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/view/CaseDetail.java</file>
             <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/view/LoginFr.java</file>
             <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/view/JudgeDashboard.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/controller/JudgeController.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/model/Case.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/model/CivilCase.java</file>
+            <file>file:/D:/MyProjects/netbeans/Cases_Management_System/src/model/CriminalCase.java</file>
         </group>
     </open-files>
 </project-private>

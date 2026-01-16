@@ -21,6 +21,7 @@ import model.Judge;
 import controller.JudgeController;
 import controller.CaseStack;
 import controller.CaseQueue;
+import javax.swing.JOptionPane;
 
 public class AdminView extends javax.swing.JFrame {
 
@@ -1497,8 +1498,8 @@ public class AdminView extends javax.swing.JFrame {
             // 1. Check for Empty Fields (Basic Validation)
             if (txtCaseId.getText().isEmpty() || txtRegNo.getText().isEmpty()
                     || txtCaseTitle.getText().isEmpty() || txtHearingDate.getText().isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this,
-                        "Please fill in all required fields!", "Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Please fill in all required fields!", "Validation Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             // 2. Extract Data from TextFields
@@ -1514,7 +1515,7 @@ public class AdminView extends javax.swing.JFrame {
             try {
                 amount = Double.parseDouble(txtClaimAmount.getText().trim());
             } catch (NumberFormatException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Claim Amount must be a number.");
+                JOptionPane.showMessageDialog(this, "Claim Amount must be a number.", "Validation Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             String relief = txtReliefSought.getText().trim();
@@ -1524,9 +1525,9 @@ public class AdminView extends javax.swing.JFrame {
                 // This strictly checks if the date matches yyyy-MM-dd
                 java.time.LocalDate.parse(hearingDate, java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             } catch (java.time.format.DateTimeParseException e) {
-                javax.swing.JOptionPane.showMessageDialog(this,
+                JOptionPane.showMessageDialog(this,
                         "Invalid Date Format! Please use yyyy-MM-dd (e.g., 2026-01-26).",
-                        "Date Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        "Date Error", JOptionPane.ERROR_MESSAGE);
                 return; // Stop the registration
             }
 
@@ -1555,7 +1556,7 @@ public class AdminView extends javax.swing.JFrame {
             boolean isSaved = controller.registerCase(newCase);
 
             if (isSaved) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Success! Case Registered.");
+                JOptionPane.showMessageDialog(this, "Success! Case Registered.","Registration Success!",JOptionPane.INFORMATION_MESSAGE);
 
                 // Clear the fields so you can add another one
                 txtCaseId.setText("");
@@ -1566,8 +1567,8 @@ public class AdminView extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Error: Case ID already exists!");
             }
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                    "Case ID must be a valid number.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Case ID must be a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
