@@ -41,9 +41,9 @@ public class CaseController {
     // --- PRELOAD DATA ---
     private void loadPredefinedCases() {
         // CIVIL CASES 
-        CivilCase c1 = new CivilCase(101, "REG-001", "Smith vs. Doe", "2025-01-10", "2026-01-26", "Kamala Singh", "running", "Property", "Land Dispute in Thamel", 500000.0, "Ownership Transfer");
-        CivilCase c2 = new CivilCase(102, "REG-002", "ABC Corp vs. XYZ Ltd", "2025-02-01", "2026-01-14", "Tek Raj Joshi", "running", "Contract", "Breach of Agreement", 120000.0, "Compensation");
-        CivilCase c3 = new CivilCase(103, "REG-003", "Family Estate Issue", "2025-03-12", "2026-01-15", "Babu Kaji", "running", "Family", "Inheritance Claim", 75000.0, "Equal Division");
+        CivilCase c1 = new CivilCase(101, "REG-001", "Smith vs. Doe", "2025-01-10", "2026-01-13", "Kamala Singh", "closed", "Property", "Land Dispute in Thamel", 500000.0, "Ownership Transfer");
+        CivilCase c2 = new CivilCase(102, "REG-002", "ABC Corp vs. XYZ Ltd", "2025-02-01", "2026-01-14", "Tek Raj Joshi", "closed", "Contract", "Breach of Agreement", 120000.0, "Compensation");
+        CivilCase c3 = new CivilCase(103, "REG-003", "Family Estate Issue", "2025-03-12", "2026-01-15", "Babu Kaji", "closed", "Family", "Inheritance Claim", 75000.0, "Equal Division");
 
         // CRIMINAL CASES 
         CriminalCase cr1 = new CriminalCase(201, "CRM-999", "State vs. Rabin K.", "2025-01-05", "2026-01-26", "Kamala Singh", "running", "Theft", "Durbar Marg Police", "FIR-1122", "Not Granted");
@@ -240,7 +240,7 @@ public class CaseController {
         java.util.LinkedList<Case> results = new java.util.LinkedList<>();
         String lowerQuery = query.toLowerCase().trim();
 
-        // Slide 9: "for (int i = 0; i < n; i++)"
+        // "for (int i = 0; i < n; i++)"
         for (int i = 0; i < allCases.size(); i++) {
             Case c = allCases.get(i);
 
